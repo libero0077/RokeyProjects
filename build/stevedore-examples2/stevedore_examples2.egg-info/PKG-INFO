@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: stevedore-examples2
+Version: 1.0
+Summary: Demonstration package for stevedore
+Home-page: http://opendev.org/openstack/stevedore
+Author: Doug Hellmann
+Author-email: doug@doughellmann.com
+Platform: Any
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Intended Audience :: Developers
+Classifier: Environment :: Console
+Provides: stevedore.examples2

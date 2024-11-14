@@ -1,0 +1,32 @@
+[0.596s] Invoking command in '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/src/multi_image_package': PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/multi_image_package build --build-base /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build install --record /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/install.log --single-version-externally-managed install_data
+[0.808s] running egg_info
+[0.822s] writing ../../build/multi_image_package/multi_image_package.egg-info/PKG-INFO
+[0.822s] writing dependency_links to ../../build/multi_image_package/multi_image_package.egg-info/dependency_links.txt
+[0.823s] writing entry points to ../../build/multi_image_package/multi_image_package.egg-info/entry_points.txt
+[0.823s] writing requirements to ../../build/multi_image_package/multi_image_package.egg-info/requires.txt
+[0.823s] writing top-level names to ../../build/multi_image_package/multi_image_package.egg-info/top_level.txt
+[0.854s] reading manifest file '../../build/multi_image_package/multi_image_package.egg-info/SOURCES.txt'
+[0.855s] writing manifest file '../../build/multi_image_package/multi_image_package.egg-info/SOURCES.txt'
+[0.855s] running build
+[0.855s] running build_py
+[0.855s] copying multi_image_package/__init__.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package
+[0.855s] copying multi_image_package/image_publisher_1.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package
+[0.855s] copying multi_image_package/image_publisher_2.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package
+[0.855s] copying multi_image_package/image_sub_init.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package
+[0.856s] copying multi_image_package/image_subscriber.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package
+[0.856s] running install
+[0.859s] running install_lib
+[0.874s] copying /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package/image_subscriber.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package
+[0.875s] byte-compiling /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package/image_subscriber.py to image_subscriber.cpython-310.pyc
+[0.875s] running install_data
+[0.876s] copying resource/multi_image_package -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/share/ament_index/resource_index/packages
+[0.876s] copying package.xml -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/share/multi_image_package
+[0.876s] running install_egg_info
+[0.893s] removing '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package-0.0.0-py3.10.egg-info' (and everything under it)
+[0.893s] Copying ../../build/multi_image_package/multi_image_package.egg-info to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package-0.0.0-py3.10.egg-info
+[0.894s] running install_scripts
+[1.015s] Installing image_publisher_1 script to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/multi_image_package
+[1.015s] Installing image_publisher_2 script to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/multi_image_package
+[1.015s] Installing image_subscriber script to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/multi_image_package
+[1.016s] writing list of installed files to '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/install.log'
+[1.036s] Invoked command in '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/src/multi_image_package' returned '0': PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/multi_image_package build --build-base /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build install --record /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/install.log --single-version-externally-managed install_data

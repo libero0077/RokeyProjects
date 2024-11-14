@@ -1,0 +1,16 @@
+[0.972s] Invoking command in '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/jun_env/lib/python3.10/site-packages/stevedore/example': PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/stevedore-examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/stevedore-examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../../../../../build/stevedore-examples build --build-base /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/stevedore-examples/build install --record /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/stevedore-examples/install.log --single-version-externally-managed
+[1.196s] running egg_info
+[1.214s] writing ../../../../../../build/stevedore-examples/stevedore_examples.egg-info/PKG-INFO
+[1.214s] writing dependency_links to ../../../../../../build/stevedore-examples/stevedore_examples.egg-info/dependency_links.txt
+[1.214s] writing entry points to ../../../../../../build/stevedore-examples/stevedore_examples.egg-info/entry_points.txt
+[1.215s] writing top-level names to ../../../../../../build/stevedore-examples/stevedore_examples.egg-info/top_level.txt
+[1.233s] reading manifest file '../../../../../../build/stevedore-examples/stevedore_examples.egg-info/SOURCES.txt'
+[1.234s] writing manifest file '../../../../../../build/stevedore-examples/stevedore_examples.egg-info/SOURCES.txt'
+[1.234s] running build
+[1.234s] running install
+[1.238s] running install_egg_info
+[1.273s] removing '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/stevedore-examples/lib/python3.10/site-packages/stevedore_examples-1.0-py3.10.egg-info' (and everything under it)
+[1.273s] Copying ../../../../../../build/stevedore-examples/stevedore_examples.egg-info to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/stevedore-examples/lib/python3.10/site-packages/stevedore_examples-1.0-py3.10.egg-info
+[1.274s] running install_scripts
+[1.407s] writing list of installed files to '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/stevedore-examples/install.log'
+[1.431s] Invoked command in '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/jun_env/lib/python3.10/site-packages/stevedore/example' returned '0': PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/stevedore-examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/stevedore-examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../../../../../build/stevedore-examples build --build-base /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/stevedore-examples/build install --record /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/stevedore-examples/install.log --single-version-externally-managed

@@ -1,0 +1,41 @@
+/home/yjh/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+running egg_info
+creating ../../build/multi_image_package/multi_image_package.egg-info
+writing ../../build/multi_image_package/multi_image_package.egg-info/PKG-INFO
+writing dependency_links to ../../build/multi_image_package/multi_image_package.egg-info/dependency_links.txt
+writing entry points to ../../build/multi_image_package/multi_image_package.egg-info/entry_points.txt
+writing requirements to ../../build/multi_image_package/multi_image_package.egg-info/requires.txt
+writing top-level names to ../../build/multi_image_package/multi_image_package.egg-info/top_level.txt
+writing manifest file '../../build/multi_image_package/multi_image_package.egg-info/SOURCES.txt'
+reading manifest file '../../build/multi_image_package/multi_image_package.egg-info/SOURCES.txt'
+writing manifest file '../../build/multi_image_package/multi_image_package.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package
+copying multi_image_package/__init__.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package
+copying multi_image_package/image_publisher_1.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package
+copying multi_image_package/image_publisher_2.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package
+copying multi_image_package/image_subscriber.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package
+running install
+running install_lib
+creating /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package
+copying /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package/__init__.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package
+copying /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package/image_publisher_1.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package
+copying /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package/image_publisher_2.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package
+copying /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/build/lib/multi_image_package/image_subscriber.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package
+byte-compiling /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package/image_publisher_1.py to image_publisher_1.cpython-310.pyc
+byte-compiling /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package/image_publisher_2.py to image_publisher_2.cpython-310.pyc
+byte-compiling /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package/image_subscriber.py to image_subscriber.cpython-310.pyc
+running install_data
+creating /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/share/ament_index/resource_index/packages
+copying resource/multi_image_package -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/share/ament_index/resource_index/packages
+copying package.xml -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/share/multi_image_package
+running install_egg_info
+Copying ../../build/multi_image_package/multi_image_package.egg-info to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages/multi_image_package-0.0.0-py3.10.egg-info
+running install_scripts
+Installing image_publisher_1 script to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/multi_image_package
+Installing image_publisher_2 script to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/multi_image_package
+Installing image_subscriber script to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/multi_image_package
+writing list of installed files to '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/multi_image_package/install.log'

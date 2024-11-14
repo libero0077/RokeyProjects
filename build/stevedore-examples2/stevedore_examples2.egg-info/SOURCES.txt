@@ -1,0 +1,7 @@
+setup.py
+../../../../../../build/stevedore-examples2/stevedore_examples2.egg-info/PKG-INFO
+../../../../../../build/stevedore-examples2/stevedore_examples2.egg-info/SOURCES.txt
+../../../../../../build/stevedore-examples2/stevedore_examples2.egg-info/dependency_links.txt
+../../../../../../build/stevedore-examples2/stevedore_examples2.egg-info/entry_points.txt
+../../../../../../build/stevedore-examples2/stevedore_examples2.egg-info/not-zip-safe
+../../../../../../build/stevedore-examples2/stevedore_examples2.egg-info/top_level.txt

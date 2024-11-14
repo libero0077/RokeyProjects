@@ -1,0 +1,2 @@
+[stevedore.example.formatter]
+field = stevedore.example2.fields:FieldList

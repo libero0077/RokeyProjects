@@ -1,0 +1,3 @@
+[stevedore.example.formatter]
+plain = stevedore.example.simple:Simple
+simple = stevedore.example.simple:Simple

@@ -1,0 +1,35 @@
+[1.303s] Invoking command in '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/src/my_package': PS1=\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/my_package build --build-base /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/build install --record /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/install.log --single-version-externally-managed install_data
+[1.533s] running egg_info
+[1.548s] writing ../../build/my_package/my_package.egg-info/PKG-INFO
+[1.549s] writing dependency_links to ../../build/my_package/my_package.egg-info/dependency_links.txt
+[1.549s] writing entry points to ../../build/my_package/my_package.egg-info/entry_points.txt
+[1.549s] writing requirements to ../../build/my_package/my_package.egg-info/requires.txt
+[1.549s] writing top-level names to ../../build/my_package/my_package.egg-info/top_level.txt
+[1.582s] reading manifest file '../../build/my_package/my_package.egg-info/SOURCES.txt'
+[1.583s] writing manifest file '../../build/my_package/my_package.egg-info/SOURCES.txt'
+[1.583s] running build
+[1.583s] running build_py
+[1.583s] copying my_package/data_subscriber.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/build/lib/my_package
+[1.583s] copying my_package/image_publisher.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/build/lib/my_package
+[1.583s] copying my_package/__init__.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/build/lib/my_package
+[1.584s] copying my_package/image_subscriber.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/build/lib/my_package
+[1.584s] copying my_package/data_publisher.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/build/lib/my_package
+[1.584s] running install
+[1.587s] running install_lib
+[1.603s] copying /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/build/lib/my_package/image_publisher.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/python3.10/site-packages/my_package
+[1.603s] copying /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/build/lib/my_package/image_subscriber.py -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/python3.10/site-packages/my_package
+[1.604s] byte-compiling /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/python3.10/site-packages/my_package/image_publisher.py to image_publisher.cpython-310.pyc
+[1.604s] byte-compiling /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/python3.10/site-packages/my_package/image_subscriber.py to image_subscriber.cpython-310.pyc
+[1.605s] running install_data
+[1.605s] copying resource/my_package -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/share/ament_index/resource_index/packages
+[1.606s] copying package.xml -> /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/share/my_package
+[1.606s] running install_egg_info
+[1.623s] removing '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/python3.10/site-packages/my_package-0.0.0-py3.10.egg-info' (and everything under it)
+[1.623s] Copying ../../build/my_package/my_package.egg-info to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/python3.10/site-packages/my_package-0.0.0-py3.10.egg-info
+[1.624s] running install_scripts
+[1.744s] Installing data_publisher script to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/my_package
+[1.744s] Installing data_subscriber script to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/my_package
+[1.744s] Installing image_publisher script to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/my_package
+[1.744s] Installing image_subscriber script to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/my_package
+[1.744s] writing list of installed files to '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/install.log'
+[1.765s] Invoked command in '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/src/my_package' returned '0': PS1=\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/my_package build --build-base /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/build install --record /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my_package/install.log --single-version-externally-managed install_data

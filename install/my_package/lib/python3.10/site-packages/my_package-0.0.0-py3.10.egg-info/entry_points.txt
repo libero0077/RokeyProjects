@@ -1,0 +1,5 @@
+[console_scripts]
+data_publisher = my_package.data_publisher:main
+data_subscriber = my_package.data_subscriber:main
+image_publisher = my_package.image_publisher:main
+image_subscriber = my_package.image_subscriber:main

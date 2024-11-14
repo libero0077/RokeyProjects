@@ -1,0 +1,20 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/stevedore-examples2/lib/python3.10/site-packages",
+        "/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/stevedore-examples/lib/python3.10/site-packages",
+        "/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/python3.10/site-packages",
+        "/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my-test-package/lib/python3.10/site-packages",
+        "/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/stevedore-examples2/lib/python3.10/site-packages",
+        "/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/stevedore-examples/lib/python3.10/site-packages",
+        "/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my_package/lib/python3.10/site-packages",
+        "/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my-test-package/lib/python3.10/site-packages",
+        "/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/multi_image_package/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

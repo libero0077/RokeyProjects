@@ -1,0 +1,3 @@
+source;share/stevedore-examples2/hook/pythonpath.ps1
+source;share/stevedore-examples2/hook/pythonpath.dsv
+source;share/stevedore-examples2/hook/pythonpath.sh

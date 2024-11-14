@@ -1,0 +1,14 @@
+running egg_info
+writing ../../../../../../build/stevedore-examples/stevedore_examples.egg-info/PKG-INFO
+writing dependency_links to ../../../../../../build/stevedore-examples/stevedore_examples.egg-info/dependency_links.txt
+writing entry points to ../../../../../../build/stevedore-examples/stevedore_examples.egg-info/entry_points.txt
+writing top-level names to ../../../../../../build/stevedore-examples/stevedore_examples.egg-info/top_level.txt
+reading manifest file '../../../../../../build/stevedore-examples/stevedore_examples.egg-info/SOURCES.txt'
+writing manifest file '../../../../../../build/stevedore-examples/stevedore_examples.egg-info/SOURCES.txt'
+running build
+running install
+running install_egg_info
+removing '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/stevedore-examples/lib/python3.10/site-packages/stevedore_examples-1.0-py3.10.egg-info' (and everything under it)
+Copying ../../../../../../build/stevedore-examples/stevedore_examples.egg-info to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/stevedore-examples/lib/python3.10/site-packages/stevedore_examples-1.0-py3.10.egg-info
+running install_scripts
+writing list of installed files to '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/stevedore-examples/install.log'

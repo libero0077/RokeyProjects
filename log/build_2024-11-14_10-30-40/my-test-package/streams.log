@@ -1,0 +1,15 @@
+[0.861s] Invoking command in '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/jun_env/lib/python3.10/site-packages/pkg_resources/tests/data/my-test-package-source': PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my-test-package/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my-test-package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../../../../../../../build/my-test-package build --build-base /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my-test-package/build install --record /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my-test-package/install.log --single-version-externally-managed
+[1.090s] running egg_info
+[1.108s] writing ../../../../../../../../build/my-test-package/my_test_package.egg-info/PKG-INFO
+[1.109s] writing dependency_links to ../../../../../../../../build/my-test-package/my_test_package.egg-info/dependency_links.txt
+[1.109s] writing top-level names to ../../../../../../../../build/my-test-package/my_test_package.egg-info/top_level.txt
+[1.128s] reading manifest file '../../../../../../../../build/my-test-package/my_test_package.egg-info/SOURCES.txt'
+[1.129s] writing manifest file '../../../../../../../../build/my-test-package/my_test_package.egg-info/SOURCES.txt'
+[1.129s] running build
+[1.129s] running install
+[1.134s] running install_egg_info
+[1.170s] removing '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my-test-package/lib/python3.10/site-packages/my_test_package-1.0-py3.10.egg-info' (and everything under it)
+[1.171s] Copying ../../../../../../../../build/my-test-package/my_test_package.egg-info to /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my-test-package/lib/python3.10/site-packages/my_test_package-1.0-py3.10.egg-info
+[1.171s] running install_scripts
+[1.313s] writing list of installed files to '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my-test-package/install.log'
+[1.358s] Invoked command in '/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/jun_env/lib/python3.10/site-packages/pkg_resources/tests/data/my-test-package-source' returned '0': PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my-test-package/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/install/my-test-package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../../../../../../../build/my-test-package build --build-base /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my-test-package/build install --record /home/yjh/Doosan/Real_project_ws/Week2/ros2_week2_ws/build/my-test-package/install.log --single-version-externally-managed
