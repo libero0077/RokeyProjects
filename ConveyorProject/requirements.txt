@@ -1,0 +1,11 @@
+ultralytics  # YOLOv8 라이브러리
+opencv-python  # 이미지 및 비디오 처리
+gradio
+requests
+yt-dlp
+pyserial
+streamlit==1.38.0   
+streamlit-webrtc
+av
+sklearn
+sqlite
