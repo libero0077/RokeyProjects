@@ -11,7 +11,7 @@ from std_msgs.msg import String  # ROS 메시지 타입
 # PyQt5 관련 모듈 임포트
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QGridLayout, QVBoxLayout, QHBoxLayout,
-    QLabel, QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QMessageBox
+    QLabel, QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QMessageBox, QDialog
 )
 from PyQt5.QtCore import Qt, pyqtSignal, QObject
 
@@ -50,12 +50,29 @@ class KitchenSubscriber(Node):
         self.cli = self.create_client(MenuUpdate, 'order_result_service')
 
         # 서비스가 준비될 때까지 대기
+        '''
+        서비스 서버가 준비될 때까지 대기
+        서비스 서버가 실행되기 전에 클라이언트가 요청을 보내면 에러가 발생할 수 있으므로, 안전하게 대기하는 과정
+        '''
         while not self.cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('Waiting for order_result_service...')
 
         # 서비스 요청 객체 생성
         self.req = MenuUpdate.Request()
         ###############################################################################################
+
+        #################### 'robot_command' 토픽에 퍼블리셔 생성 #########################################
+        self.robot_command_publisher = self.create_publisher(String, 'robot_command', qos_profile)
+        self.get_logger().info("Robot Command Publisher Initialized.")
+        ##############################################################################################
+
+    def publish_robot_command(self, command_dict): # 로봇 제어 명령과 관련하여 토픽 퍼브리시
+        """로봇 제어 명령을 'robot_command' 토픽으로 퍼블리시하는 함수"""
+        msg = String()
+        msg.data = json.dumps(command_dict)
+        self.robot_command_publisher.publish(msg)
+        self.get_logger().info(f"Published robot command: {msg.data}")
+
 
     def send_order_result(self, result_message):
         # 결과 메시지를 서비스 요청에 설정
@@ -86,6 +103,83 @@ class KitchenSubscriber(Node):
         # 시그널을 통해 GUI로 메시지를 전달
         signaler.order_received.emit(msg.data)
 
+# 팝업 창 클래스 정의
+class ControlPopup(QDialog):
+    def __init__(self, subscriber_node, table_id):
+        super().__init__()
+        self.subscriber_node = subscriber_node
+        self.table_id = table_id
+        self.init_ui()
+
+    def init_ui(self):
+        """팝업 창의 UI 설정"""
+        if isinstance(self.table_id, int):
+            self.setWindowTitle(f"Control Robot - Table {self.table_id}")
+        else:
+            self.setWindowTitle(f"Control Robot - {self.table_id.capitalize()} Position")
+        self.setFixedSize(300, 200)
+
+        layout = QVBoxLayout()
+
+        # 팝업 설명 레이블
+        if isinstance(self.table_id, int):
+            label = QLabel(f"Control robot for Table {self.table_id}")
+        else:
+            label = QLabel(f"Control robot for {self.table_id.capitalize()} Position")
+        label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(label)
+
+        # "Move to Waiting Position" 버튼
+        self.waiting_button = QPushButton("Move to Waiting Position")
+        self.waiting_button.clicked.connect(self.move_to_waiting)
+        layout.addWidget(self.waiting_button)
+
+        # "Move to Kitchen Position" 버튼
+        self.kitchen_button = QPushButton("Move to Kitchen Position")
+        self.kitchen_button.clicked.connect(self.move_to_kitchen)
+        layout.addWidget(self.kitchen_button)
+
+        # "Start Robot" 버튼
+        self.start_button = QPushButton("Start Robot")
+        self.start_button.clicked.connect(self.start_robot)
+        layout.addWidget(self.start_button)
+
+        self.setLayout(layout)
+
+    def move_to_waiting(self):
+        """대기 위치로 이동 명령 퍼블리시"""
+        command = {
+            "command": "move",
+            "position": "waiting"
+        }
+        self.subscriber_node.publish_robot_command(command)
+        QMessageBox.information(self, "Robot Control", "Robot is moving to Waiting Position.")
+        self.close()
+
+    def move_to_kitchen(self):
+        """주방 위치로 이동 명령 퍼블리시"""
+        command = {
+            "command": "move",
+            "position": "kitchen"
+        }
+        self.subscriber_node.publish_robot_command(command)
+        QMessageBox.information(self, "Robot Control", "Robot is moving to Kitchen Position.")
+        self.close()
+
+    def start_robot(self):
+        """해당 테이블로 이동 명령 퍼블리시"""
+        if isinstance(self.table_id, int):
+            position_key = f"table_{self.table_id}"
+            command = {
+                "command": "move",
+                "position": position_key
+            }
+            self.subscriber_node.publish_robot_command(command)
+            QMessageBox.information(self, "Robot Control", f"Robot is moving to Table {self.table_id}.")
+            self.close()
+        else:
+            QMessageBox.warning(self, "Robot Control", "Invalid Table ID.")
+
 # GUI 클래스 정의
 class KitchenMonitoring(QMainWindow):
     def __init__(self, subscriber_node):
@@ -100,6 +194,19 @@ class KitchenMonitoring(QMainWindow):
 
         # 주문 대기 번호 초기화
         self.order_counter = 1
+
+        # 테이블 번호를 위치 키로 매핑
+        self.table_position_keys = {
+            1: 'table_1',
+            2: 'table_2',
+            3: 'table_3',
+            4: 'table_4',
+            5: 'table_5',
+            6: 'table_6',
+            7: 'table_7',
+            8: 'table_8',
+            9: 'table_9',
+        }
 
         # 총 가격을 표시할 레이블 생성
         self.total_price_label = QLabel("Total price: 0원", alignment=Qt.AlignRight)
@@ -129,7 +236,7 @@ class KitchenMonitoring(QMainWindow):
         left_widget.setLayout(self.left_layout)
         main_layout.addWidget(left_widget, 0, 0)
 
-        # 오른쪽 패널: 주문 상세 정보 및 대기 주문 정보, 서빙 로봇 제어 버튼들 추가
+        # 오른쪽 패널: 주문 상세 정보 및 대기 주문 정보 추가
         self.right_layout = QVBoxLayout()
         self.order_detail_widget = self.create_order_detail_panel()
         self.cumulative_order_widget = self.create_cumulative_order_panel()
@@ -137,75 +244,34 @@ class KitchenMonitoring(QMainWindow):
         self.right_layout.addWidget(self.order_detail_widget)
         self.right_layout.addWidget(self.cumulative_order_widget)
 
-        # 서빙 로봇 제어 버튼들을 담을 레이아웃 생성
-        self.robot_control_layout = QHBoxLayout()
-
-        # "서빙 로봇 대기 위치로" 버튼 생성
-        self.robot_waiting_button = QPushButton("서빙 로봇 대기 위치로")
-        self.robot_waiting_button.clicked.connect(self.move_robot_to_waiting_position)
-        self.robot_control_layout.addWidget(self.robot_waiting_button)
-
-        # "서빙 로봇 주방 위치로" 버튼 생성
-        self.robot_kitchen_button = QPushButton("서빙 로봇 주방 위치로")
-        self.robot_kitchen_button.clicked.connect(self.move_robot_to_kitchen_position)
-        self.robot_control_layout.addWidget(self.robot_kitchen_button)
-
-        # "서빙 로봇 출발" 버튼 생성
-        self.robot_start_button = QPushButton("서빙 로봇 출발")
-        self.robot_start_button.clicked.connect(self.start_robot)
-        self.robot_control_layout.addWidget(self.robot_start_button)
-
-        # 로봇 제어 버튼들을 오른쪽 패널에 추가
-        self.right_layout.addLayout(self.robot_control_layout)
+        # 로봇 제어 버튼 제거 (기존 코드에서 삭제)
+        # self.robot_control_layout = QHBoxLayout()
+        #
+        # # "서빙 로봇 대기 위치로" 버튼 생성
+        # self.robot_waiting_button = QPushButton("서빙 로봇 대기 위치로")
+        # self.robot_waiting_button.clicked.connect(self.move_robot_to_waiting_position)
+        # self.robot_control_layout.addWidget(self.robot_waiting_button)
+        #
+        # # "서빙 로봇 주방 위치로" 버튼 생성
+        # self.robot_kitchen_button = QPushButton("서빙 로봇 주방 위치로")
+        # self.robot_kitchen_button.clicked.connect(self.move_robot_to_kitchen_position)
+        # self.robot_control_layout.addWidget(self.robot_kitchen_button)
+        #
+        # # "서빙 로봇 출발" 버튼 생성
+        # self.robot_start_button = QPushButton("서빙 로봇 출발")
+        # self.robot_start_button.clicked.connect(self.start_robot)
+        # self.robot_control_layout.addWidget(self.robot_start_button)
+        #
+        # # 로봇 제어 버튼들을 오른쪽 패널에 추가
+        # self.right_layout.addLayout(self.robot_control_layout)
 
         right_widget = QWidget()
         right_widget.setLayout(self.right_layout)
         main_layout.addWidget(right_widget, 0, 1)
 
-        '''
-        ############################## 데이터베이스 연결 설정 ################################
-        import sqlite3  # SQLite 데이터베이스를 사용하기 위한 모듈 임포트
-
-        # 데이터베이스 연결 설정
-        self.conn = sqlite3.connect('restaurant.db')
-        self.cursor = self.conn.cursor()
-
-        # 주문 및 대기 주문 테이블 생성 (존재하지 않을 경우)
-        self.create_tables()
-        ####################################################################################
-        '''
-
-    '''
-    def create_tables(self):
-        """주문 및 대기 주문 테이블 생성"""
-        # orders 테이블 생성
-        ############ 맨 앞,뒤 괄호에 주석을 추가해야함 ##############3
-        self.cursor.execute(
-            CREATE TABLE IF NOT EXISTS orders (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                table_id INTEGER,
-                menu TEXT,
-                quantity INTEGER,
-                price INTEGER,
-                status TEXT
-            )
-        )
-
-        # waiting_orders 테이블 생성
-        ############ 맨 앞,뒤 괄호에 주석을 추가해야함 ##############3
-        self.cursor.execute(
-            CREATE TABLE IF NOT EXISTS waiting_orders (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                wait_number INTEGER,
-                table_id INTEGER,
-                menu TEXT,
-                quantity INTEGER,
-                price INTEGER
-            )
-        )
-
-        self.conn.commit()
-    '''
+        # 테이블 버튼 클릭 시 팝업 창을 여는 시그널 연결
+        for button in self.table_buttons:
+            button.clicked.connect(self.open_control_popup)
 
     def create_table_status_panel(self):
         """테이블 상태를 보여주는 패널 생성"""
@@ -562,23 +628,81 @@ class KitchenMonitoring(QMainWindow):
         """주문 결과 메시지를 ROS 노드로 전송"""
         self.subscriber_node.send_order_result(message)
 
+    def open_control_popup(self):
+        """테이블 버튼 클릭 시 팝업 창을 여는 함수"""
+        button = self.sender()
+        if button:
+            text = button.text()
+            # 버튼 텍스트에서 테이블 번호 추출
+            table_id_str = text.split('\n')[0].replace("Table ", "")
+            try:
+                table_id = int(table_id_str)
+            except ValueError:
+                table_id = None
+
+            if table_id is not None:
+                # ControlPopup 창 열기
+                self.control_popup = ControlPopup(self.subscriber_node, table_id)
+                self.control_popup.exec_()
+
     def move_robot_to_waiting_position(self):
         # 서빙 로봇을 대기 위치로 이동시키는 기능을 구현
+        command = {
+            "command": "move",
+            "position": "waiting"
+        }
+        self.subscriber_node.publish_robot_command(command)
         print("서빙 로봇을 대기 위치로 이동합니다.")
         QMessageBox.information(self, "서빙 로봇 제어", "서빙 로봇을 대기 위치로 이동합니다.")
-        # ROS 메시지 퍼블리시 또는 서비스 호출을 통해 로봇을 제어할 수 있습니다.
+
 
     def move_robot_to_kitchen_position(self):
         # 서빙 로봇을 주방 위치로 이동시키는 기능을 구현
+        command = {
+            "command": "move",
+            "position": "kitchen"
+        }
+        self.subscriber_node.publish_robot_command(command)
         print("서빙 로봇을 주방 위치로 이동합니다.")
         QMessageBox.information(self, "서빙 로봇 제어", "서빙 로봇을 주방 위치로 이동합니다.")
-        # ROS 메시지 퍼블리시 또는 서비스 호출을 통해 로봇을 제어할 수 있습니다.
+
 
     def start_robot(self):
-        # 서빙 로봇을 출발시키는 기능을 구현
-        print("서빙 로봇을 출발합니다.")
-        QMessageBox.information(self, "서빙 로봇 제어", "서빙 로봇을 출발합니다.")
-        # ROS 메시지 퍼블리시 또는 서비스 호출을 통해 로봇을 제어할 수 있습니다.
+        """'서빙 로봇 출발' 버튼 클릭 시 호출되는 함수"""
+        # 현재 처리 중인 주문이 있는지 확인
+        if self.order_table.rowCount() == 0:
+            QMessageBox.warning(self, "로봇 제어", "현재 처리 중인 주문이 없습니다.")
+            return
+
+        # 현재 주문의 테이블 번호 가져오기 (첫 번째 주문을 기준으로 함)
+        table_id_item = self.order_table.item(0, 0)
+        if table_id_item is None:
+            QMessageBox.warning(self, "로봇 제어", "테이블 번호를 가져올 수 없습니다.")
+            return
+
+        try:
+            table_id = int(table_id_item.text())
+        except ValueError:
+            QMessageBox.warning(self, "로봇 제어", "유효한 테이블 번호가 아닙니다.")
+            return
+
+        # 테이블 번호가 유효한지 확인
+        if table_id not in self.table_position_keys:
+            QMessageBox.warning(self, "로봇 제어", f"테이블 {table_id}의 위치가 정의되어 있지 않습니다.")
+            return
+
+        # 위치 키 가져오기
+        position_key = self.table_position_keys[table_id]
+
+        # 로봇 컨트롤 노드로 보낼 명령 생성
+        command = {
+            "command": "move",
+            "position": position_key
+        }
+
+        # 명령 퍼블리시
+        self.subscriber_node.publish_robot_command(command)
+        QMessageBox.information(self, "로봇 제어", f"로봇을 테이블 {table_id} 위치로 이동시킵니다.")
 
     def show_statistics(self):
         # 통계 팝업 창을 표시하는 기능을 구현

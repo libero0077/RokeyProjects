@@ -14,6 +14,7 @@ menu_order_project/kitchen_monitoring.py
 menu_order_project/menu_order.py
 menu_order_project/table_order.py
 menu_order_project/test_order.py
+menu_order_project/test_robot_controll.py
 menu_order_project/test_sub.py
 resource/menu_order_project
 test/test_copyright.py

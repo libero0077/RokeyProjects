@@ -15,7 +15,6 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QTimer, Qt
 from rclpy.qos import QoSProfile, ReliabilityPolicy  # QoS 설정
 import json
-from menu_order_interfaces.srv import MenuUpdate  # 새로운 서비스 인터페이스 (주문 결과용)
 
 # 전역 데이터베이스 연결
 conn = None
