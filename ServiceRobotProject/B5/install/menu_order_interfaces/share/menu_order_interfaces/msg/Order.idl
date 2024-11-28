@@ -1,0 +1,22 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from menu_order_interfaces/msg/Order.msg
+// generated code does not contain a copyright notice
+
+
+module menu_order_interfaces {
+  module msg {
+    struct Order {
+      @verbatim (language="comment", text=
+        "테이블 ID")
+      string table_id;
+
+      @verbatim (language="comment", text=
+        "메뉴 이름")
+      string menu;
+
+      @verbatim (language="comment", text=
+        "주문 수량")
+      int32 quantity;
+    };
+  };
+};

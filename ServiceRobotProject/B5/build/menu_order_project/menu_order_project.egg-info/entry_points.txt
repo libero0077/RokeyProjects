@@ -1,0 +1,5 @@
+[console_scripts]
+P = menu_order_project.table_order:main
+S = menu_order_project.kitchen_monitoring:main
+test_P = menu_order_project.test_order:main
+test_S = menu_order_project.test_sub:main

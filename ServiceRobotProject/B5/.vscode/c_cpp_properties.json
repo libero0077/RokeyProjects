@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_interfaces/include/**",
+        "/home/yjh/turtlebot3_ws/install/turtlebot3_fake_node/include/**",
+        "/home/yjh/turtlebot3_ws/install/turtlebot3_msgs/include/**",
+        "/home/yjh/turtlebot3_ws/install/turtlebot3_gazebo/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/yjh/Doosan/Real_project_ws/Week4/B5/src/menu_order_interfaces/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

@@ -1,0 +1,12 @@
+# Goal
+string table_id    # 이동할 테이블 ID
+float64 x          # 테이블의 X 좌표
+float64 y          # 테이블의 Y 좌표
+---
+# Result
+bool reached       # 도착 여부
+string message     # 도착 메시지
+---
+# Feedback
+float32 progress   # 진행 상황 (0.0 ~ 1.0)
+string status      # 현재 상태 ("Moving", "Waiting", etc.)

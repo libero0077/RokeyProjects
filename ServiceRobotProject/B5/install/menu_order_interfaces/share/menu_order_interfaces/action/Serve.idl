@@ -1,0 +1,46 @@
+// generated from rosidl_adapter/resource/action.idl.em
+// with input from menu_order_interfaces/action/Serve.action
+// generated code does not contain a copyright notice
+
+
+module menu_order_interfaces {
+  module action {
+    @verbatim (language="comment", text=
+      "Goal")
+    struct Serve_Goal {
+      @verbatim (language="comment", text=
+        "이동할 테이블 ID")
+      string table_id;
+
+      @verbatim (language="comment", text=
+        "테이블의 X 좌표")
+      double x;
+
+      @verbatim (language="comment", text=
+        "테이블의 Y 좌표")
+      double y;
+    };
+    @verbatim (language="comment", text=
+      "Result")
+    struct Serve_Result {
+      @verbatim (language="comment", text=
+        "도착 여부")
+      boolean reached;
+
+      @verbatim (language="comment", text=
+        "도착 메시지")
+      string message;
+    };
+    @verbatim (language="comment", text=
+      "Feedback")
+    struct Serve_Feedback {
+      @verbatim (language="comment", text=
+        "진행 상황 (0.0 ~ 1.0)")
+      float progress;
+
+      @verbatim (language="comment", text=
+        "현재 상태 (\"Moving\", \"Waiting\", etc.)")
+      string status;
+    };
+  };
+};

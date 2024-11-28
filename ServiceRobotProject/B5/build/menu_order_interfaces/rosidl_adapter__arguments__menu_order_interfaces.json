@@ -1,0 +1,8 @@
+{
+  "package_name": "menu_order_interfaces",
+  "non_idl_tuples": [
+    "/home/yjh/Doosan/Real_project_ws/Week4/B5/src/menu_order_interfaces:msg/Order.msg",
+    "/home/yjh/Doosan/Real_project_ws/Week4/B5/src/menu_order_interfaces:srv/MenuUpdate.srv",
+    "/home/yjh/Doosan/Real_project_ws/Week4/B5/src/menu_order_interfaces:action/Serve.action"
+  ]
+}

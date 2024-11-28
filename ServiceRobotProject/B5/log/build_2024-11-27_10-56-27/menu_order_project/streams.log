@@ -1,0 +1,29 @@
+[0.672s] Invoking command in '/home/yjh/Doosan/Real_project_ws/Week4/B5/src/menu_order_project': LD_LIBRARY_PATH=/home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_interfaces/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week4/B5/build/menu_order_project/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_project/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/menu_order_project build --build-base /home/yjh/Doosan/Real_project_ws/Week4/B5/build/menu_order_project/build install --record /home/yjh/Doosan/Real_project_ws/Week4/B5/build/menu_order_project/install.log --single-version-externally-managed install_data
+[0.905s] running egg_info
+[0.922s] writing ../../build/menu_order_project/menu_order_project.egg-info/PKG-INFO
+[0.922s] writing dependency_links to ../../build/menu_order_project/menu_order_project.egg-info/dependency_links.txt
+[0.922s] writing entry points to ../../build/menu_order_project/menu_order_project.egg-info/entry_points.txt
+[0.923s] writing requirements to ../../build/menu_order_project/menu_order_project.egg-info/requires.txt
+[0.923s] writing top-level names to ../../build/menu_order_project/menu_order_project.egg-info/top_level.txt
+[0.958s] reading manifest file '../../build/menu_order_project/menu_order_project.egg-info/SOURCES.txt'
+[0.959s] writing manifest file '../../build/menu_order_project/menu_order_project.egg-info/SOURCES.txt'
+[0.959s] running build
+[0.959s] running build_py
+[0.960s] copying menu_order_project/menu_order.py -> /home/yjh/Doosan/Real_project_ws/Week4/B5/build/menu_order_project/build/lib/menu_order_project
+[0.960s] copying menu_order_project/kitchen_monitoring.py -> /home/yjh/Doosan/Real_project_ws/Week4/B5/build/menu_order_project/build/lib/menu_order_project
+[0.960s] copying menu_order_project/__init__.py -> /home/yjh/Doosan/Real_project_ws/Week4/B5/build/menu_order_project/build/lib/menu_order_project
+[0.960s] running install
+[0.964s] running install_lib
+[0.982s] copying /home/yjh/Doosan/Real_project_ws/Week4/B5/build/menu_order_project/build/lib/menu_order_project/kitchen_monitoring.py -> /home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_project/lib/python3.10/site-packages/menu_order_project
+[0.982s] byte-compiling /home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_project/lib/python3.10/site-packages/menu_order_project/kitchen_monitoring.py to kitchen_monitoring.cpython-310.pyc
+[0.984s] running install_data
+[0.984s] copying resource/menu_order_project -> /home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_project/share/ament_index/resource_index/packages
+[0.984s] copying package.xml -> /home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_project/share/menu_order_project
+[0.984s] running install_egg_info
+[1.003s] removing '/home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_project/lib/python3.10/site-packages/menu_order_project-0.0.0-py3.10.egg-info' (and everything under it)
+[1.003s] Copying ../../build/menu_order_project/menu_order_project.egg-info to /home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_project/lib/python3.10/site-packages/menu_order_project-0.0.0-py3.10.egg-info
+[1.004s] running install_scripts
+[1.141s] Installing P script to /home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_project/lib/menu_order_project
+[1.141s] Installing S script to /home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_project/lib/menu_order_project
+[1.141s] writing list of installed files to '/home/yjh/Doosan/Real_project_ws/Week4/B5/build/menu_order_project/install.log'
+[1.169s] Invoked command in '/home/yjh/Doosan/Real_project_ws/Week4/B5/src/menu_order_project' returned '0': LD_LIBRARY_PATH=/home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_interfaces/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week4/B5/build/menu_order_project/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_project/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/menu_order_project build --build-base /home/yjh/Doosan/Real_project_ws/Week4/B5/build/menu_order_project/build install --record /home/yjh/Doosan/Real_project_ws/Week4/B5/build/menu_order_project/install.log --single-version-externally-managed install_data
