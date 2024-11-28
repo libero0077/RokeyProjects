@@ -39,14 +39,19 @@ class RobotController(Node):
         # 액션 클라이언트 생성
         self.action_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
 
-        # 위치 좌표 정의 (임의의 값)
+        # 위치 좌표 정의 (amcl_pose로부터 추출한 실제 좌표로 업데이트)
         self.positions = {
-            'waiting': {'x': 1.0, 'y': 0.0, 'theta': 0.0},
-            'kitchen': {'x': 0.0, 'y': 1.0, 'theta': 1.57},
-            'table_1': {'x': 2.0, 'y': 2.0, 'theta': 0.0},
-            'table_2': {'x': 2.0, 'y': 3.0, 'theta': 0.0},
-            'table_3': {'x': 2.0, 'y': 4.0, 'theta': 0.0},
-            # 나머지 테이블 좌표도 동일한 형식으로 추가
+            'waiting': {'x': 1.5287821904725307, 'y': -1.6564363922167273, 'theta': 0.08051796784565991},
+            'kitchen': {'x': -0.45619495436058893, 'y': 0.5627857193272424, 'theta': 0.11337987469541375},
+            'table_1': {'x': 0.4608367135716978, 'y': 1.5926609706591535, 'theta': 0.19478139000050054},
+            'table_2': {'x': 0.44415937076368955, 'y': 0.4999638724737042, 'theta': -0.14039798973855175},
+            'table_3': {'x': 0.4398148607080405, 'y': -0.5713670076206864, 'theta': -0.10709628753351007},
+            'table_4': {'x': 1.983667568246241, 'y': 2.0623549505022147, 'theta': -0.17066896417045635},
+            'table_5': {'x': 2.0777497362532062, 'y': 1.0475412036423666, 'theta': -0.12801790809238955},
+            'table_6': {'x': 1.9639341467418672, 'y': -1.1660702113994799, 'theta': 0.11646105876604701},
+            'table_7': {'x': 3.193308523192465, 'y': 2.0342932481312683, 'theta': -0.09997536240913828},
+            'table_8': {'x': 3.109162110811999, 'y': 1.064675670588104, 'theta': 0.0911863336818867},
+            'table_9': {'x': 3.153391448984137, 'y': -1.0491125084255173, 'theta': -0.19493162164767266},
         }
 
     def command_callback(self, msg):
@@ -111,7 +116,9 @@ class RobotController(Node):
     def feedback_callback(self, feedback_msg):
         """액션 수행 중 피드백을 처리하는 콜백 함수"""
         feedback = feedback_msg.feedback
-        self.get_logger().info(f'Current position: {feedback.current_pose.pose.position.x}, {feedback.current_pose.pose.position.y}')
+        current_x = feedback.current_pose.pose.position.x
+        current_y = feedback.current_pose.pose.position.y
+        self.get_logger().info(f'Current position: x={current_x}, y={current_y}')
 
     def euler_to_quaternion(self, roll, pitch, yaw):
         """오일러 각도를 쿼터니언으로 변환하는 함수"""
