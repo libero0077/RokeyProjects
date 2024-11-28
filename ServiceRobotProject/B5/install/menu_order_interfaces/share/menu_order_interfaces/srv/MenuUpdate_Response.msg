@@ -1,2 +1,1 @@
-
-bool success
+/home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/build/menu_order_interfaces/rosidl_cmake/srv/MenuUpdate_Response.msg

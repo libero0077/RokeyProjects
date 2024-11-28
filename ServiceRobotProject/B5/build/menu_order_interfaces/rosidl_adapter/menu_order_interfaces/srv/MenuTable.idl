@@ -1,0 +1,23 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from menu_order_interfaces/srv/MenuTable.srv
+// generated code does not contain a copyright notice
+
+
+module menu_order_interfaces {
+  module srv {
+    @verbatim (language="comment", text=
+      "Request: 요청 메시지")
+    struct MenuTable_Request {
+      @verbatim (language="comment", text=
+        "요청 유형 (e.g., 'get_menu_table')")
+      string request_type;
+    };
+    @verbatim (language="comment", text=
+      "Response: 응답 메시지")
+    struct MenuTable_Response {
+      @verbatim (language="comment", text=
+        "테이블 데이터 (모든 행을 문자열로 직렬화)")
+      sequence<string> table_data;
+    };
+  };
+};

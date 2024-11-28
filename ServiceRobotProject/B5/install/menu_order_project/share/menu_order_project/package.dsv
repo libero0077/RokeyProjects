@@ -4,3 +4,6 @@ source;share/menu_order_project/hook/pythonpath.sh
 source;share/menu_order_project/hook/ament_prefix_path.ps1
 source;share/menu_order_project/hook/ament_prefix_path.dsv
 source;share/menu_order_project/hook/ament_prefix_path.sh
+source;../../build/menu_order_project/share/menu_order_project/hook/pythonpath_develop.ps1
+source;../../build/menu_order_project/share/menu_order_project/hook/pythonpath_develop.dsv
+source;../../build/menu_order_project/share/menu_order_project/hook/pythonpath_develop.sh

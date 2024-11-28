@@ -2,7 +2,7 @@
 
 # since this file is sourced use either the provided AMENT_CURRENT_PREFIX
 # or fall back to the destination set at configure time
-: ${AMENT_CURRENT_PREFIX:="/home/yjh/Doosan/Real_project_ws/Week4/B5/install/menu_order_interfaces"}
+: ${AMENT_CURRENT_PREFIX:="/home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/install/menu_order_interfaces"}
 if [ ! -d "$AMENT_CURRENT_PREFIX" ]; then
   if [ -z "$COLCON_CURRENT_PREFIX" ]; then
     echo "The compile time prefix path '$AMENT_CURRENT_PREFIX' doesn't " \

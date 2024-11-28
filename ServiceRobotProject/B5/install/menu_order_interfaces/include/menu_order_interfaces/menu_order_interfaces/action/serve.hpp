@@ -1,11 +1,1 @@
-// generated from rosidl_generator_cpp/resource/idl.hpp.em
-// generated code does not contain a copyright notice
-
-#ifndef MENU_ORDER_INTERFACES__ACTION__SERVE_HPP_
-#define MENU_ORDER_INTERFACES__ACTION__SERVE_HPP_
-
-#include "menu_order_interfaces/action/detail/serve__struct.hpp"
-#include "menu_order_interfaces/action/detail/serve__builder.hpp"
-#include "menu_order_interfaces/action/detail/serve__traits.hpp"
-
-#endif  // MENU_ORDER_INTERFACES__ACTION__SERVE_HPP_
+/home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/build/menu_order_interfaces/rosidl_generator_cpp/menu_order_interfaces/action/serve.hpp

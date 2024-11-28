@@ -1,0 +1,19 @@
+running develop
+running egg_info
+writing menu_order_project.egg-info/PKG-INFO
+writing dependency_links to menu_order_project.egg-info/dependency_links.txt
+writing entry points to menu_order_project.egg-info/entry_points.txt
+writing requirements to menu_order_project.egg-info/requires.txt
+writing top-level names to menu_order_project.egg-info/top_level.txt
+reading manifest file 'menu_order_project.egg-info/SOURCES.txt'
+writing manifest file 'menu_order_project.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/install/menu_order_project/lib/python3.10/site-packages/menu-order-project.egg-link (link to .)
+Installing P script to /home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/install/menu_order_project/lib/menu_order_project
+Installing S script to /home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/install/menu_order_project/lib/menu_order_project
+Installing test_P script to /home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/install/menu_order_project/lib/menu_order_project
+Installing test_S script to /home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/install/menu_order_project/lib/menu_order_project
+
+Installed /home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/build/menu_order_project
+running symlink_data
+symbolically linking /home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/build/menu_order_interfaces/srv/MenuTable.srv -> /home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/install/menu_order_project/share/menu_order_project/srv

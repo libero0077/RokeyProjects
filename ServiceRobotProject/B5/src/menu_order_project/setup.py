@@ -11,6 +11,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/srv', ['../menu_order_interfaces/srv/MenuUpdate.srv']),  # 추가
+        ('share/' + package_name + '/srv', ['../menu_order_interfaces/srv/MenuTable.srv']),  # 추가
     ],
     install_requires=['setuptools'],
     zip_safe=True,

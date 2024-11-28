@@ -8,9 +8,13 @@ file(REMOVE_RECURSE
   "rosidl_generator_cpp/menu_order_interfaces/msg/detail/order__struct.hpp"
   "rosidl_generator_cpp/menu_order_interfaces/msg/detail/order__traits.hpp"
   "rosidl_generator_cpp/menu_order_interfaces/msg/order.hpp"
+  "rosidl_generator_cpp/menu_order_interfaces/srv/detail/menu_table__builder.hpp"
+  "rosidl_generator_cpp/menu_order_interfaces/srv/detail/menu_table__struct.hpp"
+  "rosidl_generator_cpp/menu_order_interfaces/srv/detail/menu_table__traits.hpp"
   "rosidl_generator_cpp/menu_order_interfaces/srv/detail/menu_update__builder.hpp"
   "rosidl_generator_cpp/menu_order_interfaces/srv/detail/menu_update__struct.hpp"
   "rosidl_generator_cpp/menu_order_interfaces/srv/detail/menu_update__traits.hpp"
+  "rosidl_generator_cpp/menu_order_interfaces/srv/menu_table.hpp"
   "rosidl_generator_cpp/menu_order_interfaces/srv/menu_update.hpp"
 )
 

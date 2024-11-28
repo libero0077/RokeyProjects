@@ -1,1 +1,1 @@
-from menu_order_interfaces.srv._menu_update import MenuUpdate  # noqa: F401
+/home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/build/menu_order_interfaces/rosidl_generator_py/menu_order_interfaces/srv/__init__.py

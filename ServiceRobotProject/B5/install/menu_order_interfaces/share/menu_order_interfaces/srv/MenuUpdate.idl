@@ -1,17 +1,1 @@
-// generated from rosidl_adapter/resource/srv.idl.em
-// with input from menu_order_interfaces/srv/MenuUpdate.srv
-// generated code does not contain a copyright notice
-
-
-module menu_order_interfaces {
-  module srv {
-    @verbatim (language="comment", text=
-      "Request")
-    struct MenuUpdate_Request {
-      string result_message;
-    };
-    struct MenuUpdate_Response {
-      boolean success;
-    };
-  };
-};
+/home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/build/menu_order_interfaces/rosidl_adapter/menu_order_interfaces/srv/MenuUpdate.idl

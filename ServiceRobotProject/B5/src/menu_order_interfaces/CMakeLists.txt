@@ -18,6 +18,7 @@ find_package(std_msgs REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Order.msg"           # 메시지 파일
   "srv/MenuUpdate.srv"      # 서비스 파일
+  "srv/MenuTable.srv"      # 서비스 파일
   "action/Serve.action"     # 액션 파일
   DEPENDENCIES std_msgs     # 메시지 의존성
 )

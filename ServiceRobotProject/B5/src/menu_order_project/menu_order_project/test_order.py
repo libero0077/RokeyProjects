@@ -16,64 +16,26 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QTimer, Qt, pyqtSignal
 import json
-from menu_order_interfaces.srv import MenuUpdate  # 서비스 인터페이스 임포트
 
-# 전역 데이터베이스 연결
-conn = None
-
-def initialize_database():
-    global conn
-    try:
-        conn = sqlite3.connect('restaurant.db')
-        cursor = conn.cursor()
-
-        cursor.execute("DROP TABLE IF EXISTS menu")
-
-        cursor.execute('''CREATE TABLE menu
-                         (id INTEGER PRIMARY KEY,
-                          name TEXT,
-                          price REAL,
-                          availability INTEGER,
-                          category TEXT,
-                          description TEXT,
-                          image_path TEXT)''')
-
-        sample_data = [
-            ('김치찌개', 12000, 1, '메인메뉴', '국내산 김치를 사용하여 매콤하게 끓였습니다.\n맵기 강도 조절 가능', ""),
-            ('된장찌개', 11000, 1, '메인메뉴', '두부, 호박, 돼지고기을 넣어 더욱 식감을 살렸습니다.', ""),
-            ('열무비빔밥', 10000, 1, '메인메뉴', '싱싱한 열무와 다른 채소들을 사용하였습니다.', ""),
-            ('두루치기', 12000, 1, '메인메뉴', '국내산 김치와 생고기를 사용하여 더욱 맛있습니다', ""),
-            ('콜라', 2000, 1, '음료', '코카콜라 또는 펩시로 선택가능합니다', ""),
-            ('콜라제로', 2000, 1, '음료', '코카콜라제로 또는 펩시제로로 선택가능합니다', ""),
-            ('사이다', 2000, 1, '음료', '칠성사이다 또는 스프라이트로 선택가능합니다', ""),
-            ('사이다제로1', 2000, 1, '음료', '칠성사이다 제로 또는 스프라이트 제로로 선택가능합니다', ""),
-            ('사이다제로2', 2000, 1, '음료', '칠성사이다 제로 또는 스프라이트 제로로 선택가능합니다', ""),
-            ('사이다제로3', 2000, 1, '음료', '칠성사이다 제로 또는 스프라이트 제로로 선택가능합니다', "")
-        ]
-
-        cursor.executemany("INSERT INTO menu (name, price, availability, category, description, image_path) VALUES (?, ?, ?, ?, ?, ?)", sample_data)
-        conn.commit()
-    except sqlite3.Error as e:
-        print(f"데이터베이스 오류: {e}")
-    except Exception as e:
-        print(f"예외 발생: {e}")
+from menu_order_interfaces.srv import MenuUpdate, MenuTable  # 서비스 인터페이스 임포트
 
 class MenuDatabase:
-    def __init__(self):
-        global conn
-        self.conn = conn
-        self.cursor = self.conn.cursor()
-        self.load_menu()
+    def __init__(self, menu_items=None):
+        # 메뉴 아이템을 받아와서 설정
+        if menu_items is None:
+            menu_items = []
+        self.menu_items = menu_items
 
-    def load_menu(self):
-        try:
-            self.cursor.execute('SELECT id, name, price, category, description, image_path FROM menu WHERE availability=1')
-            self.menu_items = self.cursor.fetchall()
-        except sqlite3.Error as e:
-            print(f"메뉴 로딩 오류: {e}")
+    def load_menu(self, menu_items):
+        # 외부에서 받은 메뉴 데이터를 로드
+        self.menu_items = menu_items
 
     def get_menu(self):
         return self.menu_items
+
+    def get_menu_json(self):
+        # 메뉴 아이템을 JSON 형식으로 변환하여 반환
+        return json.dumps(self.menu_items)  # 리스트를 JSON 문자열로 변환
 
 class NODE(Node):
     def __init__(self):
@@ -82,18 +44,92 @@ class NODE(Node):
         self.message_publisher = self.create_publisher(String, 'order_topic', qos_profile)
         self.queue = queue.Queue()
 
-    ########################## 서비스 서버 생성 (주문 처리 결과를 받기 위해) ##################################
+        # 메뉴 정보를 요청하기 위한 서비스 클라이언트 생성
+        self.cli = self.create_client(MenuTable, 'menu_table_service')
+
+        # 서비스가 준비될 때까지 대기
+        while not self.cli.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('Waiting for menu_table_service...')
+
+        # 서비스 요청 객체 생성
+        self.req = MenuTable.Request()
+
+        self.request_table()
+
+        # 서비스 서버 생성 (주문 처리 결과를 받기 위해)
         self.srv = self.create_service(MenuUpdate, 'order_result_service', self.order_result_callback)
         self.notification_queue = queue.Queue()  # 알림 메시지 큐
 
-    # order_result_callback 함수는 서비스 요청을 받을 때마다 호출됨
+        self.menu_db = MenuDatabase()  # 메뉴 데이터베이스 초기화
+        self.gui = None  # GUI 인스턴스를 나중에 설정
+
+    def table_response_callback(self, future):
+        try:
+            response = future.result()
+            self.get_logger().info('--- Full Menu Table Received ---')
+
+            # 응답의 table_data 형식 확인
+            self.get_logger().info(f"Response table_data type: {type(response.table_data)}")
+            self.get_logger().info(f"Response table_data content: {response.table_data}")
+
+            # 받은 데이터를 파싱하여 메뉴 데이터베이스 초기화
+            menu_items = []
+            for item in response.table_data:
+                if isinstance(item, str):
+                    try:
+                        item = json.loads(item)  # JSON 문자열을 딕셔너리로 파싱
+                    except json.JSONDecodeError:
+                        self.get_logger().error(f"Failed to parse JSON: {item}")
+                        continue
+                # item은 딕셔너리
+                self.get_logger().info(f"Item: {item}")  # item 내용 출력
+
+                # 필드 이름을 실제 데이터에 맞게 수정
+                id_value = item.get('menu_item_id')  # 'id' 대신 'menu_item_id' 사용
+                price_value = item.get('price')
+
+                if id_value is None or price_value is None:
+                    self.get_logger().error(f"Missing 'menu_item_id' or 'price' in item: {item}")
+                    continue  # 해당 아이템은 스킵
+
+                try:
+                    menu_item_dict = {
+                        'id': int(id_value),  # id를 정수형으로 변환
+                        'name': item.get('name', ''),
+                        'price': int(price_value),  # price를 정수형으로 변환
+                        'category': item.get('category', ''),
+                        'description': item.get('description', ''),
+                        'image_path': item.get('image_path', '')  # image_path가 없을 경우 빈 문자열
+                    }
+                except ValueError as ve:
+                    self.get_logger().error(f"ValueError converting 'menu_item_id' or 'price' to int: {ve}")
+                    continue  # 변환 오류 발생 시 해당 아이템 스킵
+
+                menu_items.append(menu_item_dict)
+
+            self.get_logger().info(f"Parsed menu items: {menu_items}")
+
+            self.menu_db = MenuDatabase(menu_items)
+
+            # GUI의 메뉴 데이터베이스를 업데이트하고 메뉴를 갱신
+            if self.gui is not None:
+                self.gui.menu_db = self.menu_db
+                self.gui.update_menu_display()
+
+        except Exception as e:
+            self.get_logger().error(f"Service call failed: {e}")
+            
+    def request_table(self):
+        self.req.request_type = 'get_menu_table'  # 요청 유형 설정
+        future = self.cli.call_async(self.req)  # 비동기 서비스 요청
+        future.add_done_callback(self.table_response_callback)
+
     def order_result_callback(self, request, response):
         """주문 처리 결과를 주방 디스플레이 노드로부터 수신"""
         self.get_logger().info(f"Received order result: {request.result_message}")
         self.notification_queue.put(request.result_message)
         response.success = True  # 응답 확인
         return response
-    ####################################################################################################
 
     def publish_message(self):
         while not self.queue.empty():
@@ -102,11 +138,6 @@ class NODE(Node):
             msg.data = message
             self.message_publisher.publish(msg)
             self.get_logger().info(f'Published message: {message}')
-
-# ROS 노드를 별도의 스레드에서 실행
-def ros_spin(node):
-    rclpy.spin(node)
-    rclpy.shutdown()
 
 class MenuItemWidget(QWidget):
     def __init__(self, menu_item, parent=None):
@@ -120,17 +151,19 @@ class MenuItemWidget(QWidget):
 
         # 이미지 레이블
         image_label = QLabel()
-        pixmap = QPixmap(self.menu_item[5])
-        scaled_pixmap = pixmap.scaled(150, 150, Qt.KeepAspectRatio, Qt.SmoothTransformation)  # 크기 고정
+        pixmap = QPixmap(self.menu_item['image_path'])
+        if pixmap.isNull():
+            pixmap = QPixmap('default_image.png')  # 기본 이미지 설정
+        scaled_pixmap = pixmap.scaled(150, 150, Qt.KeepAspectRatio, Qt.SmoothTransformation)  # 크기 조정
         image_label.setFixedSize(150, 150)  # 레이블 크기 고정
         image_label.setAlignment(Qt.AlignCenter)  # 중앙 정렬
         image_label.setPixmap(scaled_pixmap)
         layout.addWidget(image_label)
 
-        name_label = QLabel(self.menu_item[1])
+        name_label = QLabel(self.menu_item['name'])
         layout.addWidget(name_label)
 
-        price_label = QLabel(f"{int(self.menu_item[2])}원")
+        price_label = QLabel(f"{int(self.menu_item['price'])}원")
         layout.addWidget(price_label)
 
         select_button = QPushButton("선택")
@@ -161,8 +194,10 @@ class MenuItemPopup(QDialog):
 
         # 이미지 레이블
         image_label = QLabel()
-        pixmap = QPixmap(self.menu_item[5])
-        scaled_pixmap = pixmap.scaled(250, 250, Qt.KeepAspectRatio, Qt.SmoothTransformation)  # 크기 고정
+        pixmap = QPixmap(self.menu_item['image_path'])
+        if pixmap.isNull():
+            pixmap = QPixmap('default_image.png')  # 기본 이미지 설정
+        scaled_pixmap = pixmap.scaled(250, 250, Qt.KeepAspectRatio, Qt.SmoothTransformation)  # 크기 조정
         image_label.setFixedSize(250, 250)  # 레이블 크기 고정
         image_label.setAlignment(Qt.AlignCenter)  # 중앙 정렬
         image_label.setPixmap(scaled_pixmap)
@@ -172,12 +207,12 @@ class MenuItemPopup(QDialog):
         info_layout = QVBoxLayout()
 
         # 메뉴명
-        name_label = QLabel(self.menu_item[1])
+        name_label = QLabel(self.menu_item['name'])
         name_label.setStyleSheet("font-size: 16px; font-weight: bold;")
         info_layout.addWidget(name_label)
 
         # 메뉴 설명
-        description_label = QLabel(self.menu_item[4])
+        description_label = QLabel(self.menu_item['description'])
         description_label.setStyleSheet("font-size: 14px;")
         info_layout.addWidget(description_label)
 
@@ -203,7 +238,7 @@ class MenuItemPopup(QDialog):
         minus_button.clicked.connect(self.decrease_quantity)
         quantity_layout.addWidget(minus_button)
 
-        # 수량 표시 (SpinBox 대신 QLabel 사용)
+        # 수량 표시 (SpinBox 사용)
         self.quantity_spin = QSpinBox()
         self.quantity_spin.setButtonSymbols(QSpinBox.NoButtons)  # 증가/감소 버튼 제거
         self.quantity_spin.setMinimum(1)
@@ -269,9 +304,8 @@ class MenuItemPopup(QDialog):
         self.quantity_spin.setValue(self.quantity_spin.value() + 1)
 
 class GUI(QMainWindow):
-    #################### 알림 메시지를 받기 위한 시그널 정의 ###########################
+    # 알림 메시지를 받기 위한 시그널 정의
     notification_received = pyqtSignal(str)
-    #############################################################################
 
     def __init__(self, node):
         super().__init__()
@@ -279,17 +313,14 @@ class GUI(QMainWindow):
         self.menu_db = MenuDatabase()
         self.order_items = []
         self.order_history = []
-        self.current_category = '전체 메뉴'  # 현재 선택된 카테고리 저장
-        ########주문 처리 관련 알림 내역 저장을 위한 리스트#####
+        self.current_category = '전체메뉴'  # 현재 선택된 카테고리 저장
         self.notifications = []  # 알림 내역 저장 리스트
-        ###############################################
         self.setupUi()
 
-        ########################### 알림 메시지 확인을 위한 타이머 설정 ###################
+        # 알림 메시지 확인을 위한 타이머 설정
         self.notification_timer = QTimer(self)
         self.notification_timer.timeout.connect(self.check_notifications)
         self.notification_timer.start(1000)  # 1초마다 확인
-        ############################################################################
 
         # 시그널 연결
         self.notification_received.connect(self.show_notification_popup)
@@ -368,13 +399,7 @@ class GUI(QMainWindow):
 
         # 메뉴 위젯 저장을 위한 리스트
         self.menu_widgets = []
-
-        # 메뉴 위젯 생성 및 배치
-        menu_items = self.menu_db.get_menu()
-        for i, menu_item in enumerate(menu_items):
-            menu_widget = MenuItemWidget(menu_item, self.menu_display)
-            self.menu_widgets.append(menu_widget)
-            self.menu_layout.addWidget(menu_widget, i // 3, i % 3)
+        # 초기에는 메뉴 위젯을 생성하지 않음
 
         menu_scroll.setWidget(self.menu_display)
         content_layout.addWidget(menu_scroll, 2)
@@ -443,7 +468,21 @@ class GUI(QMainWindow):
         self.timer.timeout.connect(self.update_time)
         self.timer.start(1000)
 
-    # 검색어에 맞는 메뉴 필터링
+    def update_menu_display(self):
+        # 기존 메뉴 위젯 제거
+        for i in reversed(range(self.menu_layout.count())):
+            widget = self.menu_layout.itemAt(i).widget()
+            if widget is not None:
+                widget.setParent(None)
+        self.menu_widgets.clear()
+
+        # 새로운 메뉴 위젯 생성 및 추가
+        menu_items = self.menu_db.get_menu()
+        for i, menu_item in enumerate(menu_items):
+            menu_widget = MenuItemWidget(menu_item, self.menu_display)
+            self.menu_widgets.append(menu_widget)
+            self.menu_layout.addWidget(menu_widget, i // 3, i % 3)
+
     def filter_menu(self, text):
         search_text = text.lower()
 
@@ -454,9 +493,8 @@ class GUI(QMainWindow):
         # 검색어에 맞는 메뉴만 표시
         visible_widgets = []
         for widget in self.menu_widgets:
-            menu_name = widget.menu_item[1].lower()
-            first_char_chosung = self.get_jamo(menu_name[0]).lower()
-            if search_text in menu_name or search_text == first_char_chosung:
+            menu_name = widget.menu_item['name'].lower()
+            if search_text in menu_name:
                 visible_widgets.append(widget)
 
         # 보이는 위젯들을 그리드에 다시 배치
@@ -466,52 +504,26 @@ class GUI(QMainWindow):
             col = i % 3
             self.menu_layout.addWidget(widget, row, col)
 
-        # 남은 셀을 빈 위젯으로 채우기
-        for i in range(len(visible_widgets), len(self.menu_widgets)):
-            empty_widget = QWidget()
-            row = i // 3
-            col = i % 3
-            self.menu_layout.addWidget(empty_widget, row, col)
-
-    # 초성 관련 함수
-    def get_jamo(self, char):
-        CHOSUNG_LIST = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ',
-                        'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ',
-                        'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
-        HANGUL_START = 0xAC00
-        HANGUL_END = 0xD7A3
-
-        if not char:
-            return ''
-
-        code = ord(char)
-        if code < HANGUL_START or code > HANGUL_END:
-            return char
-
-        chosung_index = (code - HANGUL_START) // (21 * 28)
-        return CHOSUNG_LIST[chosung_index]
-
-    # 카테고리 작동 구현
     def filter_by_category(self, category):
-        # 기존 메뉴 위젯 모두 제거
+        # 기존 메뉴 위젯 제거
         for i in reversed(range(self.menu_layout.count())):
             widget = self.menu_layout.itemAt(i).widget()
-            if widget:
+            if widget is not None:
                 widget.setParent(None)
+        self.menu_widgets.clear()
 
         # 선택된 카테고리에 해당하는 메뉴 표시
         menu_items = self.menu_db.get_menu()
         filtered_items = []
         if category == '전체메뉴':
             filtered_items = menu_items
-        elif category == '메뉴검색':
-            filtered_items = menu_items
         else:
-            filtered_items = [item for item in menu_items if item[3] == category]
+            filtered_items = [item for item in menu_items if item['category'] == category]
 
         # 필터링된 메뉴 위젯 추가
         for i, menu_item in enumerate(filtered_items):
             menu_widget = MenuItemWidget(menu_item, self.menu_display)
+            self.menu_widgets.append(menu_widget)
             self.menu_layout.addWidget(menu_widget, i // 3, i % 3)
 
     def update_time(self):
@@ -519,19 +531,18 @@ class GUI(QMainWindow):
         self.time_label.setText(f"현재 시간: {current_time}")
 
     def add_to_order(self, menu_item, quantity):
-        item = next((x for x in self.order_items if x['id'] == menu_item[0]), None)
+        item = next((x for x in self.order_items if x['id'] == menu_item['id']), None)
         if item:
             item['quantity'] += quantity
         else:
             self.order_items.append({
-                'id': menu_item[0],
-                'name': menu_item[1],
-                'price': menu_item[2],
+                'id': menu_item['id'],
+                'name': menu_item['name'],
+                'price': menu_item['price'],
                 'quantity': quantity
             })
         self.update_order_list()
 
-    ############################## 알림 메시지 확인 및 시그널로 전달 ############################
     def check_notifications(self):
         """알림 큐에서 메시지를 가져와 알림 리스트에 추가"""
         while not self.node.notification_queue.empty():
@@ -569,8 +580,6 @@ class GUI(QMainWindow):
 
         dialog.setLayout(layout)
         dialog.exec_()
-    ##############################################################################################
-
 
     # 장바구니
     def update_order_list(self):
@@ -686,28 +695,28 @@ class GUI(QMainWindow):
         QMessageBox.information(self, "직원 호출", "직원을 호출했습니다.")
 
 def main():
-    try:
-        initialize_database()
-        rclpy.init()
-        node = NODE()
-        ros_thread = threading.Thread(target=ros_spin, args=(node,), daemon=True)
-        ros_thread.start()
+    # ROS 노드 초기화
+    rclpy.init()
+    node = NODE()
 
-        app = QApplication(sys.argv)
-        gui = GUI(node)
-        gui.show()
+    # PyQt5 애플리케이션 설정
+    app = QApplication(sys.argv)
+    gui = GUI(node)
+    gui.show()
 
-        # 메시지 퍼블리시를 위한 타이머 설정
-        publish_timer = QTimer()
-        publish_timer.timeout.connect(node.publish_message)
-        publish_timer.start(100)  # 0.1초마다 메시지 퍼블리시 시도
+    node.gui = gui  # node에 gui를 전달
 
-        sys.exit(app.exec_())
-    except Exception as e:
-        print(f"프로그램 실행 중 오류 발생: {e}")
-    finally:
-        if conn:
-            conn.close()
+    # ROS spin_once를 주기적으로 호출하기 위한 타이머 생성
+    ros_timer = QTimer()
+    ros_timer.timeout.connect(lambda: rclpy.spin_once(node, timeout_sec=0))
+    ros_timer.start(10)  # 10ms마다 spin_once 호출
+
+    # publish_message를 주기적으로 호출하기 위한 타이머 생성
+    publish_timer = QTimer()
+    publish_timer.timeout.connect(node.publish_message)
+    publish_timer.start(100)  # 100ms마다 publish_message 호출
+
+    sys.exit(app.exec_())
 
 if __name__ == '__main__':
     main()

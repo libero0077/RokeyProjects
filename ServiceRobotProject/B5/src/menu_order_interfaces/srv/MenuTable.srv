@@ -1,0 +1,6 @@
+# Request: 요청 메시지
+string request_type  # 요청 유형 (e.g., 'get_menu_table')
+
+---
+# Response: 응답 메시지
+string[] table_data  # 테이블 데이터 (모든 행을 문자열로 직렬화)

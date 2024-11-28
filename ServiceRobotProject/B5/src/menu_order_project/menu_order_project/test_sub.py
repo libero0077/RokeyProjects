@@ -16,7 +16,10 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, pyqtSignal, QObject
 
 ########################### 서비스 인터페이스 임포트 #############################
-from menu_order_interfaces.srv import MenuUpdate  # 주문 결과를 보내기 위한 서비스
+from menu_order_interfaces.srv import MenuUpdate, MenuTable  # 메뉴 정보, 주문 결과를 보내기 위한 서비스
+from menu_order_project.check_data_pyqt5 import RestaurantApp
+import menu_order_project.db_manager as db
+
 '''
 주문 처리 결과를 테이블 오더 노드로 전달하기 위해서는 주방 디스플레이 노드가 테이블 오더 노드에게 "주문 처리 결과를 받아달라"라고 요청을 보냄
 따라서, 주방 디스플레이 노드가 서비스 클라이언트, 테이블 오더 노드가 서비스 서버가 됨
@@ -46,6 +49,15 @@ class KitchenSubscriber(Node):
             qos_profile
         )
 
+        ########################## 메뉴 테이블을 제공하기 위한 서비스 서버 생성 #############################
+        self.menu_service = self.create_service(
+            MenuTable,  # 서비스 타입
+            'menu_table_service',  # 서비스 이름
+            self.handle_table_request  # 요청 처리 콜백 함수
+        )
+        self.get_logger().info("Menu table service ready.")
+        ###############################################################################################
+
         ########################## 주문 결과를 보내기 위한 서비스 클라이언트 생성 #############################
         self.cli = self.create_client(MenuUpdate, 'order_result_service')
 
@@ -60,6 +72,35 @@ class KitchenSubscriber(Node):
         # 서비스 요청 객체 생성
         self.req = MenuUpdate.Request()
         ###############################################################################################
+
+    def handle_table_request(self, request, response):
+        """ 메뉴 테이블 요청 처리 """
+        if request.request_type == 'get_menu_table':
+            try:
+                # 데이터베이스 연결 및 메뉴 데이터 가져오기
+                conn = db.db_connection()
+                cursor = conn.cursor()
+
+                cursor.execute('SELECT * FROM menu')
+                table_rows = cursor.fetchall()
+
+                # 컬럼 이름 가져오기
+                columns = [desc[0] for desc in cursor.description]
+
+                conn.close()
+
+                # 테이블 데이터를 딕셔너리로 변환하여 직렬화
+                response.table_data = [json.dumps(dict(zip(columns, row))) for row in table_rows]
+                self.get_logger().info(f"Sending full table data with {len(table_rows)} rows.")
+            except Exception as e:
+                self.get_logger().error(f"Failed to fetch table data: {e}")
+                # 에러 메시지를 문자열 리스트로 설정
+                response.table_data = ["Error: Unable to fetch table data"]
+        else:
+            # 잘못된 요청 유형 처리
+            response.table_data = ["Error: Invalid request type"]
+
+        return response
 
     def send_order_result(self, result_message):
         # 결과 메시지를 서비스 요청에 설정
@@ -165,51 +206,6 @@ class KitchenMonitoring(QMainWindow):
         right_widget = QWidget()
         right_widget.setLayout(self.right_layout)
         main_layout.addWidget(right_widget, 0, 1)
-
-        '''
-        ############################## 데이터베이스 연결 설정 ################################
-        import sqlite3  # SQLite 데이터베이스를 사용하기 위한 모듈 임포트
-
-        # 데이터베이스 연결 설정
-        self.conn = sqlite3.connect('restaurant.db')
-        self.cursor = self.conn.cursor()
-
-        # 주문 및 대기 주문 테이블 생성 (존재하지 않을 경우)
-        self.create_tables()
-        ####################################################################################
-        '''
-
-    '''
-    def create_tables(self):
-        """주문 및 대기 주문 테이블 생성"""
-        # orders 테이블 생성
-        ############ 맨 앞,뒤 괄호에 주석을 추가해야함 ##############3
-        self.cursor.execute(
-            CREATE TABLE IF NOT EXISTS orders (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                table_id INTEGER,
-                menu TEXT,
-                quantity INTEGER,
-                price INTEGER,
-                status TEXT
-            )
-        )
-
-        # waiting_orders 테이블 생성
-        ############ 맨 앞,뒤 괄호에 주석을 추가해야함 ##############3
-        self.cursor.execute(
-            CREATE TABLE IF NOT EXISTS waiting_orders (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                wait_number INTEGER,
-                table_id INTEGER,
-                menu TEXT,
-                quantity INTEGER,
-                price INTEGER
-            )
-        )
-
-        self.conn.commit()
-    '''
 
     def create_table_status_panel(self):
         """테이블 상태를 보여주는 패널 생성"""
@@ -363,36 +359,6 @@ class KitchenMonitoring(QMainWindow):
             # 메시지 파싱 실패 시 에러 로그 출력
             self.subscriber_node.get_logger().error("Failed to decode JSON message")
 
-    '''
-    def save_order_to_database(self, table_id, orders):
-        """데이터베이스에 주문을 저장하는 함수"""
-        for order in orders:
-            menu = order["item"]
-            quantity = order["quantity"]
-            price = order["price"]
-
-            # 데이터베이스에 INSERT 쿼리 실행
-            self.cursor.execute(
-                "INSERT INTO orders (table_id, menu, quantity, price, status) VALUES (?, ?, ?, ?, ?)",
-                (table_id, menu, quantity, price, 'processing')
-            )
-        self.conn.commit()  # 변경 사항 저장
-
-    def save_waiting_order_to_database(self, wait_number, table_id, orders):
-        """데이터베이스에 대기 주문을 저장하는 함수"""
-        for order in orders:
-            menu = order["item"]
-            quantity = order["quantity"]
-            price = order["price"]
-
-            # 데이터베이스에 INSERT 쿼리 실행
-            self.cursor.execute(
-                "INSERT INTO waiting_orders (wait_number, table_id, menu, quantity, price) VALUES (?, ?, ?, ?, ?)",
-                (wait_number, table_id, menu, quantity, price)
-            )
-        self.conn.commit()  # 변경 사항 저장
-    '''
-
     def update_total_price(self):
         """모든 테이블의 총 가격을 계산하고 업데이트"""
         total_price = 0
@@ -417,6 +383,9 @@ class KitchenMonitoring(QMainWindow):
 
         # 테이블 번호 가져오기
         table_id = int(self.order_table.item(0, 0).text())
+
+        # 주문 항목 저장할 리스트
+        orders = []
 
         # 주문 데이터를 테이블 데이터에 합산
         for row in range(self.order_table.rowCount()):
@@ -449,7 +418,8 @@ class KitchenMonitoring(QMainWindow):
         # 주문 상세 정보 테이블 초기화
         self.order_table.setRowCount(0)
 
-        ##################3 데이터베이스에서 해당 주문 상태 업데이트 (processing -> accepted) #####################
+        ##################3 데이터베이스에서 해당 주문 저장 #####################
+        db.insert_order_with_items(table_id, orders)
         '''
         self.cursor.execute(
             "UPDATE orders SET status = 'accepted' WHERE table_id = ? AND status = 'processing'",
@@ -587,8 +557,10 @@ class KitchenMonitoring(QMainWindow):
     def show_statistics(self):
         # 통계 팝업 창을 표시하는 기능을 구현
         print("통계 팝업 창을 표시합니다.")
-        QMessageBox.information(self, "Statistics", "통계 팝업 창을 표시합니다.")
-        # 실제 통계 데이터를 표시하는 창을 구현할 수 있습니다.
+
+        # 새로운 창으로 'RestaurantApp' 띄우기
+        self.statistics_window = RestaurantApp()  # QWidget 기반의 창을 띄움
+        self.statistics_window.show()  # show()를 사용하면 새로운 창으로 표시됨
 
     '''
     def closeEvent(self, event):
