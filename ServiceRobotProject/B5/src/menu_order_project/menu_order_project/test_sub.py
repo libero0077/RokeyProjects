@@ -130,15 +130,18 @@ class ControlPopup(QDialog):
         label.setAlignment(Qt.AlignCenter)
         layout.addWidget(label)
 
+        # 주문 데이터를 주문 번호 순서대로 정렬
+        sorted_orders = sorted(self.orders, key=lambda x: x['order_number'])
+
         # 주문 내용을 표시하는 테이블 위젯을 추가합니다.
         self.order_table = QTableWidget()
-        self.order_table.setRowCount(len(self.orders))
+        self.order_table.setRowCount(len(sorted_orders))
         self.order_table.setColumnCount(5)
         self.order_table.setHorizontalHeaderLabels(["Select", "Order Number", "Menu", "Quantity", "Price"])
         self.order_table.verticalHeader().setVisible(False)
         self.order_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        for row, order in enumerate(self.orders):
+        for row, order in enumerate(sorted_orders):
             # 주문 데이터를 가져옵니다.
             order_number = order['order_number']
             menu = order['item']
@@ -463,20 +466,6 @@ class KitchenMonitoring(QMainWindow):
                 'price': price
             }
 
-            '''# 기존에 동일한 메뉴가 있는지 확인
-            menu_found = False
-            for existing_order in self.table_data[table_id]:
-                if existing_order['item'] == menu:
-                    # 수량과 가격을 업데이트
-                    existing_order['quantity'] += quantity
-                    existing_order['price'] += price
-                    menu_found = True
-                    break
-
-            if not menu_found:
-                # 새로운 메뉴 추가
-                self.table_data[table_id].append(order)'''
-
             # 기존에 동일한 메뉴와 주문 번호가 있는지 확인
             order_found = False
             for existing_order in self.table_data[table_id]:
@@ -491,10 +480,29 @@ class KitchenMonitoring(QMainWindow):
                 # 새로운 주문 추가
                 self.table_data[table_id].append(order)
 
-        # 테이블 버튼 업데이트
         if 1 <= table_id <= len(self.table_buttons):
             button = self.table_buttons[table_id - 1]
-            button.setText(f"Table {table_id}\n" + "\n".join([f"{o['item']} {o['quantity']}개 {o['price']}원" for o in self.table_data[table_id]]))
+            # 임시로 메뉴별로 수량과 가격을 누적하는 딕셔너리 생성
+            accumulated_orders = {}
+            for order in self.table_data[table_id]:
+                item = order['item']
+                if item in accumulated_orders:
+                    accumulated_orders[item]['quantity'] += order['quantity']
+                    accumulated_orders[item]['price'] += order['price']
+                else:
+                    accumulated_orders[item] = {
+                        'quantity': order['quantity'],
+                        'price': order['price']
+                    }
+            # 버튼 텍스트 업데이트
+            button.setText(
+                f"Table {table_id}\n" +
+                "\n".join([
+                    f"{item} {data['quantity']}개 {data['price']}원"
+                    for item, data in accumulated_orders.items()
+                ])
+            )
+
 
         # 주문 상세 정보 테이블 초기화
         self.order_table.setRowCount(0)
