@@ -1,6 +1,7 @@
 import sys
 import threading
 import json
+import re  # 정규표현식을 사용하기 위해 추가
 
 # ROS2 관련 모듈 임포트
 import rclpy
@@ -11,7 +12,7 @@ from std_msgs.msg import String  # ROS 메시지 타입
 # PyQt5 관련 모듈 임포트
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QGridLayout, QVBoxLayout, QHBoxLayout,
-    QLabel, QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QMessageBox, QDialog
+    QLabel, QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QMessageBox, QDialog, QCheckBox
 )
 from PyQt5.QtCore import Qt, pyqtSignal, QObject
 
@@ -66,13 +67,12 @@ class KitchenSubscriber(Node):
         self.get_logger().info("Robot Command Publisher Initialized.")
         ##############################################################################################
 
-    def publish_robot_command(self, command_dict): # 로봇 제어 명령과 관련하여 토픽 퍼브리시
+    def publish_robot_command(self, command_dict):  # 로봇 제어 명령과 관련하여 토픽 퍼브리시
         """로봇 제어 명령을 'robot_command' 토픽으로 퍼블리시하는 함수"""
         msg = String()
         msg.data = json.dumps(command_dict)
         self.robot_command_publisher.publish(msg)
         self.get_logger().info(f"Published robot command: {msg.data}")
-
 
     def send_order_result(self, result_message):
         # 결과 메시지를 서비스 요청에 설정
@@ -105,10 +105,11 @@ class KitchenSubscriber(Node):
 
 # 팝업 창 클래스 정의
 class ControlPopup(QDialog):
-    def __init__(self, subscriber_node, table_id):
+    def __init__(self, subscriber_node, table_id, orders):
         super().__init__()
         self.subscriber_node = subscriber_node
         self.table_id = table_id
+        self.orders = orders  # 주문 데이터를 저장합니다.
         self.init_ui()
 
     def init_ui(self):
@@ -117,32 +118,60 @@ class ControlPopup(QDialog):
             self.setWindowTitle(f"Control Robot - Table {self.table_id}")
         else:
             self.setWindowTitle(f"Control Robot - {self.table_id.capitalize()} Position")
-        self.setFixedSize(300, 200)
+        self.setFixedSize(600, 600)  # 창 크기를 늘립니다.
 
         layout = QVBoxLayout()
 
         # 팝업 설명 레이블
         if isinstance(self.table_id, int):
-            label = QLabel(f"Control robot for Table {self.table_id}")
+            label = QLabel(f"Order Details for Table {self.table_id}")
         else:
-            label = QLabel(f"Control robot for {self.table_id.capitalize()} Position")
+            label = QLabel(f"Order Details for {self.table_id.capitalize()} Position")
         label.setAlignment(Qt.AlignCenter)
         layout.addWidget(label)
 
-        # "Move to Waiting Position" 버튼
+        # 주문 내용을 표시하는 테이블 위젯을 추가합니다.
+        self.order_table = QTableWidget()
+        self.order_table.setRowCount(len(self.orders))
+        self.order_table.setColumnCount(5)
+        self.order_table.setHorizontalHeaderLabels(["Select", "Order Number", "Menu", "Quantity", "Price"])
+        self.order_table.verticalHeader().setVisible(False)
+        self.order_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+        for row, order in enumerate(self.orders):
+            # 주문 데이터를 가져옵니다.
+            order_number = order['order_number']
+            menu = order['item']
+            quantity = order['quantity']
+            price = order['price']
+
+            # 체크박스 추가
+            checkbox = QCheckBox()
+            self.order_table.setCellWidget(row, 0, checkbox)
+
+            self.order_table.setItem(row, 1, QTableWidgetItem(str(order_number)))
+            self.order_table.setItem(row, 2, QTableWidgetItem(menu))
+            self.order_table.setItem(row, 3, QTableWidgetItem(str(quantity)))
+            self.order_table.setItem(row, 4, QTableWidgetItem(str(price)))
+
+        layout.addWidget(self.order_table)
+
+        # 로봇 제어 버튼들을 추가합니다.
         self.waiting_button = QPushButton("Move to Waiting Position")
         self.waiting_button.clicked.connect(self.move_to_waiting)
-        layout.addWidget(self.waiting_button)
 
-        # "Move to Kitchen Position" 버튼
         self.kitchen_button = QPushButton("Move to Kitchen Position")
         self.kitchen_button.clicked.connect(self.move_to_kitchen)
-        layout.addWidget(self.kitchen_button)
 
-        # "Start Robot" 버튼
         self.start_button = QPushButton("Start Robot")
         self.start_button.clicked.connect(self.start_robot)
-        layout.addWidget(self.start_button)
+
+        # 버튼들을 가로로 배치합니다.
+        button_layout = QHBoxLayout()
+        button_layout.addWidget(self.waiting_button)
+        button_layout.addWidget(self.kitchen_button)
+        button_layout.addWidget(self.start_button)
+        layout.addLayout(button_layout)
 
         self.setLayout(layout)
 
@@ -214,7 +243,7 @@ class KitchenMonitoring(QMainWindow):
 
         # 창 제목과 크기 설정
         self.setWindowTitle("Kitchen Display")
-        self.setGeometry(100, 100, 1120, 600)
+        self.setGeometry(100, 100, 1200, 600)
 
         # 메인 레이아웃 생성
         main_widget = QWidget(self)
@@ -243,27 +272,6 @@ class KitchenMonitoring(QMainWindow):
 
         self.right_layout.addWidget(self.order_detail_widget)
         self.right_layout.addWidget(self.cumulative_order_widget)
-
-        # 로봇 제어 버튼 제거 (기존 코드에서 삭제)
-        # self.robot_control_layout = QHBoxLayout()
-        #
-        # # "서빙 로봇 대기 위치로" 버튼 생성
-        # self.robot_waiting_button = QPushButton("서빙 로봇 대기 위치로")
-        # self.robot_waiting_button.clicked.connect(self.move_robot_to_waiting_position)
-        # self.robot_control_layout.addWidget(self.robot_waiting_button)
-        #
-        # # "서빙 로봇 주방 위치로" 버튼 생성
-        # self.robot_kitchen_button = QPushButton("서빙 로봇 주방 위치로")
-        # self.robot_kitchen_button.clicked.connect(self.move_robot_to_kitchen_position)
-        # self.robot_control_layout.addWidget(self.robot_kitchen_button)
-        #
-        # # "서빙 로봇 출발" 버튼 생성
-        # self.robot_start_button = QPushButton("서빙 로봇 출발")
-        # self.robot_start_button.clicked.connect(self.start_robot)
-        # self.robot_control_layout.addWidget(self.robot_start_button)
-        #
-        # # 로봇 제어 버튼들을 오른쪽 패널에 추가
-        # self.right_layout.addLayout(self.robot_control_layout)
 
         right_widget = QWidget()
         right_widget.setLayout(self.right_layout)
@@ -315,8 +323,8 @@ class KitchenMonitoring(QMainWindow):
         # 주문 상세 정보를 표시할 테이블 위젯 생성
         self.order_table = QTableWidget()
         self.order_table.setRowCount(0)  # 초기 행 개수는 0
-        self.order_table.setColumnCount(4)  # 열 개수는 4개
-        self.order_table.setHorizontalHeaderLabels(["Table Number", "Menu", "Quantity", "Price"])  # 열 제목 설정
+        self.order_table.setColumnCount(5)  # 열 개수는 5개로 증가
+        self.order_table.setHorizontalHeaderLabels(["Order Number", "Table Number", "Menu", "Quantity", "Price"])  # 열 제목 설정
         self.order_table.verticalHeader().setVisible(False)  # 왼쪽 행 번호 숨기기
 
         # 열 크기를 균등하게 조절
@@ -356,7 +364,7 @@ class KitchenMonitoring(QMainWindow):
         self.cumulative_table = QTableWidget()
         self.cumulative_table.setRowCount(0)  # 초기 행 개수는 0
         self.cumulative_table.setColumnCount(5)  # 열 개수는 5개
-        self.cumulative_table.setHorizontalHeaderLabels(["Order number", "Table number", "Menu", "Quantity", "Price"])
+        self.cumulative_table.setHorizontalHeaderLabels(["Order Number", "Table Number", "Menu", "Quantity", "Price"])
         self.cumulative_table.verticalHeader().setVisible(False)  # 왼쪽 행 번호 숨기기
 
         # 열 크기를 균등하게 조절
@@ -378,97 +386,57 @@ class KitchenMonitoring(QMainWindow):
             table_id = data["table_id"]  # 테이블 번호
             orders = data["orders"]      # 주문 목록
 
-            # 현재 대기 번호 할당
-            current_wait_number = self.order_counter
+            ###### 주문 번호 할당 : 한 번에 들어온 주문은 주문 번호가 같아야 함####
+            order_number = self.order_counter
+            self.order_counter += 1  # 주문 번호 증가
+            ############################################################
+
+            # 주문에 'order_number' 추가
+            for order in orders:
+                order['order_number'] = order_number
 
             if self.order_table.rowCount() == 0:
                 # 현재 처리 중인 주문이 없으면 주문 상세 정보에 추가
                 for order in orders:
                     row_count = self.order_table.rowCount()
                     self.order_table.insertRow(row_count)
-                    self.order_table.setItem(row_count, 0, QTableWidgetItem(str(table_id)))
-                    self.order_table.setItem(row_count, 1, QTableWidgetItem(order["item"]))
-                    self.order_table.setItem(row_count, 2, QTableWidgetItem(str(order["quantity"])))
-                    self.order_table.setItem(row_count, 3, QTableWidgetItem(str(order["price"])))
-
-                # 데이터베이스에 주문 기록 저장
-                '''
-                self.save_order_to_database(table_id, orders)
-                '''
-
-                # 대기 번호 증가
-                self.order_counter += 1
+                    self.order_table.setItem(row_count, 0, QTableWidgetItem(str(order['order_number'])))  # Order Number
+                    self.order_table.setItem(row_count, 1, QTableWidgetItem(str(table_id)))
+                    self.order_table.setItem(row_count, 2, QTableWidgetItem(order["item"]))
+                    self.order_table.setItem(row_count, 3, QTableWidgetItem(str(order["quantity"])))
+                    self.order_table.setItem(row_count, 4, QTableWidgetItem(str(order["price"])))
             else:
                 # 현재 처리 중인 주문이 있으면 대기 주문 정보에 추가
                 for order in orders:
                     row_count = self.cumulative_table.rowCount()
                     self.cumulative_table.insertRow(row_count)
-                    self.cumulative_table.setItem(row_count, 0, QTableWidgetItem(str(current_wait_number)))
+                    self.cumulative_table.setItem(row_count, 0, QTableWidgetItem(str(order['order_number'])))  # Order Number
                     self.cumulative_table.setItem(row_count, 1, QTableWidgetItem(str(table_id)))
                     self.cumulative_table.setItem(row_count, 2, QTableWidgetItem(order["item"]))
                     self.cumulative_table.setItem(row_count, 3, QTableWidgetItem(str(order["quantity"])))
                     self.cumulative_table.setItem(row_count, 4, QTableWidgetItem(str(order["price"])))
-
-                ################3 데이터베이스에 대기 주문 기록 저장 #########################
-                '''
-                self.save_waiting_order_to_database(current_wait_number, table_id, orders)
-                '''
-
-                # 대기 번호 증가
-                self.order_counter += 1
-
-            # 총 가격 업데이트
-            self.update_total_price()
-            self.update_order_total_price()
-
         except json.JSONDecodeError:
             # 메시지 파싱 실패 시 에러 로그 출력
             self.subscriber_node.get_logger().error("Failed to decode JSON message")
 
-    '''
-    def save_order_to_database(self, table_id, orders):
-        """데이터베이스에 주문을 저장하는 함수"""
-        for order in orders:
-            menu = order["item"]
-            quantity = order["quantity"]
-            price = order["price"]
+        # 총 가격 업데이트
+        self.update_total_price()
+        self.update_order_total_price()
 
-            # 데이터베이스에 INSERT 쿼리 실행
-            self.cursor.execute(
-                "INSERT INTO orders (table_id, menu, quantity, price, status) VALUES (?, ?, ?, ?, ?)",
-                (table_id, menu, quantity, price, 'processing')
-            )
-        self.conn.commit()  # 변경 사항 저장
-
-    def save_waiting_order_to_database(self, wait_number, table_id, orders):
-        """데이터베이스에 대기 주문을 저장하는 함수"""
-        for order in orders:
-            menu = order["item"]
-            quantity = order["quantity"]
-            price = order["price"]
-
-            # 데이터베이스에 INSERT 쿼리 실행
-            self.cursor.execute(
-                "INSERT INTO waiting_orders (wait_number, table_id, menu, quantity, price) VALUES (?, ?, ?, ?, ?)",
-                (wait_number, table_id, menu, quantity, price)
-            )
-        self.conn.commit()  # 변경 사항 저장
-    '''
 
     def update_total_price(self):
         """모든 테이블의 총 가격을 계산하고 업데이트"""
         total_price = 0
         for orders in self.table_data.values():
             for order in orders:
-                _, _, price = self.parse_order(order)
-                total_price += price
+                total_price += order['price']
         self.total_price_label.setText(f"Total price: {total_price}원")
 
     def update_order_total_price(self):
         """현재 주문의 총 가격을 계산하고 업데이트"""
         total_price = 0
         for row in range(self.order_table.rowCount()):
-            price = int(self.order_table.item(row, 3).text())
+            price = int(self.order_table.item(row, 4).text())
             total_price += price
         self.order_total_price_label.setText(f"Total price: {total_price}원")
 
@@ -478,73 +446,75 @@ class KitchenMonitoring(QMainWindow):
             return
 
         # 테이블 번호 가져오기
-        table_id = int(self.order_table.item(0, 0).text())
+        table_id = int(self.order_table.item(0, 1).text())
 
         # 주문 데이터를 테이블 데이터에 합산
         for row in range(self.order_table.rowCount()):
-            menu = self.order_table.item(row, 1).text()
-            quantity = int(self.order_table.item(row, 2).text())
-            price = int(self.order_table.item(row, 3).text())
+            order_number = int(self.order_table.item(row, 0).text())
+            menu = self.order_table.item(row, 2).text()
+            quantity = int(self.order_table.item(row, 3).text())
+            price = int(self.order_table.item(row, 4).text())
 
-            # 기존에 동일한 메뉴가 있는지 확인
+            # 주문 객체 생성
+            order = {
+                'order_number': order_number,
+                'item': menu,
+                'quantity': quantity,
+                'price': price
+            }
+
+            '''# 기존에 동일한 메뉴가 있는지 확인
             menu_found = False
-            for i, existing_order in enumerate(self.table_data[table_id]):
-                existing_menu, existing_quantity, existing_price = self.parse_order(existing_order)
-
-                if existing_menu == menu:
+            for existing_order in self.table_data[table_id]:
+                if existing_order['item'] == menu:
                     # 수량과 가격을 업데이트
-                    new_quantity = existing_quantity + quantity
-                    new_price = existing_price + price
-                    self.table_data[table_id][i] = f"{menu} {new_quantity}개 {new_price}원"
+                    existing_order['quantity'] += quantity
+                    existing_order['price'] += price
                     menu_found = True
                     break
 
             if not menu_found:
                 # 새로운 메뉴 추가
-                self.table_data[table_id].append(f"{menu} {quantity}개 {price}원")
+                self.table_data[table_id].append(order)'''
+
+            # 기존에 동일한 메뉴와 주문 번호가 있는지 확인
+            order_found = False
+            for existing_order in self.table_data[table_id]:
+                if existing_order['item'] == menu and existing_order['order_number'] == order_number:
+                    # 수량과 가격을 업데이트
+                    existing_order['quantity'] += quantity
+                    existing_order['price'] += price
+                    order_found = True
+                    break
+
+            if not order_found:
+                # 새로운 주문 추가
+                self.table_data[table_id].append(order)
 
         # 테이블 버튼 업데이트
         if 1 <= table_id <= len(self.table_buttons):
             button = self.table_buttons[table_id - 1]
-            button.setText(f"Table {table_id}\n" + "\n".join(self.table_data[table_id]))
+            button.setText(f"Table {table_id}\n" + "\n".join([f"{o['item']} {o['quantity']}개 {o['price']}원" for o in self.table_data[table_id]]))
 
         # 주문 상세 정보 테이블 초기화
         self.order_table.setRowCount(0)
 
-        ##################3 데이터베이스에서 해당 주문 상태 업데이트 (processing -> accepted) #####################
-        '''
-        self.cursor.execute(
-            "UPDATE orders SET status = 'accepted' WHERE table_id = ? AND status = 'processing'",
-            (table_id,)
-        )
-        self.conn.commit()
-        '''
-
         # 대기 주문 정보에서 다음 주문을 가져와 주문 상세 정보에 표시
         if self.cumulative_table.rowCount() > 0:
-            first_wait_number = self.cumulative_table.item(0, 0).text()
+            first_order_number = self.cumulative_table.item(0, 0).text()
 
             rows_to_move = []
             for row in range(self.cumulative_table.rowCount()):
-                if self.cumulative_table.item(row, 0).text() == first_wait_number:
+                if self.cumulative_table.item(row, 0).text() == first_order_number:
                     rows_to_move.append(row)
 
             for row in rows_to_move:
                 row_count = self.order_table.rowCount()
                 self.order_table.insertRow(row_count)
-                self.order_table.setItem(row_count, 0, QTableWidgetItem(self.cumulative_table.item(row, 1).text()))
-                self.order_table.setItem(row_count, 1, QTableWidgetItem(self.cumulative_table.item(row, 2).text()))
-                self.order_table.setItem(row_count, 2, QTableWidgetItem(self.cumulative_table.item(row, 3).text()))
-                self.order_table.setItem(row_count, 3, QTableWidgetItem(self.cumulative_table.item(row, 4).text()))
-
-            ######################33 데이터베이스에서 대기 주문 삭제 및 주문으로 이동 #######################
-            '''
-            self.cursor.execute(
-                "DELETE FROM waiting_orders WHERE wait_number = ?",
-                (first_wait_number,)
-            )
-            self.conn.commit()
-            '''
+                for col in range(self.cumulative_table.columnCount()):
+                    item = self.cumulative_table.item(row, col)
+                    if item:
+                        self.order_table.setItem(row_count, col, QTableWidgetItem(item.text()))
 
             # 대기 주문 정보에서 해당 행 삭제
             for row in reversed(rows_to_move):
@@ -564,48 +534,32 @@ class KitchenMonitoring(QMainWindow):
             return
 
         # 테이블 번호 가져오기
-        table_id = int(self.order_table.item(0, 0).text())
+        table_id = int(self.order_table.item(0, 1).text())
 
         # "Specific order information"에서 주문 정보를 삭제
         self.order_table.setRowCount(0)
 
-        ################ 데이터베이스에서 해당 주문 삭제 #####################
-        '''
-        self.cursor.execute(
-            "DELETE FROM orders WHERE table_id = ? AND status = 'processing'",
-            (table_id,)
-        )
-        self.conn.commit()
-        '''
-
         # 대기 주문 정보에서 다음 주문 가져오기
         if self.cumulative_table.rowCount() > 0:
-            first_wait_number = self.cumulative_table.item(0, 0).text()
+            next_order_numbers = []
+            first_order_number = self.cumulative_table.item(0, 0).text()
 
-            rows_to_move = []
+            # 다음 주문 번호와 동일한 주문 모두 가져오기
             for row in range(self.cumulative_table.rowCount()):
-                if self.cumulative_table.item(row, 0).text() == first_wait_number:
-                    rows_to_move.append(row)
+                order_number = self.cumulative_table.item(row, 0).text()
+                if order_number == first_order_number:
+                    next_order_numbers.append(row)
 
-            for row in rows_to_move:
+            for row in next_order_numbers:
                 row_count = self.order_table.rowCount()
                 self.order_table.insertRow(row_count)
-                self.order_table.setItem(row_count, 0, QTableWidgetItem(self.cumulative_table.item(row, 1).text()))
-                self.order_table.setItem(row_count, 1, QTableWidgetItem(self.cumulative_table.item(row, 2).text()))
-                self.order_table.setItem(row_count, 2, QTableWidgetItem(self.cumulative_table.item(row, 3).text()))
-                self.order_table.setItem(row_count, 3, QTableWidgetItem(self.cumulative_table.item(row, 4).text()))
+                for col in range(self.cumulative_table.columnCount()):
+                    item = self.cumulative_table.item(row, col)
+                    if item:
+                        self.order_table.setItem(row_count, col, QTableWidgetItem(item.text()))
 
-            ####################### 데이터베이스에서 대기 주문 삭제 #############################
-            '''
-            self.cursor.execute(
-                "DELETE FROM waiting_orders WHERE wait_number = ?",
-                (first_wait_number,)
-            )
-            self.conn.commit()
-            '''
-
-            # 대기 주문 정보에서 해당 행 삭제
-            for row in reversed(rows_to_move):
+            # 대기 주문에서 해당 주문 삭제
+            for row in reversed(next_order_numbers):
                 self.cumulative_table.removeRow(row)
 
         # 주문 가격 총합 업데이트
@@ -614,15 +568,6 @@ class KitchenMonitoring(QMainWindow):
         # 서비스 요청 전송
         response_message = f"Order Canceled for Table {table_id}"
         self.send_order_result(response_message)
-
-    def parse_order(self, order_text):
-        """주문 문자열을 파싱하여 메뉴명, 수량, 가격을 반환"""
-        # 예: "햄버거 3개 15000원" -> ("햄버거", 3, 15000)
-        parts = order_text.split()
-        menu = parts[0]
-        quantity = int(parts[1].replace("개", ""))
-        price = int(parts[2].replace("원", ""))
-        return menu, quantity, price
 
     def send_order_result(self, message):
         """주문 결과 메시지를 ROS 노드로 전송"""
@@ -633,89 +578,23 @@ class KitchenMonitoring(QMainWindow):
         button = self.sender()
         if button:
             text = button.text()
-            # 버튼 텍스트에서 테이블 번호 추출
-            table_id_str = text.split('\n')[0].replace("Table ", "")
-            try:
-                table_id = int(table_id_str)
-            except ValueError:
-                table_id = None
-
-            if table_id is not None:
-                # ControlPopup 창 열기
-                self.control_popup = ControlPopup(self.subscriber_node, table_id)
+            # 정규표현식을 사용하여 'Table ' 다음에 오는 숫자를 추출
+            match = re.match(r'Table (\d+)', text)
+            if match:
+                table_id = int(match.group(1))
+                # 해당 테이블의 주문 데이터를 가져옵니다.
+                orders = self.table_data.get(table_id, [])
+                # ControlPopup 창 열기, 주문 데이터 전달
+                self.control_popup = ControlPopup(self.subscriber_node, table_id, orders)
                 self.control_popup.exec_()
-
-    def move_robot_to_waiting_position(self):
-        # 서빙 로봇을 대기 위치로 이동시키는 기능을 구현
-        command = {
-            "command": "move",
-            "position": "waiting"
-        }
-        self.subscriber_node.publish_robot_command(command)
-        print("서빙 로봇을 대기 위치로 이동합니다.")
-        QMessageBox.information(self, "서빙 로봇 제어", "서빙 로봇을 대기 위치로 이동합니다.")
-
-
-    def move_robot_to_kitchen_position(self):
-        # 서빙 로봇을 주방 위치로 이동시키는 기능을 구현
-        command = {
-            "command": "move",
-            "position": "kitchen"
-        }
-        self.subscriber_node.publish_robot_command(command)
-        print("서빙 로봇을 주방 위치로 이동합니다.")
-        QMessageBox.information(self, "서빙 로봇 제어", "서빙 로봇을 주방 위치로 이동합니다.")
-
-
-    def start_robot(self):
-        """'서빙 로봇 출발' 버튼 클릭 시 호출되는 함수"""
-        # 현재 처리 중인 주문이 있는지 확인
-        if self.order_table.rowCount() == 0:
-            QMessageBox.warning(self, "로봇 제어", "현재 처리 중인 주문이 없습니다.")
-            return
-
-        # 현재 주문의 테이블 번호 가져오기 (첫 번째 주문을 기준으로 함)
-        table_id_item = self.order_table.item(0, 0)
-        if table_id_item is None:
-            QMessageBox.warning(self, "로봇 제어", "테이블 번호를 가져올 수 없습니다.")
-            return
-
-        try:
-            table_id = int(table_id_item.text())
-        except ValueError:
-            QMessageBox.warning(self, "로봇 제어", "유효한 테이블 번호가 아닙니다.")
-            return
-
-        # 테이블 번호가 유효한지 확인
-        if table_id not in self.table_position_keys:
-            QMessageBox.warning(self, "로봇 제어", f"테이블 {table_id}의 위치가 정의되어 있지 않습니다.")
-            return
-
-        # 위치 키 가져오기
-        position_key = self.table_position_keys[table_id]
-
-        # 로봇 컨트롤 노드로 보낼 명령 생성
-        command = {
-            "command": "move",
-            "position": position_key
-        }
-
-        # 명령 퍼블리시
-        self.subscriber_node.publish_robot_command(command)
-        QMessageBox.information(self, "로봇 제어", f"로봇을 테이블 {table_id} 위치로 이동시킵니다.")
+            else:
+                print("Failed to extract table_id from button text.")
 
     def show_statistics(self):
         # 통계 팝업 창을 표시하는 기능을 구현
         print("통계 팝업 창을 표시합니다.")
         QMessageBox.information(self, "Statistics", "통계 팝업 창을 표시합니다.")
         # 실제 통계 데이터를 표시하는 창을 구현할 수 있습니다.
-
-    '''
-    def closeEvent(self, event):
-        """창이 닫힐 때 데이터베이스 연결 종료"""
-        self.conn.close()
-        event.accept()
-    '''
 
 def ros_spin(node):
     """ROS 노드를 별도의 스레드에서 실행하는 함수"""
