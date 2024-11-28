@@ -110,6 +110,7 @@ class ControlPopup(QDialog):
         self.subscriber_node = subscriber_node
         self.table_id = table_id
         self.orders = orders  # 주문 데이터를 저장합니다.
+        self.checkbox_widgets = []  # 체크박스 위젯들을 저장할 리스트 추가 : 해당 메뉴들을 배송했다면, 체크박스가 선택된채로 고정되게 하기 위함
         self.init_ui()
 
     def init_ui(self):
@@ -147,10 +148,15 @@ class ControlPopup(QDialog):
             menu = order['item']
             quantity = order['quantity']
             price = order['price']
+            checked = order.get('checked', False)
+            disabled = order.get('disabled', False)
 
             # 체크박스 추가
             checkbox = QCheckBox()
+            checkbox.setChecked(checked)
+            checkbox.setEnabled(not disabled)  # 비활성화 상태 적용
             self.order_table.setCellWidget(row, 0, checkbox)
+            self.checkbox_widgets.append(checkbox)  # 체크박스를 리스트에 추가
 
             self.order_table.setItem(row, 1, QTableWidgetItem(str(order_number)))
             self.order_table.setItem(row, 2, QTableWidgetItem(menu))
@@ -208,7 +214,15 @@ class ControlPopup(QDialog):
             }
             self.subscriber_node.publish_robot_command(command)
             QMessageBox.information(self, "Robot Control", f"Robot is moving to Table {self.table_id}.")
-            self.close()
+
+            ################## 선택된 체크박스를 비활성화하고 상태를 주문 데이터에 저장 ################################
+            for checkbox, order in zip(self.checkbox_widgets, self.orders):
+                if checkbox.isChecked():
+                    checkbox.setEnabled(False)  # 체크된 체크박스를 비활성화
+                    order['checked'] = True
+                    order['disabled'] = True
+            # 팝업 창을 닫지 않고 그대로 유지하여 상태 변화를 보여줍니다.
+            # self.close()
         else:
             QMessageBox.warning(self, "Robot Control", "Invalid Table ID.")
 
@@ -463,7 +477,9 @@ class KitchenMonitoring(QMainWindow):
                 'order_number': order_number,
                 'item': menu,
                 'quantity': quantity,
-                'price': price
+                'price': price,
+                'checked': False,    # 체크 여부 : 체크박스 관련 비활성화
+                'disabled': False    # 비활성화 여부 : 체크박스 관련 비활성화
             }
 
             # 기존에 동일한 메뉴와 주문 번호가 있는지 확인
