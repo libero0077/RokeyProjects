@@ -1,4 +1,4 @@
-# robot_controller.py
+# 추후 수정해야할 파일 => 재수정
 
 import rclpy
 from rclpy.node import Node
