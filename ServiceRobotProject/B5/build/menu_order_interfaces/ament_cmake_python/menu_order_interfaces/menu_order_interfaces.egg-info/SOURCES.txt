@@ -9,4 +9,5 @@ menu_order_interfaces/action/_serve.py
 menu_order_interfaces/msg/__init__.py
 menu_order_interfaces/msg/_order.py
 menu_order_interfaces/srv/__init__.py
+menu_order_interfaces/srv/_menu_table.py
 menu_order_interfaces/srv/_menu_update.py

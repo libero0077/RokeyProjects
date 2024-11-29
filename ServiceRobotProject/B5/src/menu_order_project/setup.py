@@ -25,6 +25,7 @@ setup(
             'S = menu_order_project.kitchen_monitoring:main',
             'test_P = menu_order_project.test_order:main',
             'test_S = menu_order_project.test_sub:main',
+            'test_R = menu_order_project.test_robot_controll:main',
         ],
     },
 )
