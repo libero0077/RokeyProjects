@@ -1,6 +1,5 @@
 import sqlite3
 from datetime import datetime, timedelta
-import time
 
 # 공용 함수: 현재 타임스탬프 반환
 def get_current_timestamp():
@@ -23,13 +22,17 @@ def create_db():
             y FLOAT NOT NULL
         );
         ''')
-
+        
         # 테이블 생성: 메뉴 정보
         cursor.execute('''
         CREATE TABLE IF NOT EXISTS menu (
             menu_item_id INTEGER PRIMARY KEY AUTOINCREMENT,
             name VARCHAR(100),
-            price INTEGER
+            price INTEGER,
+            type_id INTEGER,
+            category VARCHAR(50),
+            description TEXT,
+            image TEXT
         );
         ''')
 
@@ -39,7 +42,6 @@ def create_db():
             order_id INTEGER PRIMARY KEY AUTOINCREMENT,
             table_id INTEGER,
             order_time TIMESTAMP,
-            status VARCHAR(50),
             total_amount INTEGER,
             FOREIGN KEY (table_id) REFERENCES tables(table_id)
         );
@@ -52,19 +54,21 @@ def create_db():
             order_id INTEGER,
             menu_item_id INTEGER,
             quantity INTEGER,
+            status VARCHAR(50),
             FOREIGN KEY (order_id) REFERENCES orders(order_id),
             FOREIGN KEY (menu_item_id) REFERENCES menu(menu_item_id)
         );
         ''')
 
+
         # 테이블 생성: 서빙 상세 정보
         cursor.execute('''
         CREATE TABLE IF NOT EXISTS deliver_log (
             deliver_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            order_id INTEGER,
+            order_item_id INTEGER,
             start_time TIMESTAMP,
             end_time TIMESTAMP,
-            FOREIGN KEY (order_id) REFERENCES orders(order_id)
+            FOREIGN KEY (order_item_id) REFERENCES order_items(order_item_id)
         );
         ''')
 
@@ -80,12 +84,12 @@ def insert_table(table_id, x, y):
         ''', (table_id, x, y))
         conn.commit()
 
-def insert_menu(name, price):
+def insert_menu(name, price, type_id, category, description, image):
     with db_connection() as conn:
         cursor = conn.cursor()
         cursor.execute('''
-        INSERT INTO menu (name, price)
-        VALUES (?, ?)
+        INSERT INTO menu (menu_item_id, name, price, type_id, category, description, image)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         ''', (name, price))
         conn.commit()
 
@@ -93,31 +97,36 @@ def insert_order_with_items(table_id, items):
     """
     :param table_id: 주문이 발생한 테이블 ID
     :param items: 주문 항목의 리스트 (menu_item_id, quantity)
-    :return: 생성된 order_id
+    :return: 생성된 order_id, order_item_ids
     """
+
+    
     with db_connection() as conn:
         cursor = conn.cursor()
+        total_amount = 0
+        order_item_ids = []
 
-        # 주문 추가 (초기 상태는 Received, 금액은 0)
+        # 주문 추가
         order_time = get_current_timestamp()
         cursor.execute('''
-        INSERT INTO orders (table_id, order_time, status, total_amount)
-        VALUES (?, ?, ?, 0)
+        INSERT INTO orders (table_id, order_time, total_amount)
+        VALUES (?, ?, ?)
         ''', (table_id, order_time, "Received"))
+
         order_id = cursor.lastrowid
 
-        # 주문 항목 추가 및 총액 계산
-        total_amount = 0
+        # 주문 아이템 추가 및 총액 계산
         for menu_item_id, quantity in items:
+            status = "Received"
             cursor.execute('''
-            INSERT INTO order_items (order_id, menu_item_id, quantity)
-            VALUES (?, ?, ?)
-            ''', (order_id, menu_item_id, quantity))
+            INSERT INTO order_items (order_id, menu_item_id, quantity, status)
+            VALUES (?, ?, ?, ?)
+            ''', (order_id, menu_item_id, quantity, status))
+            order_item_id = cursor.lastrowid
+            order_item_ids.append(order_item_id)
 
-            # 메뉴 가격 조회
-            cursor.execute('''
-            SELECT price FROM menu WHERE menu_item_id = ?
-            ''', (menu_item_id,))
+            # 메뉴 가격 조회 및 총액 계산
+            cursor.execute('SELECT price FROM menu WHERE menu_item_id = ?', (menu_item_id,))
             price = cursor.fetchone()[0]
             total_amount += price * quantity
 
@@ -129,41 +138,48 @@ def insert_order_with_items(table_id, items):
         ''', (total_amount, order_id))
 
         conn.commit()
-        return order_id
-
-def insert_delivery_log(order_id, end=False):
+        return order_id, order_item_ids
+    
+def insert_delivery_log(order_item_id, end=False):
     """
-    배달 시작 및 종료 시 delivery_log와 orders 상태 업데이트
-    :param order_id: 배달과 연결된 주문 ID
+    배달 시작 및 종료 시 delivery_log와 order_items 상태 업데이트
+    :param order_item_id: 배달과 연결된 주문 아이템 ID
     :param end: True이면 배달 완료, False이면 배달 시작
     """
     with db_connection() as conn:
         cursor = conn.cursor()
         if end:
-            # 배달 완료: end_time 업데이트 및 orders 상태를 "Delivered"로 변경
+            # 배달 완료
             end_time = get_current_timestamp()
+            
+            cursor.execute('''
+            SELECT end_time FROM deliver_log WHERE order_item_id = ? AND end_time IS NULL
+            ''', (order_item_id,))
+            if cursor.fetchone() is not None:  # 이미 배달 완료 상태인 경우 처리
+                return           
+            
             cursor.execute('''
             UPDATE deliver_log
             SET end_time = ?
-            WHERE order_id = ? AND end_time IS NULL
-            ''', (end_time, order_id))
+            WHERE order_item_id = ? AND end_time IS NULL
+            ''', (end_time, order_item_id))
             cursor.execute('''
-            UPDATE orders
+            UPDATE order_items
             SET status = "Delivered"
-            WHERE order_id = ?
-            ''', (order_id,))
+            WHERE order_item_id = ?
+            ''', (order_item_id,))
         else:
-            # 배달 시작: start_time 추가 및 orders 상태를 "Delivering"으로 변경
+            # 배달 시작
             start_time = get_current_timestamp()
             cursor.execute('''
-            INSERT INTO deliver_log (order_id, start_time)
+            INSERT INTO deliver_log (order_item_id, start_time)
             VALUES (?, ?)
-            ''', (order_id, start_time))
+            ''', (order_item_id, start_time))
             cursor.execute('''
-            UPDATE orders
+            UPDATE order_items
             SET status = "Delivering"
-            WHERE order_id = ?
-            ''', (order_id,))
+            WHERE order_item_id = ?
+            ''', (order_item_id,))
         conn.commit()
 
 # 총액 계산 함수
@@ -199,44 +215,6 @@ def check_db():
                 print(f"Error accessing table {table}: {e}")
             print()
 
+
 if __name__ == "__main__":
-    # # 데이터베이스 초기화
-    # create_db()
-
-    # # 테이블 데이터 삽입
-    # insert_table(1, 0, 0)
-    # insert_table(2, 10, 0)
-    # insert_table(3, 20, 0)
-    # insert_table(4, 0, 10)
-    # insert_table(5, 10, 10)
-    # insert_table(6, 20, 10)
-    # insert_table(7, 0, 20)
-    # insert_table(8, 10, 20)
-    # insert_table(9, 20, 20)
-
-    # # 메뉴 데이터 삽입
-    # insert_menu("Pasta", 12000)
-    # insert_menu("Pizza", 35000)
-    # insert_menu("Steak", 50000)
-    # insert_menu("Salad", 10000)
-    # insert_menu("Chicken", 25000)
-    # insert_menu("Hamburger", 8000)
-    # insert_menu("Waffle", 3000)
-
-    # order1 = insert_order_with_items(1, [(1, 2), (2, 1)])
-    # time.sleep(10)
-    # order2 = insert_order_with_items(2, [(3, 2), (6, 1), (5, 2)])
-    # time.sleep(5)
-    # order3 = insert_order_with_items(3, [(1, 1), (5, 1), (4, 2)])
-
-    # # 배달 로그 추가
-    # insert_delivery_log(order1)      # 배달 시작
-    # time.sleep(3)
-    # insert_delivery_log(order2)      # 배달 시작
-    # time.sleep(10)
-    # insert_delivery_log(order1, end=True)  # 배달 완료
-    # time.sleep(2)
-    # insert_delivery_log(order2, end=True)  # 배달 완료
-
-    # 최근 12시간 내 주문 확인
     check_db()

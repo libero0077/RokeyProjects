@@ -611,12 +611,12 @@ class GUI(QMainWindow):
         if not self.order_items:
             QMessageBox.warning(self, "주문 오류", "주문 목록이 비어있습니다.")
             return
-
+        print(self.order_items)
         # JSON 메시지 구조 생성
         order_message = {
             "table_id": 1,  # 테이블 번호
             "orders": [
-                {"item": item["name"], "quantity": item["quantity"], "price": int(item["price"] * item["quantity"])}
+                {"menu_item_id": item["id"], "item": item["name"], "quantity": item["quantity"], "price": int(item["price"] * item["quantity"])}
                 for item in self.order_items
             ]
         }
