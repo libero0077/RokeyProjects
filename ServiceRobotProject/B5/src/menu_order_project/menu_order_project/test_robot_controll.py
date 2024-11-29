@@ -1,4 +1,4 @@
-# 추후 수정해야할 파일 => 재수정
+# 노드 3 (RobotController) 코드 수정
 
 import rclpy
 from rclpy.node import Node
@@ -12,15 +12,6 @@ from action_msgs.msg import GoalStatus
 from rclpy.action import ActionClient
 from nav2_msgs.action import NavigateToPose
 
-'''
-RobotController 클래스:
-subscription: 'robot_command' 토픽을 구독하여 명령을 수신
-action_client: navigate_to_pose 액션 서버에 목표 위치를 보냄
-positions: 각 위치에 대한 좌표를 딕셔너리로 저장 (임의의 좌표 값이며, 나중에 실제 좌표로 수정 )
-명령 처리 (command_callback): 수신한 명령에 따라 로봇을 이동
-이동 함수 (move_to_position): 목표 위치를 설정하고 액션 서버에 목표를 보냄
-쿼터니언 변환 함수 (euler_to_quaternion): 오일러 각도를 쿼터니언으로 변환
-'''
 class RobotController(Node):
     def __init__(self):
         super().__init__('robot_controller')
@@ -35,11 +26,12 @@ class RobotController(Node):
             self.command_callback,
             qos_profile
         )
+        self.subscription  # prevent unused variable warning
 
         # 액션 클라이언트 생성
         self.action_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
 
-        # 위치 좌표 정의 (amcl_pose로부터 추출한 실제 좌표로 업데이트)
+        # 위치 좌표 정의
         self.positions = {
             'waiting': {'x': 1.5287821904725307, 'y': -1.6564363922167273, 'theta': 0.08051796784565991},
             'kitchen': {'x': -0.45619495436058893, 'y': 0.5627857193272424, 'theta': 0.11337987469541375},
@@ -54,19 +46,38 @@ class RobotController(Node):
             'table_9': {'x': 3.153391448984137, 'y': -1.0491125084255173, 'theta': -0.19493162164767266},
         }
 
+        ############################ 로봇 상태를 퍼블리시하기 위한 퍼블리셔 생성 ####################
+        self.status_publisher = self.create_publisher(String, 'robot_status', qos_profile)
+        self.get_logger().info("Robot Status Publisher Initialized.")
+        ####################################################################################
+
     def command_callback(self, msg):
         """로봇 명령을 수신하여 처리하는 콜백 함수"""
-        data = json.loads(msg.data)
-        command = data['command']
-        position_key = data.get('position')
+        try:
+            data = json.loads(msg.data)
+            command = data['command']
+            position_key = data.get('position')
 
-        if command == 'move' and position_key in self.positions:
-            position = self.positions[position_key]
-            self.move_to_position(position)
-        else:
-            self.get_logger().warn(f"Unknown command or position: {command}, {position_key}")
+            if command == 'move' and position_key in self.positions:
+                position = self.positions[position_key]
+                # 로봇 이동 시작 상태 퍼블리시
+                status_msg = String()
+                if position_key == 'waiting':
+                    status_msg.data = "로봇이 대기 위치로 이동 중입니다."
+                elif position_key == 'kitchen':
+                    status_msg.data = "로봇이 주방 위치로 이동 중입니다."
+                else:
+                    status_msg.data = f"로봇이 {position_key}으로 이동 중입니다."
+                self.status_publisher.publish(status_msg)
+                self.get_logger().info(f"Published robot status: {status_msg.data}")  # 추가된 로그
 
-    def move_to_position(self, position):
+                self.move_to_position(position, position_key)
+            else:
+                self.get_logger().warn(f"Unknown command or position: {command}, {position_key}")
+        except json.JSONDecodeError:
+            self.get_logger().error("Failed to decode JSON from robot_command")
+
+    def move_to_position(self, position, position_key):
         """로봇을 지정된 위치로 이동시키는 함수"""
         # NavigateToPose 목표 메시지 생성
         goal_msg = NavigateToPose.Goal()
@@ -89,9 +100,9 @@ class RobotController(Node):
 
         # 목표를 액션 서버로 보내기
         self._send_goal_future = self.action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
-        self._send_goal_future.add_done_callback(self.goal_response_callback)
+        self._send_goal_future.add_done_callback(lambda future: self.goal_response_callback(future, position_key))
 
-    def goal_response_callback(self, future):
+    def goal_response_callback(self, future, position_key):
         """액션 서버로부터의 응답을 처리하는 콜백 함수"""
         goal_handle = future.result()
         if not goal_handle.accepted:
@@ -101,15 +112,26 @@ class RobotController(Node):
         self.get_logger().info('Goal accepted :)')
 
         self._get_result_future = goal_handle.get_result_async()
-        self._get_result_future.add_done_callback(self.get_result_callback)
+        self._get_result_future.add_done_callback(lambda future: self.get_result_callback(future, position_key))
 
-    def get_result_callback(self, future):
+    def get_result_callback(self, future, position_key):
         """액션 수행 결과를 처리하는 콜백 함수"""
         result = future.result().result
         status = future.result().status
 
         if status == GoalStatus.STATUS_SUCCEEDED:
             self.get_logger().info('Goal succeeded!')
+
+            # 목표 도착 상태 퍼블리시
+            status_msg = String()
+            if position_key == 'waiting':
+                status_msg.data = "대기 위치입니다."
+            elif position_key == 'kitchen':
+                status_msg.data = "주방 위치입니다."
+            else:
+                status_msg.data = f"{position_key} 위치입니다."
+            self.status_publisher.publish(status_msg)
+            self.get_logger().info(f"Published robot status: {status_msg.data}")  # 추가된 로그
         else:
             self.get_logger().info(f'Goal failed with status: {status}')
 

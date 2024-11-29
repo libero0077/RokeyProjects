@@ -31,6 +31,10 @@ class Signaler(QObject):
     # 문자열을 전달하는 시그널 정의
     order_received = pyqtSignal(str)
 
+    ####### 로봇 상태를 전달하는 시그널 정의 추가 ####
+    robot_status_updated = pyqtSignal(str)
+    ##########################################
+
 # Signaler 인스턴스 생성
 signaler = Signaler()
 
@@ -77,6 +81,11 @@ class KitchenSubscriber(Node):
         #################### 'robot_command' 토픽에 퍼블리셔 생성 #########################################
         self.robot_command_publisher = self.create_publisher(String, 'robot_command', qos_profile)
         self.get_logger().info("Robot Command Publisher Initialized.")
+        ##############################################################################################
+
+        ##새로 추가된 부분#### 'robot_status' 토픽을 구독하는 서브스크라이버 생성 ##########################
+        self.robot_status_subscription = self.create_subscription(String, 'robot_status', self.robot_status_callback, qos_profile)
+        self.get_logger().info("Robot Status Subscriber Initialized.")
         ##############################################################################################
 
     def publish_robot_command(self, command_dict):  # 로봇 제어 명령과 관련하여 토픽 퍼브리시
@@ -144,6 +153,16 @@ class KitchenSubscriber(Node):
         # 시그널을 통해 GUI로 메시지를 전달
         signaler.order_received.emit(msg.data)
 
+    ###새로 추가되었음##### 로봇의 상태를 나타내기 위한 콜백함수 ##########################
+    def robot_status_callback(self, msg):
+        """로봇 상태 메시지를 받으면 호출되는 콜백 함수"""
+        status = msg.data
+        self.get_logger().info(f"Received robot status: {status}")
+
+        # 시그널을 통해 GUI로 상태 메시지를 전달
+        signaler.robot_status_updated.emit(status)
+    #######################################################################
+
 # 팝업 창 클래스 정의
 class ControlPopup(QDialog):
     def __init__(self, subscriber_node, table_id, orders):
@@ -159,7 +178,7 @@ class ControlPopup(QDialog):
             self.setWindowTitle(f"Control Robot - Table {self.table_id}")
         else:
             self.setWindowTitle(f"Control Robot - {self.table_id.capitalize()} Position")
-        self.setFixedSize(600, 600)
+        self.setFixedSize(800, 800)
 
         layout = QVBoxLayout()
 
@@ -220,12 +239,51 @@ class ControlPopup(QDialog):
         # 로봇 제어 버튼들을 추가합니다.
         self.waiting_button = QPushButton("Move to Waiting Position")
         self.waiting_button.clicked.connect(self.move_to_waiting)
+        ### 버튼 크기 및 색상 조정 ####
+        self.waiting_button.setFixedSize(200, 60)  # 버튼 크기 설정 (너비: 200px, 높이: 60px)
+        self.waiting_button.setStyleSheet("""
+            QPushButton {
+                background-color: #2196F3;  /* 파란색 배경 */
+                color: white;               /* 흰색 글자 */
+                font-size: 16px;
+                border-radius: 10px;
+            }
+            QPushButton:hover {
+                background-color: #0b7dda;  /* 호버 시 조금 더 진한 파란색 */
+            }
+        """)
 
         self.kitchen_button = QPushButton("Move to Kitchen Position")
         self.kitchen_button.clicked.connect(self.move_to_kitchen)
+        ### 버튼 크기 및 색상 조정 ###
+        self.kitchen_button.setFixedSize(200, 60)  # 버튼 크기 설정 (너비: 200px, 높이: 60px)
+        self.kitchen_button.setStyleSheet("""
+            QPushButton {
+                background-color: #FF9800;  /* 주황색 배경 */
+                color: white;               /* 흰색 글자 */
+                font-size: 16px;
+                border-radius: 10px;
+            }
+            QPushButton:hover {
+                background-color: #e68900;  /* 호버 시 조금 더 진한 주황색 */
+            }
+        """)
 
         self.start_button = QPushButton("Start Robot")
         self.start_button.clicked.connect(self.start_robot)
+        #### 버튼 크기 및 색상 조정 #############
+        self.start_button.setFixedSize(200, 60)  # 버튼 크기 설정 (너비: 200px, 높이: 60px)
+        self.start_button.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50;  /* 초록색 배경 */
+                color: white;               /* 흰색 글자 */
+                font-size: 16px;
+                border-radius: 10px;
+            }
+            QPushButton:hover {
+                background-color: #45a049;  /* 호버 시 조금 더 진한 초록색 */
+            }
+        """)
 
         # 버튼들을 가로로 배치합니다.
         button_layout = QHBoxLayout()
@@ -330,6 +388,10 @@ class KitchenMonitoring(QMainWindow):
 
         # 시그널과 슬롯 연결
         signaler.order_received.connect(self.update_order_details)
+        ####### 로봇 상태 시그널 연결하기 위해 추가함 #######################
+        signaler.robot_status_updated.connect(self.update_robot_status)  # 로봇 상태 시그널 연결
+        ############################################################
+
 
         # 테이블별 누적 주문 데이터 초기화 (테이블 1~9번)
         self.table_data = {i + 1: [] for i in range(9)}
@@ -357,9 +419,15 @@ class KitchenMonitoring(QMainWindow):
         self.total_price_label = QLabel("Total price: 0원", alignment=Qt.AlignRight)
         self.order_total_price_label = QLabel("Total price: 0원", alignment=Qt.AlignRight)
 
+
+        ###새로 추가됨####### 로봇 상태를 표시할 레이블 생성 ##########################
+        self.robot_status_label = QLabel("로봇 상태: 대기 중", alignment=Qt.AlignLeft)
+        self.robot_status_label.setStyleSheet("font-size: 20px; font-weight: bold; color: red;")
+        #######################################################################################
+
         # 창 제목과 크기 설정
         self.setWindowTitle("Kitchen Display")
-        self.setGeometry(100, 100, 1120, 600)
+        self.setGeometry(100, 100, 1250, 600)
 
         # 메인 레이아웃 생성
         main_widget = QWidget(self)
@@ -376,6 +444,10 @@ class KitchenMonitoring(QMainWindow):
         self.statistics_button = QPushButton("Statistics")
         self.statistics_button.clicked.connect(self.show_statistics)
         self.left_layout.addWidget(self.statistics_button)
+
+        ##################### 로봇 상태 레이블 추가 ###########
+        self.left_layout.addWidget(self.robot_status_label)
+        ###################################################
 
         left_widget = QWidget()
         left_widget.setLayout(self.left_layout)
@@ -457,7 +529,35 @@ class KitchenMonitoring(QMainWindow):
         self.accept_button = QPushButton("Accept")
         self.cancel_button = QPushButton("Cancel")
         self.accept_button.clicked.connect(self.handle_accept)  # 'Accept' 버튼 클릭 시 처리 함수 연결
+        ################## Accept button 크기 및 색상 조정 #########################################
+        self.accept_button.setFixedSize(250, 80)  # 버튼 크기 설정 (너비: 150px, 높이: 50px)
+        self.accept_button.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50;  /* 초록색 배경 */
+                color: white;               /* 흰색 글자 */
+                font-size: 16px;
+                border-radius: 10px;
+            }
+            QPushButton:hover {
+                background-color: #45a049;  /* 호버 시 조금 더 진한 초록색 */
+            }
+        """)
+        #########################################################################################
         self.cancel_button.clicked.connect(self.handle_cancel)  # 'Cancel' 버튼 클릭 시 처리 함수 연결
+        ############ Cancle의 크기 및 색상 조정 #####################################################
+        self.cancel_button.setFixedSize(250, 80)  # 버튼 크기 설정 (너비: 150px, 높이: 50px)
+        self.cancel_button.setStyleSheet("""
+            QPushButton {
+                background-color: #f44336;  /* 빨간색 배경 */
+                color: white;               /* 흰색 글자 */
+                font-size: 16px;
+                border-radius: 10px;
+            }
+            QPushButton:hover {
+                background-color: #da190b;  /* 호버 시 조금 더 진한 빨간색 */
+            }
+        """)
+        #############################################################################################
         button_layout.addWidget(self.accept_button)
         button_layout.addWidget(self.cancel_button)
         layout.addLayout(button_layout)
@@ -756,6 +856,13 @@ class KitchenMonitoring(QMainWindow):
                 self.control_popup.exec_()
             else:
                 print("Failed to extract table_id from button text.")
+
+    ## 새로 추가됨 ######## 로봇 상태를 나타내는 메서드 ############################
+    def update_robot_status(self, status_message):
+        """로봇 상태 시그널을 받아 레이블을 업데이트하는 슬롯 함수"""
+        self.robot_status_label.setText(f"로봇 상태: {status_message}")
+        self.get_logger().info(f"Updated robot status label to: {status_message}")  # 추가된 로그
+    ##################################################################
 
     # def move_robot_to_waiting_position(self):
     #     # 서빙 로봇을 대기 위치로 이동시키는 기능을 구현
