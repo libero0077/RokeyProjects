@@ -55,29 +55,44 @@ class RobotController(Node):
         """로봇 명령을 수신하여 처리하는 콜백 함수"""
         try:
             data = json.loads(msg.data)
-            command = data['command']
+            command = data.get('command')
             position_key = data.get('position')
+            order_item_ids = data.get('order_item_ids', [])
 
             if command == 'move' and position_key in self.positions:
                 position = self.positions[position_key]
+                
                 # 로봇 이동 시작 상태 퍼블리시
                 status_msg = String()
+                
+                # Standardizing message format with JSON
+                status_data = {
+                    "status": "",
+                    "position": position_key,
+                    "order_item_ids": order_item_ids
+                }
+                
+                # Set the appropriate status based on the position
                 if position_key == 'waiting':
-                    status_msg.data = "로봇이 대기 위치로 이동 중입니다."
+                    status_data["status"] = "로봇이 대기 위치로 이동 중입니다."
                 elif position_key == 'kitchen':
-                    status_msg.data = "로봇이 주방 위치로 이동 중입니다."
+                    status_data["status"] = "로봇이 주방 위치로 이동 중입니다."
                 else:
-                    status_msg.data = f"로봇이 {position_key}으로 이동 중입니다."
+                    status_data["status"] = f"로봇이 {order_item_ids}을 배송하기 위해 {position_key}으로 이동 중입니다."
+
+                # Publish the message as a JSON string
+                status_msg.data = json.dumps(status_data)
                 self.status_publisher.publish(status_msg)
                 self.get_logger().info(f"Published robot status: {status_msg.data}")  # 추가된 로그
 
-                self.move_to_position(position, position_key)
+                # Move to the target position
+                self.move_to_position(position, position_key, order_item_ids)
             else:
                 self.get_logger().warn(f"Unknown command or position: {command}, {position_key}")
         except json.JSONDecodeError:
             self.get_logger().error("Failed to decode JSON from robot_command")
 
-    def move_to_position(self, position, position_key):
+    def move_to_position(self, position, position_key, order_item_ids):
         """로봇을 지정된 위치로 이동시키는 함수"""
         # NavigateToPose 목표 메시지 생성
         goal_msg = NavigateToPose.Goal()
@@ -100,9 +115,9 @@ class RobotController(Node):
 
         # 목표를 액션 서버로 보내기
         self._send_goal_future = self.action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
-        self._send_goal_future.add_done_callback(lambda future: self.goal_response_callback(future, position_key))
+        self._send_goal_future.add_done_callback(lambda future: self.goal_response_callback(future, position_key, order_item_ids))
 
-    def goal_response_callback(self, future, position_key):
+    def goal_response_callback(self, future, position_key, order_item_ids):
         """액션 서버로부터의 응답을 처리하는 콜백 함수"""
         goal_handle = future.result()
         if not goal_handle.accepted:
@@ -112,9 +127,9 @@ class RobotController(Node):
         self.get_logger().info('Goal accepted :)')
 
         self._get_result_future = goal_handle.get_result_async()
-        self._get_result_future.add_done_callback(lambda future: self.get_result_callback(future, position_key))
+        self._get_result_future.add_done_callback(lambda future: self.get_result_callback(future, position_key, order_item_ids))
 
-    def get_result_callback(self, future, position_key):
+    def get_result_callback(self, future, position_key, order_item_ids):
         """액션 수행 결과를 처리하는 콜백 함수"""
         result = future.result().result
         status = future.result().status
@@ -123,18 +138,30 @@ class RobotController(Node):
             self.get_logger().info('Goal succeeded!')
 
             # 목표 도착 상태 퍼블리시
-            status_msg = String()
+            status_msg = {
+                "status": "",
+                "position": position_key,
+                "order_item_ids": order_item_ids
+            }
+
             if position_key == 'waiting':
-                status_msg.data = "대기 위치입니다."
+                status_msg["status"] = "대기 위치입니다."
             elif position_key == 'kitchen':
-                status_msg.data = "주방 위치입니다."
+                status_msg["status"] = "주방 위치입니다."
+            elif "table_" in position_key:  # 테이블에 도착했을 경우
+                status_msg["status"] = (
+                    "음식이 도착했습니다. "
+                    "음식을 수령하셨다면 복귀 버튼을 눌러주세요."
+                )
             else:
-                status_msg.data = f"{position_key} 위치입니다."
-            self.status_publisher.publish(status_msg)
-            self.get_logger().info(f"Published robot status: {status_msg.data}")  # 추가된 로그
+                status_msg["status"] = f"{position_key} 위치입니다."
+
+            # JSON 직렬화 후 퍼블리시
+            self.status_publisher.publish(String(data=json.dumps(status_msg)))
+            self.get_logger().info(f"Published robot status: {status_msg}")
         else:
             self.get_logger().info(f'Goal failed with status: {status}')
-
+            
     def feedback_callback(self, feedback_msg):
         """액션 수행 중 피드백을 처리하는 콜백 함수"""
         feedback = feedback_msg.feedback

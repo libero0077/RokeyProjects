@@ -148,26 +148,47 @@ def insert_delivery_log(order_item_id, end=False):
     """
     with db_connection() as conn:
         cursor = conn.cursor()
+        print("db연결 완료. 실행")
         if end:
-            # 배달 완료
-            end_time = get_current_timestamp()
-            
-            cursor.execute('''
-            SELECT end_time FROM deliver_log WHERE order_item_id = ? AND end_time IS NULL
-            ''', (order_item_id,))
-            if cursor.fetchone() is not None:  # 이미 배달 완료 상태인 경우 처리
-                return           
-            
-            cursor.execute('''
-            UPDATE deliver_log
-            SET end_time = ?
-            WHERE order_item_id = ? AND end_time IS NULL
-            ''', (end_time, order_item_id))
-            cursor.execute('''
-            UPDATE order_items
-            SET status = "Delivered"
-            WHERE order_item_id = ?
-            ''', (order_item_id,))
+            try:
+                print("배달 완료")
+                end_time = get_current_timestamp()
+                
+                # SELECT 쿼리
+                print(f"Checking if end_time is already set for order_item_id: {order_item_id}")
+                cursor.execute('''
+                SELECT end_time FROM deliver_log WHERE order_item_id = ? AND end_time IS NULL
+                ''', (order_item_id,))
+                result = cursor.fetchone()
+                print(f"Query result: {result}")
+                
+                # end_time이 이미 설정된 경우
+                if result and result[0] is not None:  
+                    print(f"Order item {order_item_id} already marked as delivered.")
+                    return
+                
+                # UPDATE deliver_log
+                print("Executing UPDATE deliver_log query")
+                cursor.execute('''
+                UPDATE deliver_log
+                SET end_time = ?
+                WHERE order_item_id = ? AND end_time IS NULL
+                ''', (end_time, order_item_id))
+                print("실행2")
+
+                # UPDATE order_items
+                print("Executing UPDATE order_items query")
+                cursor.execute('''
+                UPDATE order_items
+                SET status = "Delivered"
+                WHERE order_item_id = ?
+                ''', (order_item_id,))
+                print("실행3")
+            except sqlite3.Error as e:
+                print(f"SQLite error: {e}")
+            except Exception as e:
+                print(f"Unexpected error: {e}")
+
         else:
             # 배달 시작
             start_time = get_current_timestamp()

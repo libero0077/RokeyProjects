@@ -153,15 +153,28 @@ class KitchenSubscriber(Node):
         # 시그널을 통해 GUI로 메시지를 전달
         signaler.order_received.emit(msg.data)
 
-    ###새로 추가되었음##### 로봇의 상태를 나타내기 위한 콜백함수 ##########################
     def robot_status_callback(self, msg):
         """로봇 상태 메시지를 받으면 호출되는 콜백 함수"""
-        status = msg.data
-        self.get_logger().info(f"Received robot status: {status}")
+        print(msg)
+        try:
+            status_msg = json.loads(msg.data)
+            status = status_msg.get("status", "")
+            position = status_msg.get("position", "")
+            order_item_ids = status_msg.get("order_item_ids", [])
 
-        # 시그널을 통해 GUI로 상태 메시지를 전달
-        signaler.robot_status_updated.emit(status)
-    #######################################################################
+            self.get_logger().info(f"Received robot status: {status}")
+            self.get_logger().info(f"Position: {position}, Order IDs: {order_item_ids}")
+
+            if "음식이 도착" in status:
+                # order_item_ids를 정수형으로 변환
+                for order_item_id in map(int, order_item_ids):
+                    print(order_item_id, type(order_item_id))
+                    db.insert_delivery_log(order_item_id, end=True)
+
+            # 시그널을 통해 GUI로 상태 메시지를 전달
+            signaler.robot_status_updated.emit(status)
+        except json.JSONDecodeError:
+            self.get_logger().error("Failed to parse robot status message")
 
 # 팝업 창 클래스 정의
 class ControlPopup(QDialog):
@@ -199,7 +212,7 @@ class ControlPopup(QDialog):
 
         # 개별 주문들을 테이블에 추가
         row_count = 0
-        print("1", self.orders)
+    
         for order in self.orders:
             order_number = order['order_number']
             items = order['items']
@@ -297,7 +310,7 @@ class ControlPopup(QDialog):
     def update_order_state(self, item, state):
         # stateChanged의 값이 Qt.Checked인지 확인
         item['checked'] = (state == Qt.Checked)
-        item['disabled'] = True if state == Qt.Checked else item.get('disabled', False)
+        # item['disabled'] = True if state == Qt.Checked else item.get('disabled', False)
 
     def get_order_item_status(self, order_item_id):
         # 데이터베이스에서 주문 아이템의 상태를 가져오는 함수
@@ -347,38 +360,50 @@ class ControlPopup(QDialog):
         """해당 테이블로 이동 명령 퍼블리시"""
         if isinstance(self.table_id, int):
             position_key = f"table_{self.table_id}"
-            command = {
-                "command": "move",
-                "position": position_key
-            }
-            self.subscriber_node.publish_robot_command(command)
-            QMessageBox.information(self, "Robot Control", f"Robot is moving to Table {self.table_id}.")
 
-            # 선택된 주문의 상태를 업데이트하고 체크박스 비활성화
+            # 선택된 주문의 order_item_id 수집
+            selected_order_item_ids = []
             for idx in range(self.order_table.rowCount()):
                 checkbox = self.order_table.cellWidget(idx, 0)
-                if checkbox.isChecked():
+                if checkbox.isChecked() and checkbox.isEnabled():  # 체크되어 있고 활성화된 항목만 선택
                     # 주문 아이템 ID 가져오기
                     order_item_id = int(self.order_table.item(idx, 2).text())
+                    
+                    # "Delivered" 상태인 경우는 제외
+                    order_status = self.order_table.item(idx, 7).text()  # 주문 상태가 "Delivered"인지 확인
+                    if order_status != "Delivered":
+                        selected_order_item_ids.append(order_item_id)
 
-                    # 상태 업데이트
-                    self.order_table.setItem(idx, 7, QTableWidgetItem("Delivering"))
-                    # 체크박스 비활성화
-                    checkbox.setEnabled(False)
+                        # 상태 업데이트
+                        self.order_table.setItem(idx, 7, QTableWidgetItem("Delivering"))
+                        checkbox.setEnabled(False)  # 비활성화
 
-                    # 정확한 주문 항목 찾기
-                    for order in self.orders:
-                        for item in order['items']:
-                            if item['order_item_id'] == order_item_id:
-                                # 주문 상태 업데이트
-                                item['checked'] = True
-                                item['disabled'] = True
+                        # 정확한 주문 항목 찾기 및 상태 업데이트
+                        for order in self.orders:
+                            for item in order['items']:
+                                if item['order_item_id'] == order_item_id:
+                                    item['checked'] = True
+                                    item['disabled'] = True
 
-                                # 데이터베이스에 배달 로그 기록 (배달 시작)
-                                db.insert_delivery_log(order_item_id, end=False)
-                                break
+                                    # 데이터베이스에 배달 로그 기록 (배달 시작)
+                                    db.insert_delivery_log(order_item_id, end=False)
+                                    break
+
+            if not selected_order_item_ids:
+                QMessageBox.warning(self, "Robot Control", "No orders selected for delivery.")
+                return
+
+            # 로봇 명령 생성 및 퍼블리시
+            command = {
+                "command": "move",
+                "position": position_key,
+                "order_item_ids": selected_order_item_ids  # 추가된 필드
+            }
+            self.subscriber_node.publish_robot_command(command)
+            QMessageBox.information(self, "Robot Control", f"Robot is moving to Table {self.table_id} with orders: {selected_order_item_ids}.")
         else:
             QMessageBox.warning(self, "Robot Control", "Invalid Table ID.")
+
 
 # GUI 클래스 정의
 class KitchenMonitoring(QMainWindow):
@@ -511,8 +536,8 @@ class KitchenMonitoring(QMainWindow):
         # 주문 상세 정보를 표시할 테이블 위젯 생성
         self.order_table = QTableWidget()
         self.order_table.setRowCount(0)  # 초기 행 개수는 0
-        self.order_table.setColumnCount(7)  # 열 개수를 7로 변경
-        self.order_table.setHorizontalHeaderLabels(["Order Number", "Table Number", "Menu Item ID", "Menu", "Quantity", "Price", "Additional Info"])  # 필요에 따라 헤더 수정
+        self.order_table.setColumnCount(6)  # 열 개수를 7로 변경
+        self.order_table.setHorizontalHeaderLabels(["Order Number", "Table Number", "Menu Item ID", "Menu", "Quantity", "Price"])  # 필요에 따라 헤더 수정
         self.order_table.verticalHeader().setVisible(False)  # 왼쪽 행 번호 숨기기
 
         # 열 크기를 균등하게 조절
@@ -736,7 +761,6 @@ class KitchenMonitoring(QMainWindow):
 
         # 주문 상세 정보 테이블 초기화
         self.order_table.setRowCount(0)
-        print("WARN:::::::::::::::", table_id, current_order_items)
 
         # 데이터베이스에 현재 주문 데이터 저장
         order_id, order_item_ids = db.insert_order_with_items(table_id, current_order_items)

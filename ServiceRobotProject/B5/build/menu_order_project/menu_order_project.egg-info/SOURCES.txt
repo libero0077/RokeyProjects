@@ -12,6 +12,7 @@ menu_order_project/table_order.py
 menu_order_project/temp_update_db.py
 menu_order_project/test_order.py
 menu_order_project/test_robot_controll.py
+menu_order_project/test_robot_monitor.py
 menu_order_project/test_sub.py
 menu_order_project.egg-info/PKG-INFO
 menu_order_project.egg-info/SOURCES.txt
