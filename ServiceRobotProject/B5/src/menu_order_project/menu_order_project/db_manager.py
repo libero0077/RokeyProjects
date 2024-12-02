@@ -89,7 +89,7 @@ def insert_menu(name, price, type_id, category, description, image, sales_count)
     with db_connection() as conn:
         cursor = conn.cursor()
         cursor.execute('''
-        INSERT INTO menu (menu_item_id, name, price, type_id, category, description, image, sales_count)
+        INSERT INTO menu (name, price, type_id, category, description, image, sales_count)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         ''', (name, price, type_id, category, description, image, sales_count))
         conn.commit()
