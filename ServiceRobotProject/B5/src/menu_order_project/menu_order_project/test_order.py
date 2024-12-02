@@ -99,7 +99,8 @@ class NODE(Node):
                         'price': int(price_value),  # price를 정수형으로 변환
                         'category': item.get('category', ''),
                         'description': item.get('description', ''),
-                        'image_path': item.get('image_path', '')  # image_path가 없을 경우 빈 문자열
+                        'image_path': item.get('image', ''),  # image_path가 없을 경우 빈 문자열
+                        'sales_count' : item.get('sales_count', '')
                     }
                 except ValueError as ve:
                     self.get_logger().error(f"ValueError converting 'menu_item_id' or 'price' to int: {ve}")
@@ -127,6 +128,27 @@ class NODE(Node):
     def order_result_callback(self, request, response):
         """주문 처리 결과를 주방 디스플레이 노드로부터 수신"""
         self.get_logger().info(f"Received order result: {request.result_message}")
+
+        # 주문 결과가 "Order Accepted"일 경우만 처리
+        if "Order Accepted" in request.result_message:
+            self.get_logger().info("Order accepted, adding to order history.")
+            
+            # GUI 클래스에서 저장된 pending_order 목록을 가져와서 추가
+            if hasattr(self.gui, 'pending_order') and self.gui.pending_order:
+                self.get_logger().info(f"Pending orders to be added: {self.gui.pending_order}")
+                self.gui.add_to_order_history(self.gui.pending_order)  # GUI 클래스의 메소드 호출
+                self.gui.pending_order.clear()  # 목록을 추가한 후 초기화
+
+        elif "Order Canceled" in request.result_message:
+            # GUI 클래스에서 저장된 pending_order 목록을 가져와서 추가
+            self.get_logger().info("Order canceled, clearing pending orders.")
+            if hasattr(self.gui, 'pending_order') and self.gui.pending_order:
+                self.gui.pending_order.clear()  # 목록을 초기화
+
+        else:
+            self.get_logger().error(f"Order failed: {request.result_message}")
+        
+
         self.notification_queue.put(request.result_message)
         response.success = True  # 응답 확인
         return response
@@ -134,6 +156,7 @@ class NODE(Node):
     def publish_message(self):
         while not self.queue.empty():
             message = self.queue.get()
+            self.get_logger().info(f"Publishing message: {message}")
             msg = String()
             msg.data = message
             self.message_publisher.publish(msg)
@@ -470,14 +493,16 @@ class GUI(QMainWindow):
 
     def update_menu_display(self):
         # 기존 메뉴 위젯 제거
+        self.node.get_logger().info("Updating menu display, clearing old widgets.")
         for i in reversed(range(self.menu_layout.count())):
             widget = self.menu_layout.itemAt(i).widget()
             if widget is not None:
                 widget.setParent(None)
-        self.menu_widgets.clear()
 
+        self.menu_widgets.clear()
         # 새로운 메뉴 위젯 생성 및 추가
         menu_items = self.menu_db.get_menu()
+        self.node.get_logger().info(f"Displaying menu items: {menu_items}")
         for i, menu_item in enumerate(menu_items):
             menu_widget = MenuItemWidget(menu_item, self.menu_display)
             self.menu_widgets.append(menu_widget)
@@ -515,8 +540,21 @@ class GUI(QMainWindow):
         # 선택된 카테고리에 해당하는 메뉴 표시
         menu_items = self.menu_db.get_menu()
         filtered_items = []
+
         if category == '전체메뉴':
             filtered_items = menu_items
+        elif category == '인기메뉴':
+        # '인기메뉴'에 대해서는 별도 필터링 조건이 필요하다면 추가
+            # sales_count 기준으로 상위 3개 메뉴 필터링
+            sorted_items = sorted(menu_items, key=lambda item: item.get('sales_count', 0), reverse=True)
+            filtered_items = sorted_items[:3]  # 상위 3개의 항목 선택
+        elif category == '메인메뉴':
+        # 카테고리가 'FOOD'인 항목만 필터링
+            filtered_items = [item for item in menu_items if item['category'].upper() == 'FOOD']
+        elif category == '음료':
+        # 카테고리가 'DRINK'인 항목만 필터링
+            filtered_items = [item for item in menu_items if item['category'].upper() == 'DRINK']
+    
         else:
             filtered_items = [item for item in menu_items if item['category'] == category]
 
@@ -620,18 +658,54 @@ class GUI(QMainWindow):
                 for item in self.order_items
             ]
         }
+        
+        self.node.get_logger().info(f"Placing order: {order_message}")
 
-        # 버튼을 클릭했을 때 주문 내역에 추가
-        self.order_history.append({
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "items": self.order_items.copy()
-        })
+        # # 버튼을 클릭했을 때 주문 내역에 추가
+        # self.order_history.append({
+        #     "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        #     "items": self.order_items.copy()
+        # })
 
         # ROS 퍼블리셔로 메시지 전송
         self.node.queue.put(json.dumps(order_message))  # JSON 형식으로 직렬화
-        QMessageBox.information(self, "주문 완료", "주문이 완료되었습니다.")
+        self.node.get_logger().info("Order message put in queue.")
+        
+        self.pending_order = self.order_items.copy()
+        self.node.get_logger().info(f"Pending order saved: {self.pending_order}")
         self.order_items.clear()
         self.update_order_list()
+
+        # 주문 완료 팝업 띄우기 (비동기적으로 업데이트)
+        self.order_status_popup = QMessageBox.information(self, "주문 전송", "주문이 전송되었습니다.")
+
+        # 주문 결과를 확인하는 콜백 함수가 처리되면, 타이머로 다시 확인
+        QTimer.singleShot(100, self.check_order_result)
+
+    def check_order_result(self):
+        """주문 결과를 확인하고 처리하는 함수"""
+        if self.node.order_result_received:
+            if "Order Accepted" in self.node.last_order_result:
+                self.add_to_order_history(self.pending_order)
+                self.pending_order.clear()
+            elif "Order Canceled" in self.node.last_order_result:
+                self.pending_order.clear()  # 주문이 취소된 경우 처리
+            self.order_status_popup.close()
+
+    def add_to_order_history(self, order_items):
+        """주문 내역에 추가"""
+        self.node.get_logger().info(f"Adding order to history: {order_items}")
+        self.order_history.append({
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "items": order_items.copy()  # 주문 내역을 복사하여 추가
+        })
+
+    def handle_order_result(self, result_message):
+        """주문 결과 메시지를 받아 처리하는 함수"""
+        if "Order Accepted" in result_message:
+            self.check_order_result()  # 주문 승인 처리
+        elif "Order Canceled" in result_message:
+            self.check_order_result()  # 주문 취소 처리
 
     def show_order_history(self):
         dialog = QDialog(self)

@@ -249,15 +249,69 @@ def check_db():
                 print(f"Error accessing table {table}: {e}")
             print()
 
+def update_menu_images():
+    with db_connection() as conn:
+        cursor = conn.cursor()
+        # 이미지 경로를 포함한 데이터 정의
+        menu_images = [
+            (1, 'images/pasta.jpg'),
+            (2, 'images/pizza.jpg'),
+            (3, 'images/steak.jpg'),
+            (4, 'images/salad.jpg'),
+            (5, 'images/chicken.jpg'),
+            (6, 'images/hamburger.jpg'),
+            (7, 'images/coke.jpg'),
+            (8, 'images/sprite.jpg'),
+            (9, 'images/wine.jpg'),
+            (10, 'images/beer.jpg')
+        ]
+        
+        # 업데이트 쿼리 실행
+        cursor.executemany('''
+            UPDATE menu
+            SET image = ?
+            WHERE menu_item_id = ?
+        ''', [(image, menu_item_id) for menu_item_id, image in menu_images])
+        conn.commit()
+        print("Menu images updated successfully.")
+
+def add_sales_count_column():
+    """
+    menu 테이블에 sales_count 컬럼을 추가 (기본값 0)
+    """
+    with db_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            "ALTER TABLE menu ADD COLUMN sales_count INTEGER DEFAULT 0"
+        )
+        conn.commit()
+
+def update_sales_count(menu_item_id, quantity):
+    """
+    주문 시 해당 메뉴의 판매량을 업데이트
+    :param menu_item_id: 메뉴 ID
+    :param quantity: 주문 수량
+    """
+    with db_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            "UPDATE menu SET sales_count = sales_count + ? WHERE menu_item_id = ?",
+            (quantity, menu_item_id)
+        )
+        conn.commit()
+                
 if __name__ == "__main__":
     # 기존 테이블 삭제 및 새로 생성
-    drop_tables()
-    create_db()
+    #drop_tables()
+    #create_db()
 
     # 데이터 삽입
-    insert_tables_data()
-    insert_menu_data()
-    insert_orders_and_order_items()
+    #insert_tables_data()
+    #insert_menu_data()
+    #insert_orders_and_order_items()
+
+    # 메뉴 테이블 이미지 경로 업데이트
+    update_menu_images()
 
     # 데이터 확인
     check_db()

@@ -11,6 +11,9 @@ import math
 from action_msgs.msg import GoalStatus
 from rclpy.action import ActionClient
 from nav2_msgs.action import NavigateToPose
+## 2D pose estimate을 자동으로 해주기 위해 추가 ####
+import time  # 초기화 대기를 위해 필요
+from nav2_msgs.srv import SetInitialPose  # SetInitialPose 서비스 추가
 
 class RobotController(Node):
     def __init__(self):
@@ -50,6 +53,59 @@ class RobotController(Node):
         self.status_publisher = self.create_publisher(String, 'robot_status', qos_profile)
         self.get_logger().info("Robot Status Publisher Initialized.")
         ####################################################################################
+
+        ### 2D pose estimate을 자동으로 해주는 과정 ####################################
+        # SetInitialPose 서비스 클라이언트 생성
+        self.set_initial_pose_client = self.create_client(SetInitialPose, '/set_initial_pose')
+
+        # 서비스 초기화 대기
+        while not self.set_initial_pose_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('Waiting for SetInitialPose service...')
+
+        # 초기 위치 설정
+        self.set_initial_pose()
+        ##############################################################################
+
+    ########### 2D pose estimate을 자동으로 해주는 과정 ###############
+    def set_initial_pose(self):
+        """SetInitialPose 서비스를 사용하여 초기 위치를 설정"""
+        req = SetInitialPose.Request()
+
+        # 초기 위치 설정
+        req.pose.header.frame_id = 'map'
+        req.pose.pose.pose.position.x = 0.02887068462523727
+        req.pose.pose.pose.position.y = -0.012281313266620303
+        req.pose.pose.pose.position.z = 0.0
+
+        # 초기 자세 설정 (쿼터니언 값 사용)
+        req.pose.pose.pose.orientation.x = 0.0
+        req.pose.pose.pose.orientation.y = 0.0
+        req.pose.pose.pose.orientation.z = -0.0020148885693665403
+        req.pose.pose.pose.orientation.w = 0.9999979701099663
+
+        # 초기 공분산 설정
+        req.pose.pose.covariance = [
+            0.17590620940375784, -0.017164822007954904, 0.0, 0.0, 0.0, 0.0,
+            -0.017164822007954904, 0.2120207762335773, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0, 0.06125552509931215
+        ]
+
+        # 서비스 호출
+        future = self.set_initial_pose_client.call_async(req)
+        future.add_done_callback(self.set_initial_pose_callback)
+
+    ###### 아래 메서드는 2D pose estimate가 제대로 되었는지 확인을 꼭 해야한다면 필요하지만, #####
+    ###### 굳이 확인을 하지 않아도 된다면 주석 처리해도 괜찮음 ################################
+    def set_initial_pose_callback(self, future):
+        try:
+            response = future.result()
+            self.get_logger().info('Initial pose set successfully.')
+        except Exception as e:
+            self.get_logger().error(f'Failed to set initial pose: {str(e)}')
+    #########################################################
 
     def command_callback(self, msg):
         """로봇 명령을 수신하여 처리하는 콜백 함수"""

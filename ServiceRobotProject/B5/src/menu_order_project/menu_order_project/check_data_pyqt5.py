@@ -280,7 +280,7 @@ class RestaurantApp(QWidget):
     def display_all_tables(self):
         # 각 테이블의 헤더 정보를 설정하여 데이터를 표시
         self.display_table("tables", ["table_id", "x", "y"])
-        self.display_table("menu", ["menu_item_id", "name", "price"])
+        self.display_table("menu", ["menu_item_id", "name", "price", "image"])
         self.display_table("orders", ["order_id", "table_id", "order_time", "total_amount"])
         self.display_table("order_items", ["order_item_id", "order_id", "menu_item_id", "quantity", "status"])
         self.display_table("deliver_log", ["deliver_id", "order_id", "start_time", "end_time"])

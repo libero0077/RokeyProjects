@@ -32,7 +32,8 @@ def create_db():
             type_id INTEGER,
             category VARCHAR(50),
             description TEXT,
-            image TEXT
+            image TEXT,
+            sales_count INTEGER DEFAULT 0
         );
         ''')
 
@@ -84,13 +85,13 @@ def insert_table(table_id, x, y):
         ''', (table_id, x, y))
         conn.commit()
 
-def insert_menu(name, price, type_id, category, description, image):
+def insert_menu(name, price, type_id, category, description, image, sales_count):
     with db_connection() as conn:
         cursor = conn.cursor()
         cursor.execute('''
-        INSERT INTO menu (menu_item_id, name, price, type_id, category, description, image)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (name, price))
+        INSERT INTO menu (menu_item_id, name, price, type_id, category, description, image, sales_count)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (name, price, type_id, category, description, image, sales_count))
         conn.commit()
 
 def insert_order_with_items(table_id, items):
@@ -130,6 +131,9 @@ def insert_order_with_items(table_id, items):
             price = cursor.fetchone()[0]
             total_amount += price * quantity
 
+            # 판매량 업데이트
+            update_sales_count(menu_item_id, quantity)
+            
         # 총액 업데이트
         cursor.execute('''
         UPDATE orders
@@ -148,10 +152,8 @@ def insert_delivery_log(order_item_id, end=False):
     """
     with db_connection() as conn:
         cursor = conn.cursor()
-        print("db연결 완료. 실행")
         if end:
             try:
-                print("배달 완료")
                 end_time = get_current_timestamp()
                 
                 # SELECT 쿼리
@@ -174,7 +176,6 @@ def insert_delivery_log(order_item_id, end=False):
                 SET end_time = ?
                 WHERE order_item_id = ? AND end_time IS NULL
                 ''', (end_time, order_item_id))
-                print("실행2")
 
                 # UPDATE order_items
                 print("Executing UPDATE order_items query")
@@ -183,7 +184,7 @@ def insert_delivery_log(order_item_id, end=False):
                 SET status = "Delivered"
                 WHERE order_item_id = ?
                 ''', (order_item_id,))
-                print("실행3")
+
             except sqlite3.Error as e:
                 print(f"SQLite error: {e}")
             except Exception as e:
@@ -201,6 +202,21 @@ def insert_delivery_log(order_item_id, end=False):
             SET status = "Delivering"
             WHERE order_item_id = ?
             ''', (order_item_id,))
+        conn.commit()
+
+def update_sales_count(menu_item_id, quantity):
+    """
+    주어진 menu_item_id의 판매량(sales_count)을 업데이트합니다.
+    :param menu_item_id: 판매된 메뉴 ID
+    :param quantity: 판매 수량
+    """
+    with db_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+        UPDATE menu
+        SET sales_count = sales_count + ?
+        WHERE menu_item_id = ?
+        ''', (quantity, menu_item_id))
         conn.commit()
 
 # 총액 계산 함수
@@ -222,7 +238,7 @@ def check_db():
         cursor = conn.cursor()
 
         # 모든 테이블 조회
-        tables = ["tables", "menu", "orders", "order_items", "deliver_log"]
+        tables = ["tables", "menu"]
         for table in tables:
             print(f"--- {table} ---")
             try:
