@@ -100,8 +100,6 @@ def insert_order_with_items(table_id, items):
     :param items: 주문 항목의 리스트 (menu_item_id, quantity)
     :return: 생성된 order_id, order_item_ids
     """
-
-    
     with db_connection() as conn:
         cursor = conn.cursor()
         total_amount = 0
@@ -131,9 +129,13 @@ def insert_order_with_items(table_id, items):
             price = cursor.fetchone()[0]
             total_amount += price * quantity
 
-            # 판매량 업데이트
-            update_sales_count(menu_item_id, quantity)
-            
+            # 판매량 업데이트 (연결을 공유하여 업데이트)
+            cursor.execute('''
+            UPDATE menu
+            SET sales_count = sales_count + ?
+            WHERE menu_item_id = ?
+            ''', (quantity, menu_item_id))
+
         # 총액 업데이트
         cursor.execute('''
         UPDATE orders
@@ -143,6 +145,7 @@ def insert_order_with_items(table_id, items):
 
         conn.commit()
         return order_id, order_item_ids
+
     
 def insert_delivery_log(order_item_id, end=False):
     """

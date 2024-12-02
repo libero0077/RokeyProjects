@@ -63,6 +63,9 @@ class NODE(Node):
         self.menu_db = MenuDatabase()  # 메뉴 데이터베이스 초기화
         self.gui = None  # GUI 인스턴스를 나중에 설정
 
+        self.order_result_received = False
+        self.last_order_result = ""
+
     def table_response_callback(self, future):
         try:
             response = future.result()
@@ -128,7 +131,8 @@ class NODE(Node):
     def order_result_callback(self, request, response):
         """주문 처리 결과를 주방 디스플레이 노드로부터 수신"""
         self.get_logger().info(f"Received order result: {request.result_message}")
-
+        self.order_result_received = True
+        self.last_order_result = request.result_message
         # 주문 결과가 "Order Accepted"일 경우만 처리
         if "Order Accepted" in request.result_message:
             self.get_logger().info("Order accepted, adding to order history.")

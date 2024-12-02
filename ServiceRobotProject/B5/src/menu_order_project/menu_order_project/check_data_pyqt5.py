@@ -180,6 +180,9 @@ class RestaurantApp(QWidget):
 
         # 그래프 레이아웃
         graph_layout = QGridLayout()
+        
+        # 그래프 유형 선택 콤보 박스
+        self.graph_types = ["Bar", "Line", "Pie"]
 
         # 첫 번째 그래프: 일별 매출
         self.canvas1 = FigureCanvas(Figure(figsize=(5, 4)))
