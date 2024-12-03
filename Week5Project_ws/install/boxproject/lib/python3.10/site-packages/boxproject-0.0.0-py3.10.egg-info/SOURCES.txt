@@ -1,0 +1,17 @@
+package.xml
+setup.cfg
+setup.py
+../../build/boxproject/boxproject.egg-info/PKG-INFO
+../../build/boxproject/boxproject.egg-info/SOURCES.txt
+../../build/boxproject/boxproject.egg-info/dependency_links.txt
+../../build/boxproject/boxproject.egg-info/entry_points.txt
+../../build/boxproject/boxproject.egg-info/requires.txt
+../../build/boxproject/boxproject.egg-info/top_level.txt
+../../build/boxproject/boxproject.egg-info/zip-safe
+boxproject/GUI_node.py
+boxproject/__init__.py
+boxproject/web_camera_node.py
+resource/boxproject
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

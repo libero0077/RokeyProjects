@@ -1,0 +1,3 @@
+[console_scripts]
+gui_node = boxproject.GUI_node:main
+webcam_node = boxproject.web_camera_node:main

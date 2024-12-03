@@ -1,0 +1,31 @@
+[0.662s] Invoking command in '/home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/src/boxproject': PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/boxproject build --build-base /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/build install --record /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/install.log --single-version-externally-managed install_data
+[0.893s] running egg_info
+[0.909s] writing ../../build/boxproject/boxproject.egg-info/PKG-INFO
+[0.910s] writing dependency_links to ../../build/boxproject/boxproject.egg-info/dependency_links.txt
+[0.910s] writing entry points to ../../build/boxproject/boxproject.egg-info/entry_points.txt
+[0.910s] writing requirements to ../../build/boxproject/boxproject.egg-info/requires.txt
+[0.910s] writing top-level names to ../../build/boxproject/boxproject.egg-info/top_level.txt
+[0.946s] reading manifest file '../../build/boxproject/boxproject.egg-info/SOURCES.txt'
+[0.947s] writing manifest file '../../build/boxproject/boxproject.egg-info/SOURCES.txt'
+[0.947s] running build
+[0.947s] running build_py
+[0.947s] copying boxproject/GUI_node.py -> /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/build/lib/boxproject
+[0.947s] copying boxproject/web_camera_node.py -> /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/build/lib/boxproject
+[0.947s] copying boxproject/__init__.py -> /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/build/lib/boxproject
+[0.948s] running install
+[0.951s] running install_lib
+[0.969s] copying /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/build/lib/boxproject/GUI_node.py -> /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.969s] copying /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/build/lib/boxproject/web_camera_node.py -> /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.969s] byte-compiling /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/lib/python3.10/site-packages/boxproject/GUI_node.py to GUI_node.cpython-310.pyc
+[0.970s] byte-compiling /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/lib/python3.10/site-packages/boxproject/web_camera_node.py to web_camera_node.cpython-310.pyc
+[0.970s] running install_data
+[0.970s] copying resource/boxproject -> /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/share/ament_index/resource_index/packages
+[0.971s] copying package.xml -> /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/share/boxproject
+[0.971s] running install_egg_info
+[0.990s] removing '/home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/lib/python3.10/site-packages/boxproject-0.0.0-py3.10.egg-info' (and everything under it)
+[0.990s] Copying ../../build/boxproject/boxproject.egg-info to /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/lib/python3.10/site-packages/boxproject-0.0.0-py3.10.egg-info
+[0.990s] running install_scripts
+[1.127s] Installing gui_node script to /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/lib/boxproject
+[1.127s] Installing webcam_node script to /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/lib/boxproject
+[1.127s] writing list of installed files to '/home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/install.log'
+[1.152s] Invoked command in '/home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/src/boxproject' returned '0': PYTHONPATH=/home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/install/boxproject/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/boxproject build --build-base /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/build install --record /home/yjh/Doosan/Real_project_ws/Week5/Week5Project_ws/build/boxproject/install.log --single-version-externally-managed install_data

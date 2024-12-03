@@ -1,0 +1,6 @@
+source;share/boxproject/hook/pythonpath.ps1
+source;share/boxproject/hook/pythonpath.dsv
+source;share/boxproject/hook/pythonpath.sh
+source;share/boxproject/hook/ament_prefix_path.ps1
+source;share/boxproject/hook/ament_prefix_path.dsv
+source;share/boxproject/hook/ament_prefix_path.sh
