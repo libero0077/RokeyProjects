@@ -1,0 +1,52 @@
+[0.299s] Invoking command in '/home/juwon/Week5Project_ws/src/boxproject': AMENT_PREFIX_PATH=/home/juwon/Week5Project_ws/src/install/boxproject_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/juwon/Week5Project_ws/src/install/boxproject_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/juwon/Week5Project_ws/src/install/boxproject_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/juwon/Week5Project_ws/src/build/boxproject/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages:/home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/boxproject build --build-base /home/juwon/Week5Project_ws/src/build/boxproject/build install --record /home/juwon/Week5Project_ws/src/build/boxproject/install.log --single-version-externally-managed install_data
+[0.411s] running egg_info
+[0.411s] creating ../build/boxproject/boxproject.egg-info
+[0.411s] writing ../build/boxproject/boxproject.egg-info/PKG-INFO
+[0.411s] writing dependency_links to ../build/boxproject/boxproject.egg-info/dependency_links.txt
+[0.411s] writing entry points to ../build/boxproject/boxproject.egg-info/entry_points.txt
+[0.411s] writing requirements to ../build/boxproject/boxproject.egg-info/requires.txt
+[0.411s] writing top-level names to ../build/boxproject/boxproject.egg-info/top_level.txt
+[0.411s] writing manifest file '../build/boxproject/boxproject.egg-info/SOURCES.txt'
+[0.412s] reading manifest file '../build/boxproject/boxproject.egg-info/SOURCES.txt'
+[0.412s] writing manifest file '../build/boxproject/boxproject.egg-info/SOURCES.txt'
+[0.412s] running build
+[0.412s] running build_py
+[0.412s] creating /home/juwon/Week5Project_ws/src/build/boxproject/build
+[0.412s] creating /home/juwon/Week5Project_ws/src/build/boxproject/build/lib
+[0.413s] creating /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject
+[0.413s] copying boxproject/GUI_node_JJ.py -> /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject
+[0.413s] copying boxproject/web_camera_node.py -> /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject
+[0.413s] copying boxproject/GUI_node.py -> /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject
+[0.413s] copying boxproject/__init__.py -> /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject
+[0.413s] copying boxproject/robot_arm_node.py -> /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject
+[0.413s] copying boxproject/robot_status.py -> /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject
+[0.413s] running install
+[0.413s] running install_lib
+[0.414s] creating /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.414s] copying /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject/GUI_node_JJ.py -> /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.414s] copying /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject/web_camera_node.py -> /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.414s] copying /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject/GUI_node.py -> /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.414s] copying /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject/__init__.py -> /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.414s] copying /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject/robot_arm_node.py -> /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.414s] copying /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject/robot_status.py -> /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.414s] byte-compiling /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject/GUI_node_JJ.py to GUI_node_JJ.cpython-310.pyc
+[0.416s] byte-compiling /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject/web_camera_node.py to web_camera_node.cpython-310.pyc
+[0.417s] byte-compiling /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject/GUI_node.py to GUI_node.cpython-310.pyc
+[0.418s] byte-compiling /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject/__init__.py to __init__.cpython-310.pyc
+[0.418s] byte-compiling /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject/robot_arm_node.py to robot_arm_node.cpython-310.pyc
+[0.419s] byte-compiling /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject/robot_status.py to robot_status.cpython-310.pyc
+[0.419s] running install_data
+[0.419s] creating /home/juwon/Week5Project_ws/src/install/boxproject/share/ament_index
+[0.419s] creating /home/juwon/Week5Project_ws/src/install/boxproject/share/ament_index/resource_index
+[0.419s] creating /home/juwon/Week5Project_ws/src/install/boxproject/share/ament_index/resource_index/packages
+[0.419s] copying resource/boxproject -> /home/juwon/Week5Project_ws/src/install/boxproject/share/ament_index/resource_index/packages
+[0.419s] copying package.xml -> /home/juwon/Week5Project_ws/src/install/boxproject/share/boxproject
+[0.420s] running install_egg_info
+[0.421s] Copying ../build/boxproject/boxproject.egg-info to /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject-0.0.0-py3.10.egg-info
+[0.421s] running install_scripts
+[0.433s] Installing gui_node script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.433s] Installing robot_arm_node script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.433s] Installing robot_status script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.433s] Installing webcam_node script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.433s] writing list of installed files to '/home/juwon/Week5Project_ws/src/build/boxproject/install.log'
+[0.445s] Invoked command in '/home/juwon/Week5Project_ws/src/boxproject' returned '0': AMENT_PREFIX_PATH=/home/juwon/Week5Project_ws/src/install/boxproject_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/juwon/Week5Project_ws/src/install/boxproject_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/juwon/Week5Project_ws/src/install/boxproject_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/juwon/Week5Project_ws/src/build/boxproject/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages:/home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/boxproject build --build-base /home/juwon/Week5Project_ws/src/build/boxproject/build install --record /home/juwon/Week5Project_ws/src/build/boxproject/install.log --single-version-externally-managed install_data

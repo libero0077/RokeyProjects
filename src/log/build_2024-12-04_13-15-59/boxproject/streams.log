@@ -1,0 +1,28 @@
+[0.427s] Invoking command in '/home/juwon/Week5Project_ws/src/boxproject': PYTHONPATH=/home/juwon/Week5Project_ws/src/build/boxproject/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/boxproject build --build-base /home/juwon/Week5Project_ws/src/build/boxproject/build install --record /home/juwon/Week5Project_ws/src/build/boxproject/install.log --single-version-externally-managed install_data
+[0.574s] running egg_info
+[0.574s] writing ../build/boxproject/boxproject.egg-info/PKG-INFO
+[0.575s] writing dependency_links to ../build/boxproject/boxproject.egg-info/dependency_links.txt
+[0.575s] writing entry points to ../build/boxproject/boxproject.egg-info/entry_points.txt
+[0.575s] writing requirements to ../build/boxproject/boxproject.egg-info/requires.txt
+[0.575s] writing top-level names to ../build/boxproject/boxproject.egg-info/top_level.txt
+[0.577s] reading manifest file '../build/boxproject/boxproject.egg-info/SOURCES.txt'
+[0.578s] writing manifest file '../build/boxproject/boxproject.egg-info/SOURCES.txt'
+[0.578s] running build
+[0.578s] running build_py
+[0.578s] copying boxproject/web_camera_node.py -> /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject
+[0.578s] running install
+[0.579s] running install_lib
+[0.579s] copying /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject/web_camera_node.py -> /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.579s] byte-compiling /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject/web_camera_node.py to web_camera_node.cpython-310.pyc
+[0.581s] running install_data
+[0.581s] running install_egg_info
+[0.583s] removing '/home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject-0.0.0-py3.10.egg-info' (and everything under it)
+[0.583s] Copying ../build/boxproject/boxproject.egg-info to /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject-0.0.0-py3.10.egg-info
+[0.584s] running install_scripts
+[0.611s] Installing gui_node script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.611s] Installing robot_arm_node script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.611s] Installing robot_status script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.612s] Installing test_node script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.612s] Installing webcam_node script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.612s] writing list of installed files to '/home/juwon/Week5Project_ws/src/build/boxproject/install.log'
+[0.627s] Invoked command in '/home/juwon/Week5Project_ws/src/boxproject' returned '0': PYTHONPATH=/home/juwon/Week5Project_ws/src/build/boxproject/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/boxproject build --build-base /home/juwon/Week5Project_ws/src/build/boxproject/build install --record /home/juwon/Week5Project_ws/src/build/boxproject/install.log --single-version-externally-managed install_data

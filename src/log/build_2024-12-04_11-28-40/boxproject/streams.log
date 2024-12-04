@@ -1,0 +1,31 @@
+[0.393s] Invoking command in '/home/juwon/Week5Project_ws/src/boxproject': PYTHONPATH=/home/juwon/Week5Project_ws/src/build/boxproject/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/boxproject build --build-base /home/juwon/Week5Project_ws/src/build/boxproject/build install --record /home/juwon/Week5Project_ws/src/build/boxproject/install.log --single-version-externally-managed install_data
+[0.529s] running egg_info
+[0.531s] writing ../build/boxproject/boxproject.egg-info/PKG-INFO
+[0.531s] writing dependency_links to ../build/boxproject/boxproject.egg-info/dependency_links.txt
+[0.531s] writing entry points to ../build/boxproject/boxproject.egg-info/entry_points.txt
+[0.531s] writing requirements to ../build/boxproject/boxproject.egg-info/requires.txt
+[0.531s] writing top-level names to ../build/boxproject/boxproject.egg-info/top_level.txt
+[0.533s] reading manifest file '../build/boxproject/boxproject.egg-info/SOURCES.txt'
+[0.533s] writing manifest file '../build/boxproject/boxproject.egg-info/SOURCES.txt'
+[0.533s] running build
+[0.533s] running build_py
+[0.533s] copying boxproject/GUI_node.py -> /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject
+[0.534s] copying boxproject/debug_node.py -> /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject
+[0.534s] running install
+[0.535s] running install_lib
+[0.535s] copying /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject/GUI_node.py -> /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.535s] copying /home/juwon/Week5Project_ws/src/build/boxproject/build/lib/boxproject/debug_node.py -> /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject
+[0.535s] byte-compiling /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject/GUI_node.py to GUI_node.cpython-310.pyc
+[0.538s] byte-compiling /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject/debug_node.py to debug_node.cpython-310.pyc
+[0.539s] running install_data
+[0.539s] running install_egg_info
+[0.541s] removing '/home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject-0.0.0-py3.10.egg-info' (and everything under it)
+[0.541s] Copying ../build/boxproject/boxproject.egg-info to /home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages/boxproject-0.0.0-py3.10.egg-info
+[0.541s] running install_scripts
+[0.556s] Installing gui_node script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.557s] Installing robot_arm_node script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.557s] Installing robot_status script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.557s] Installing test_node script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.557s] Installing webcam_node script to /home/juwon/Week5Project_ws/src/install/boxproject/lib/boxproject
+[0.558s] writing list of installed files to '/home/juwon/Week5Project_ws/src/build/boxproject/install.log'
+[0.575s] Invoked command in '/home/juwon/Week5Project_ws/src/boxproject' returned '0': PYTHONPATH=/home/juwon/Week5Project_ws/src/build/boxproject/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/juwon/Week5Project_ws/src/install/boxproject/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/boxproject build --build-base /home/juwon/Week5Project_ws/src/build/boxproject/build install --record /home/juwon/Week5Project_ws/src/build/boxproject/install.log --single-version-externally-managed install_data

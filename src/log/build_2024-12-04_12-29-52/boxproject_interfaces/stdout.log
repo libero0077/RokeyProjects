@@ -1,0 +1,142 @@
+[  3%] Built target boxproject_interfaces__cpp
+[ 12%] Built target boxproject_interfaces__rosidl_generator_c
+[ 12%] Built target ament_cmake_python_copy_boxproject_interfaces
+[ 22%] Built target boxproject_interfaces__rosidl_typesupport_introspection_cpp
+[ 32%] Built target boxproject_interfaces__rosidl_typesupport_cpp
+[ 41%] Built target boxproject_interfaces__rosidl_typesupport_fastrtps_cpp
+[ 51%] Built target boxproject_interfaces__rosidl_typesupport_introspection_c
+[ 61%] Built target boxproject_interfaces__rosidl_typesupport_c
+[ 70%] Built target boxproject_interfaces__rosidl_typesupport_fastrtps_c
+[ 70%] Built target boxproject_interfaces
+[ 74%] Built target boxproject_interfaces__py
+[ 80%] Built target boxproject_interfaces__rosidl_generator_py
+[ 87%] Built target boxproject_interfaces__rosidl_typesupport_c__pyext
+[ 93%] Built target boxproject_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[100%] Built target boxproject_interfaces__rosidl_typesupport_introspection_c__pyext
+running egg_info
+writing boxproject_interfaces.egg-info/PKG-INFO
+writing dependency_links to boxproject_interfaces.egg-info/dependency_links.txt
+writing top-level names to boxproject_interfaces.egg-info/top_level.txt
+reading manifest file 'boxproject_interfaces.egg-info/SOURCES.txt'
+writing manifest file 'boxproject_interfaces.egg-info/SOURCES.txt'
+[100%] Built target ament_cmake_python_build_boxproject_interfaces_egg
+-- Install configuration: ""
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/ament_index/resource_index/rosidl_interfaces/boxproject_interfaces
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/msg
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/msg/rosidl_generator_c__visibility_control.h
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/task_action.h
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__functions.h
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__type_support.h
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__functions.c
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__struct.h
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/environment/library_path.sh
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/environment/library_path.dsv
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/lib/libboxproject_interfaces__rosidl_generator_c.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/msg
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__rosidl_typesupport_fastrtps_c.h
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/lib/libboxproject_interfaces__rosidl_typesupport_fastrtps_c.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/msg
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__rosidl_typesupport_introspection_c.h
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__type_support.c
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/lib/libboxproject_interfaces__rosidl_typesupport_introspection_c.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/lib/libboxproject_interfaces__rosidl_typesupport_c.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/task_action.hpp
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__builder.hpp
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__struct.hpp
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__traits.hpp
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/msg
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/dds_fastrtps
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__rosidl_typesupport_fastrtps_cpp.hpp
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/lib/libboxproject_interfaces__rosidl_typesupport_fastrtps_cpp.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__rosidl_typesupport_introspection_cpp.hpp
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/include/boxproject_interfaces/boxproject_interfaces/action/detail/task_action__type_support.cpp
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/lib/libboxproject_interfaces__rosidl_typesupport_introspection_cpp.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/lib/libboxproject_interfaces__rosidl_typesupport_cpp.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/environment/pythonpath.sh
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/environment/pythonpath.dsv
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces-0.0.0-py3.10.egg-info
+-- Installing: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces-0.0.0-py3.10.egg-info/top_level.txt
+-- Installing: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces-0.0.0-py3.10.egg-info/dependency_links.txt
+-- Installing: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces-0.0.0-py3.10.egg-info/PKG-INFO
+-- Installing: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces-0.0.0-py3.10.egg-info/SOURCES.txt
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/_boxproject_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/boxproject_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/_boxproject_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/boxproject_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/libboxproject_interfaces__rosidl_generator_py.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/__init__.py
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/boxproject_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/action
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/action/_task_action.py
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/action/_task_action_s.c
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/action/__init__.py
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/_boxproject_interfaces_s.ep.rosidl_typesupport_c.c
+Listing '/home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces'...
+Listing '/home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/action'...
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/boxproject_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/boxproject_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/local/lib/python3.10/dist-packages/boxproject_interfaces/boxproject_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/lib/libboxproject_interfaces__rosidl_generator_py.so
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/action/TaskAction.idl
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/action/TaskAction.action
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/ament_index/resource_index/package_run_dependencies/boxproject_interfaces
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/ament_index/resource_index/parent_prefix_path/boxproject_interfaces
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/environment/ament_prefix_path.sh
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/environment/path.sh
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/environment/path.dsv
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/local_setup.bash
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/local_setup.sh
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/local_setup.zsh
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/local_setup.dsv
+-- Installing: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/package.dsv
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/ament_index/resource_index/packages/boxproject_interfaces
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/export_boxproject_interfaces__rosidl_generator_cExport.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/export_boxproject_interfaces__rosidl_generator_cExport-noconfig.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/export_boxproject_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/export_boxproject_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/boxproject_interfaces__rosidl_typesupport_introspection_cExport.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/boxproject_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/boxproject_interfaces__rosidl_typesupport_cExport.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/boxproject_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/export_boxproject_interfaces__rosidl_generator_cppExport.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/export_boxproject_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/export_boxproject_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/boxproject_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/boxproject_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/boxproject_interfaces__rosidl_typesupport_cppExport.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/boxproject_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/export_boxproject_interfaces__rosidl_generator_pyExport.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/export_boxproject_interfaces__rosidl_generator_pyExport-noconfig.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/rosidl_cmake-extras.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/boxproject_interfacesConfig.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/cmake/boxproject_interfacesConfig-version.cmake
+-- Up-to-date: /home/juwon/Week5Project_ws/src/install/boxproject_interfaces/share/boxproject_interfaces/package.xml
