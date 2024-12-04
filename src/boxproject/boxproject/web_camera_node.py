@@ -23,7 +23,7 @@ class CameraNode(Node):
         self.find_and_connect_camera()
 
         # 타이머 설정
-        self.timer_period = 0.1  # 0.1초마다 프레임 퍼블리시
+        self.timer_period = 0.05  # 0.1초마다 프레임 퍼블리시
         self.timer = self.create_timer(self.timer_period, self.publish_frame)
 
         # 카메라 상태 확인 타이머
@@ -31,7 +31,8 @@ class CameraNode(Node):
 
     def find_and_connect_camera(self):
         """사용 가능한 카메라를 찾아 연결"""
-        self.get_logger().info("Searching for available cameras...")
+        self.get_logger().info("사용 가능한 카메라를 검색하는 중...")
+        self.publish_log_message("[정보] 사용 가능한 카메라를 검색하는 중...")
         for index in range(10):  # 최대 10개의 카메라 시도
             cap = cv2.VideoCapture(index)
             if cap.isOpened():
@@ -40,11 +41,11 @@ class CameraNode(Node):
                 self.camera = cv2.VideoCapture(self.camera_index)
                 if self.camera.isOpened():
                     self.camera_connected = True
-                    self.get_logger().info(f"[정보] 카메라에 연결됨 /dev/video{self.camera_index}")
+                    self.get_logger().info(f"카메라에 연결됨 /dev/video{self.camera_index}")
                     self.publish_log_message(f"[정보] 카메라에 연결됨 /dev/video{self.camera_index}")
                     return True
         self.camera_connected = False
-        self.get_logger().warning("No available cameras found.")
+        self.get_logger().warning("사용 가능한 카메라를 찾을 수 없습니다.")
         return False
 
     def check_camera_status(self):
@@ -82,14 +83,14 @@ class CameraNode(Node):
             msg = self.bridge.cv2_to_imgmsg(frame, encoding='bgr8')
             self.webcam_publisher.publish(msg)
         except Exception as e:
-            self.get_logger().error(f"Error publishing frame: {e}")
+            self.get_logger().error(f"에러 퍼블리싱 프레임 {e}")
 
     def publish_log_message(self, message):
         """Log 메시지 퍼블리시"""
         msg = String()
         msg.data = message
         self.log_publisher.publish(msg)
-        self.get_logger().info(f"Published log message: {message}")
+        self.get_logger().info(f"전송된 로그 메시지: {message}")
 
 
 def main(args=None):
