@@ -1,1 +1,0 @@
-ament_cmake_symlink_install_targets("TARGET_FILES" "/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example/hello_moveit" "TARGETS" "hello_moveit" "DESTINATION" "lib/turtlebot3_manipulation_example")

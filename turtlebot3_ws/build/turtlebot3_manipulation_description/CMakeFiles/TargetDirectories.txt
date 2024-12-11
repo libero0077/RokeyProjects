@@ -1,9 +1,0 @@
-/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_description/CMakeFiles/uninstall.dir
-/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_description/CMakeFiles/turtlebot3_manipulation_description_uninstall.dir
-/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_description/CMakeFiles/test.dir
-/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_description/CMakeFiles/edit_cache.dir
-/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_description/CMakeFiles/rebuild_cache.dir
-/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_description/CMakeFiles/list_install_components.dir
-/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_description/CMakeFiles/install.dir
-/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_description/CMakeFiles/install/local.dir
-/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_description/CMakeFiles/install/strip.dir
