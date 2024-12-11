@@ -1,0 +1,233 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-caab24b312f763d4e7bb.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				},
+				{
+					"build" : "boxproject_interfaces__py",
+					"jsonFile" : "directory-boxproject_interfaces__py-eafa58fa6f0382b0f289.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/juwon/Week5Project_ws/src/build/boxproject_interfaces/boxproject_interfaces__py",
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "boxproject_interfaces",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_boxproject_interfaces_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_boxproject_interfaces_egg-4603604d6029a54cc7fc.json",
+					"name" : "ament_cmake_python_build_boxproject_interfaces_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_copy_boxproject_interfaces::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_copy_boxproject_interfaces-c7e35c5c7f9ce440b61c.json",
+					"name" : "ament_cmake_python_copy_boxproject_interfaces",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces-1a2be462bb9a0b1a1283.json",
+					"name" : "boxproject_interfaces",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__cpp-6d31a1b060b030bf2fe9.json",
+					"name" : "boxproject_interfaces__cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "boxproject_interfaces__py::@7b17419b3cfb3539a651",
+					"jsonFile" : "target-boxproject_interfaces__py-44d70f3d5f8491cdd795.json",
+					"name" : "boxproject_interfaces__py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__rosidl_generator_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__rosidl_generator_c-b78076e9c2fbcd3a8775.json",
+					"name" : "boxproject_interfaces__rosidl_generator_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__rosidl_generator_py::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__rosidl_generator_py-f244418b8e49fa186cff.json",
+					"name" : "boxproject_interfaces__rosidl_generator_py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__rosidl_typesupport_c-23a229b9964b09994ea9.json",
+					"name" : "boxproject_interfaces__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__rosidl_typesupport_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__rosidl_typesupport_c__pyext-62960fc07cde5b550adf.json",
+					"name" : "boxproject_interfaces__rosidl_typesupport_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__rosidl_typesupport_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__rosidl_typesupport_cpp-200c4d80a17e99281246.json",
+					"name" : "boxproject_interfaces__rosidl_typesupport_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__rosidl_typesupport_fastrtps_c-1ba8ea8e4caa98970e17.json",
+					"name" : "boxproject_interfaces__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__rosidl_typesupport_fastrtps_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__rosidl_typesupport_fastrtps_c__pyext-6cfb532418f20fe19d99.json",
+					"name" : "boxproject_interfaces__rosidl_typesupport_fastrtps_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__rosidl_typesupport_fastrtps_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__rosidl_typesupport_fastrtps_cpp-6894687850464c31274c.json",
+					"name" : "boxproject_interfaces__rosidl_typesupport_fastrtps_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__rosidl_typesupport_introspection_c-3cc6f842756acd03a8fe.json",
+					"name" : "boxproject_interfaces__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__rosidl_typesupport_introspection_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__rosidl_typesupport_introspection_c__pyext-e783787dfd8990f3dbfc.json",
+					"name" : "boxproject_interfaces__rosidl_typesupport_introspection_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces__rosidl_typesupport_introspection_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces__rosidl_typesupport_introspection_cpp-ec249417f4e4a5deef2b.json",
+					"name" : "boxproject_interfaces__rosidl_typesupport_introspection_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boxproject_interfaces_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boxproject_interfaces_uninstall-03756d89b3169e03b2f9.json",
+					"name" : "boxproject_interfaces_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-e46fb166e8975814a650.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/juwon/Week5Project_ws/src/build/boxproject_interfaces",
+		"source" : "/home/juwon/Week5Project_ws/src/boxproject_interfaces"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

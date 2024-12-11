@@ -21,6 +21,10 @@ setup(
         'console_scripts': [
             'webcam_node = boxproject.web_camera_node:main',
             'gui_node = boxproject.GUI_node:main',
+            'robot_status = boxproject.robot_status:main',
+            'robot_arm_node = boxproject.robot_arm_node:main',
+            'test_node = boxproject.debug_node:main',
+            'conveyor_node = boxproject.conveyor_node:main',
         ],
     },
 )
