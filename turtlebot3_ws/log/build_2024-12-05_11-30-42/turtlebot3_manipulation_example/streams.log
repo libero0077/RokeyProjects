@@ -1,0 +1,148 @@
+[0.551s] Invoking command in '/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/turtlebot3_ws/install/turtlebot3_teleop:/home/rokey/turtlebot3_ws/install/turtlebot3_example:/opt/ros/humble /usr/local/bin/cmake /home/rokey/turtlebot3_ws/src/turtlebot3_manipulation/turtlebot3_manipulation_example -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example
+[0.641s] -- The C compiler identification is GNU 11.4.0
+[0.758s] -- The CXX compiler identification is GNU 11.4.0
+[0.780s] -- Detecting C compiler ABI info
+[0.878s] -- Detecting C compiler ABI info - done
+[0.911s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.912s] -- Detecting C compile features
+[0.912s] -- Detecting C compile features - done
+[0.919s] -- Detecting CXX compiler ABI info
+[1.050s] -- Detecting CXX compiler ABI info - done
+[1.088s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.088s] -- Detecting CXX compile features
+[1.089s] -- Detecting CXX compile features - done
+[1.094s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.371s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter
+[1.499s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.604s] -- Found moveit_ros_planning_interface: 2.5.5 (/opt/ros/humble/share/moveit_ros_planning_interface/cmake)
+[1.604s] [33mCMake Warning (dev) at /opt/ros/humble/share/moveit_ros_planning_interface/cmake/ConfigExtras.cmake:9 (find_package):
+[1.604s]   Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+[1.604s]   --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+[1.604s]   set the policy and suppress this warning.
+[1.605s] 
+[1.605s] Call Stack (most recent call first):
+[1.605s]   /opt/ros/humble/share/moveit_ros_planning_interface/cmake/moveit_ros_planning_interfaceConfig.cmake:41 (include)
+[1.605s]   CMakeLists.txt:10 (find_package)
+[1.605s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[1.605s] [0m
+[1.845s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: date_time filesystem program_options system thread
+[1.956s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.967s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.988s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[2.017s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.060s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.783s] [33mCMake Warning (dev) at /opt/ros/humble/share/moveit_core/cmake/ConfigExtras.cmake:3 (find_package):
+[2.783s]   Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+[2.783s]   --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+[2.784s]   set the policy and suppress this warning.
+[2.784s] 
+[2.784s] Call Stack (most recent call first):
+[2.784s]   /opt/ros/humble/share/moveit_core/cmake/moveit_coreConfig.cmake:41 (include)
+[2.784s]   /opt/ros/humble/share/moveit_ros_planning_interface/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+[2.784s]   /opt/ros/humble/share/moveit_ros_planning_interface/cmake/moveit_ros_planning_interfaceConfig.cmake:41 (include)
+[2.784s]   CMakeLists.txt:10 (find_package)
+[2.784s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[2.784s] [0m
+[2.817s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread
+[2.879s] -- Found parameter_traits: 0.3.9 (/opt/ros/humble/share/parameter_traits/cmake)
+[2.970s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[2.989s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[3.150s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")
+[3.206s] -- Found FastRTPS: /opt/ros/humble/include
+[3.286s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.307s] -- Found Threads: TRUE
+[3.466s] -- Found rclcpp_lifecycle: 16.0.10 (/opt/ros/humble/share/rclcpp_lifecycle/cmake)
+[3.574s] [33mCMake Warning (dev) at /opt/ros/humble/share/geometric_shapes/cmake/ConfigExtras.cmake:31 (find_package):
+[3.575s]   Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+[3.575s]   --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+[3.575s]   set the policy and suppress this warning.
+[3.575s] 
+[3.575s] Call Stack (most recent call first):
+[3.575s]   /opt/ros/humble/share/geometric_shapes/cmake/geometric_shapesConfig.cmake:41 (include)
+[3.575s]   /opt/ros/humble/share/moveit_core/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+[3.575s]   /opt/ros/humble/share/moveit_core/cmake/moveit_coreConfig.cmake:41 (include)
+[3.575s]   /opt/ros/humble/share/moveit_ros_planning_interface/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+[3.576s]   /opt/ros/humble/share/moveit_ros_planning_interface/cmake/moveit_ros_planning_interfaceConfig.cmake:41 (include)
+[3.576s]   CMakeLists.txt:10 (find_package)
+[3.576s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[3.576s] [0m
+[3.582s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: filesystem
+[3.808s] -- library: /usr/lib/x86_64-linux-gnu/libcurl.so
+[3.954s] -- Found Eigen3: TRUE (found version "3.4.0")
+[3.954s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[4.434s] [33mCMake Warning (dev) at /opt/ros/humble/share/moveit_ros_planning/cmake/ConfigExtras.cmake:3 (find_package):
+[4.434s]   Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+[4.434s]   --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+[4.434s]   set the policy and suppress this warning.
+[4.434s] 
+[4.434s] Call Stack (most recent call first):
+[4.435s]   /opt/ros/humble/share/moveit_ros_planning/cmake/moveit_ros_planningConfig.cmake:41 (include)
+[4.435s]   /opt/ros/humble/share/moveit_ros_planning_interface/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+[4.435s]   /opt/ros/humble/share/moveit_ros_planning_interface/cmake/moveit_ros_planning_interfaceConfig.cmake:41 (include)
+[4.435s]   CMakeLists.txt:10 (find_package)
+[4.435s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[4.435s] [0m
+[4.446s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread chrono
+[4.570s] [33mCMake Warning (dev) at /opt/ros/humble/share/moveit_ros_warehouse/cmake/ConfigExtras.cmake:3 (find_package):
+[4.570s]   Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+[4.570s]   --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+[4.570s]   set the policy and suppress this warning.
+[4.570s] 
+[4.570s] Call Stack (most recent call first):
+[4.570s]   /opt/ros/humble/share/moveit_ros_warehouse/cmake/moveit_ros_warehouseConfig.cmake:41 (include)
+[4.571s]   /opt/ros/humble/share/moveit_ros_planning_interface/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+[4.571s]   /opt/ros/humble/share/moveit_ros_planning_interface/cmake/moveit_ros_planning_interfaceConfig.cmake:41 (include)
+[4.571s]   CMakeLists.txt:10 (find_package)
+[4.571s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[4.571s] [0m
+[4.591s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread system filesystem regex date_time program_options
+[4.675s] [33mCMake Warning (dev) at /opt/ros/humble/share/moveit_ros_move_group/cmake/ConfigExtras.cmake:3 (find_package):
+[4.676s]   Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+[4.676s]   --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+[4.676s]   set the policy and suppress this warning.
+[4.676s] 
+[4.676s] Call Stack (most recent call first):
+[4.676s]   /opt/ros/humble/share/moveit_ros_move_group/cmake/moveit_ros_move_groupConfig.cmake:41 (include)
+[4.676s]   /opt/ros/humble/share/moveit_ros_planning_interface/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+[4.676s]   /opt/ros/humble/share/moveit_ros_planning_interface/cmake/moveit_ros_planning_interfaceConfig.cmake:41 (include)
+[4.677s]   CMakeLists.txt:10 (find_package)
+[4.677s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[4.677s] [0m
+[4.685s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread
+[4.779s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[4.979s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[4.980s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/rokey/turtlebot3_ws/src/turtlebot3_manipulation/turtlebot3_manipulation_example/include>
+[4.980s] -- Configured cppcheck exclude dirs and/or files: 
+[4.982s] -- Added test 'lint_cmake' to check CMake code style
+[4.984s] -- Added test 'uncrustify' to check C / C++ code style
+[4.984s] -- Configured uncrustify additional arguments: 
+[4.985s] -- Added test 'xmllint' to check XML markup files
+[4.989s] -- Configuring done (4.4s)
+[5.060s] -- Generating done (0.1s)
+[5.068s] -- Build files have been written to: /home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example
+[5.107s] Invoked command in '/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/turtlebot3_ws/install/turtlebot3_teleop:/home/rokey/turtlebot3_ws/install/turtlebot3_example:/opt/ros/humble /usr/local/bin/cmake /home/rokey/turtlebot3_ws/src/turtlebot3_manipulation/turtlebot3_manipulation_example -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example
+[5.112s] Invoking command in '/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/turtlebot3_ws/install/turtlebot3_teleop:/home/rokey/turtlebot3_ws/install/turtlebot3_example:/opt/ros/humble /usr/local/bin/cmake --build /home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example -- -j8 -l8
+[5.174s] [ 50%] [32mBuilding CXX object CMakeFiles/hello_moveit.dir/src/hello_moveit.cpp.o[0m
+[25.204s] [100%] [32m[1mLinking CXX executable hello_moveit[0m
+[26.573s] [100%] Built target hello_moveit
+[26.585s] Invoked command in '/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/turtlebot3_ws/install/turtlebot3_teleop:/home/rokey/turtlebot3_ws/install/turtlebot3_example:/opt/ros/humble /usr/local/bin/cmake --build /home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example -- -j8 -l8
+[26.588s] Invoking command in '/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/turtlebot3_ws/install/turtlebot3_teleop:/home/rokey/turtlebot3_ws/install/turtlebot3_example:/opt/ros/humble /usr/local/bin/cmake --install /home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example
+[26.593s] -- Install configuration: ""
+[26.594s] -- Execute custom install script
+[26.595s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/lib/turtlebot3_manipulation_example/hello_moveit
+[26.602s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/ament_index/resource_index/package_run_dependencies/turtlebot3_manipulation_example
+[26.609s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/ament_index/resource_index/parent_prefix_path/turtlebot3_manipulation_example
+[26.616s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/environment/ament_prefix_path.sh
+[26.623s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/environment/ament_prefix_path.dsv
+[26.630s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/environment/path.sh
+[26.637s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/environment/path.dsv
+[26.643s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/local_setup.bash
+[26.649s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/local_setup.sh
+[26.656s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/local_setup.zsh
+[26.663s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/local_setup.dsv
+[26.671s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/package.dsv
+[26.681s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/ament_index/resource_index/packages/turtlebot3_manipulation_example
+[26.685s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/cmake/turtlebot3_manipulation_exampleConfig.cmake
+[26.692s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/cmake/turtlebot3_manipulation_exampleConfig-version.cmake
+[26.698s] -- Symlinking: /home/rokey/turtlebot3_ws/install/turtlebot3_manipulation_example/share/turtlebot3_manipulation_example/package.xml
+[26.707s] Invoked command in '/home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/turtlebot3_ws/install/turtlebot3_teleop:/home/rokey/turtlebot3_ws/install/turtlebot3_example:/opt/ros/humble /usr/local/bin/cmake --install /home/rokey/turtlebot3_ws/build/turtlebot3_manipulation_example
