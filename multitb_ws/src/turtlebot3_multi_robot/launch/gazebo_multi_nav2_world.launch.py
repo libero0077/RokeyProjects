@@ -76,7 +76,7 @@ def generate_launch_description():
 
     world = os.path.join(
         get_package_share_directory('turtlebot3_multi_robot'),
-        'worlds', 'multi_robot_world.world')
+        'worlds', 'b5_map.world')
 
     gzserver_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -112,7 +112,7 @@ def generate_launch_description():
         executable='map_server',
         name='map_server',
         output='screen',
-        parameters=[{'yaml_filename': os.path.join(get_package_share_directory('turtlebot3_navigation2'), 'map', 'map.yaml'),
+        parameters=[{'yaml_filename': "/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_multi_robot/map/map.yaml",
                      },],
         remappings=remappings)
 

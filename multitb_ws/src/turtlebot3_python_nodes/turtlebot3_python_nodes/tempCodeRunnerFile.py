@@ -1,0 +1,1 @@
+db_manager.delete_data('Payment_Log', {'payment_id':1})
