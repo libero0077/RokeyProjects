@@ -1,0 +1,26 @@
+[0.904s] Invoking command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes': CMAKE_PREFIX_PATH=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot LD_LIBRARY_PATH=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/build --no-deps symlink_data
+[1.308s] running develop
+[1.662s] running egg_info
+[1.692s] creating turtlebot3_python_nodes.egg-info
+[1.693s] writing turtlebot3_python_nodes.egg-info/PKG-INFO
+[1.696s] writing dependency_links to turtlebot3_python_nodes.egg-info/dependency_links.txt
+[1.697s] writing entry points to turtlebot3_python_nodes.egg-info/entry_points.txt
+[1.697s] writing requirements to turtlebot3_python_nodes.egg-info/requires.txt
+[1.698s] writing top-level names to turtlebot3_python_nodes.egg-info/top_level.txt
+[1.698s] writing manifest file 'turtlebot3_python_nodes.egg-info/SOURCES.txt'
+[1.780s] reading manifest file 'turtlebot3_python_nodes.egg-info/SOURCES.txt'
+[1.782s] writing manifest file 'turtlebot3_python_nodes.egg-info/SOURCES.txt'
+[1.838s] running build_ext
+[1.839s] Creating /home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/lib/python3.10/site-packages/turtlebot3-python-nodes.egg-link (link to .)
+[1.840s] Installing central_control_node script to /home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/lib/turtlebot3_python_nodes
+[1.840s] Installing gui_minimap script to /home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/lib/turtlebot3_python_nodes
+[1.840s] Installing kiosk_gui script to /home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/lib/turtlebot3_python_nodes
+[1.840s] 
+[1.840s] Installed /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes
+[1.841s] running symlink_data
+[1.841s] creating /home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/ament_index/resource_index/packages
+[1.841s] symbolically linking /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/resource/turtlebot3_python_nodes -> /home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/ament_index/resource_index/packages
+[1.841s] symbolically linking /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/package.xml -> /home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes
+[1.842s] creating /home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/srv
+[1.842s] symbolically linking /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces/srv/ExitRequest.srv -> /home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/srv
+[1.941s] Invoked command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes' returned '0': CMAKE_PREFIX_PATH=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot LD_LIBRARY_PATH=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/build --no-deps symlink_data

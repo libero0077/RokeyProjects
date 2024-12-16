@@ -20,6 +20,7 @@ find_package(std_msgs REQUIRED)
 # Generate interfaces (msg, srv, action)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/ExitRequest.srv"      # 서비스 파일
+  "srv/GetSystemState.srv"
   DEPENDENCIES std_msgs     # 메시지 의존성
 )
 ##################################################

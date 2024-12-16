@@ -1,213 +1,351 @@
     db_manager.initialize_db()
     print("Database initialized successfully.")
-    
     data = {
-    'slot_name': 'A-0',
+    'slot_name': 'A-11',
     'location_x': 0,
     'location_y': 0,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'A-1',
+    'slot_name': 'A-12',
     'location_x': 1,
     'location_y': 0,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'A-2',
+    'slot_name': 'A-13',
     'location_x': 2,
     'location_y': 0,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'A-3',
+    'slot_name': 'A-16',
     'location_x': 3,
     'location_y': 0,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'A-4',
+    'slot_name': 'A-17',
     'location_x': 4,
     'location_y': 0,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'A-5',
+    'slot_name': 'A-111',
     'location_x': 0,
     'location_y': 1,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'A-6',
+    'slot_name': 'A-114',
     'location_x': 1,
     'location_y': 1,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'A-7',
+    'slot_name': 'A-115',
     'location_x': 2,
     'location_y': 1,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'A-8',
+    'slot_name': 'A-116',
     'location_x': 3,
     'location_y': 1,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'A-9',
+    'slot_name': 'A-32',
     'location_x': 4,
     'location_y': 1,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'B-0',
+    'slot_name': 'A-33',
     'location_x': 0,
     'location_y': 2,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'B-1',
+    'slot_name': 'A-35',
     'location_x': 1,
     'location_y': 2,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'B-2',
+    'slot_name': 'A-37',
     'location_x': 2,
     'location_y': 2,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'B-3',
+    'slot_name': 'A-38',
     'location_x': 3,
     'location_y': 2,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'B-4',
+    'slot_name': 'A-310',
     'location_x': 4,
     'location_y': 2,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'B-5',
+    'slot_name': 'A-313',
     'location_x': 0,
     'location_y': 3,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'B-6',
+    'slot_name': 'A-315',
     'location_x': 1,
     'location_y': 3,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'B-7',
+    'slot_name': 'A-43',
     'location_x': 2,
     'location_y': 3,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'B-8',
+    'slot_name': 'A-48',
     'location_x': 3,
     'location_y': 3,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'B-9',
+    'slot_name': 'A-49',
     'location_x': 4,
     'location_y': 3,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'C-0',
+    'slot_name': 'A-410',
     'location_x': 0,
     'location_y': 4,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'C-1',
+    'slot_name': 'A-414',
     'location_x': 1,
     'location_y': 4,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'C-2',
+    'slot_name': 'A-415',
     'location_x': 2,
     'location_y': 4,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'C-3',
+    'slot_name': 'A-62',
     'location_x': 3,
     'location_y': 4,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'C-4',
+    'slot_name': 'A-64',
     'location_x': 4,
     'location_y': 4,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'C-5',
+    'slot_name': 'A-65',
     'location_x': 0,
     'location_y': 5,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'C-6',
+    'slot_name': 'A-67',
     'location_x': 1,
     'location_y': 5,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'C-7',
+    'slot_name': 'A-69',
     'location_x': 2,
     'location_y': 5,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'C-8',
+    'slot_name': 'A-610',
     'location_x': 3,
     'location_y': 5,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
     data = {
-    'slot_name': 'C-9',
+    'slot_name': 'A-612',
     'location_x': 4,
     'location_y': 5,
+    'vehicle_id': None
+    }
+    data = {
+    'slot_name': 'A-614',
+    'location_x': 0,
+    'location_y': 0,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-615',
+    'location_x': 1,
+    'location_y': 0,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-72',
+    'location_x': 2,
+    'location_y': 0,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-73',
+    'location_x': 3,
+    'location_y': 0,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-77',
+    'location_x': 4,
+    'location_y': 0,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-710',
+    'location_x': 0,
+    'location_y': 1,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-712',
+    'location_x': 1,
+    'location_y': 1,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-713',
+    'location_x': 2,
+    'location_y': 1,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-714',
+    'location_x': 3,
+    'location_y': 1,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-715',
+    'location_x': 4,
+    'location_y': 1,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-93',
+    'location_x': 0,
+    'location_y': 2,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-95',
+    'location_x': 1,
+    'location_y': 2,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-96',
+    'location_x': 2,
+    'location_y': 2,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-97',
+    'location_x': 3,
+    'location_y': 2,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-99',
+    'location_x': 4,
+    'location_y': 2,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-910',
+    'location_x': 0,
+    'location_y': 3,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-911',
+    'location_x': 1,
+    'location_y': 3,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-914',
+    'location_x': 2,
+    'location_y': 3,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-915',
+    'location_x': 3,
+    'location_y': 3,
+    'vehicle_id': None
+    }
+    db_manager.insert_data('Parking_Slot', data)
+    data = {
+    'slot_name': 'A-916',
+    'location_x': 4,
+    'location_y': 3,
     'vehicle_id': None
     }
     db_manager.insert_data('Parking_Slot', data)
@@ -245,6 +383,7 @@
     'last_task_id': None
     }
     db_manager.insert_data('Robot_Info', data)
+
     data = {
     'vehicle_id': "1111"
     }

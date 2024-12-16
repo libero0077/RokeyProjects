@@ -292,14 +292,27 @@ if __name__ == "__main__":
     # Launch 파일과 동일한 경로를 사용하도록 수정
     db_path = "/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_python_nodes/parking_system.db"
     db_manager = DBManager(db_path)
+
+    # db_manager.delete_data('Task_Log', {'robot_id':1})
     # data = {
     # 'end_time' : None,
     # 'status' : "주차 완료",
     # }
     # conditions = ["task_id = 1"]
     # db_manager.update_data('Task_Log', data, conditions)
+    # data = {
+    # 'robot_id' : 1,
+    # 'vehicle_id' : '1111',
+    # 'vehicle_img' : '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_python_nodes/db/img/car_1111.jpeg',
+    # 'slot_id' : 2,
+    # 'task_type' : '주차',
+    # 'start_time' : '2024-12-15T10:30:00',
+    # 'end_time' : None,
+    # 'status' : '주차 완료'
+    # }
+    # db_manager.insert_data('Task_Log', data)
     # db_manager.delete_data('Payment_Log', {'payment_id':1})
-    # db_manager.delete_data('Task_Log', {'task_id':2})
+    
     # data = {
     # 'vehicle_id': "1111"
     # }

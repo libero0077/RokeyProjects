@@ -1,0 +1,1 @@
+/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces/rosidl_generator_c/turtlebot3_interfaces/srv/detail/get_system_state__type_support.h

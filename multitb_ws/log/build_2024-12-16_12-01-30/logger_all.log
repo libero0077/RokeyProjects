@@ -1,0 +1,274 @@
+[0.263s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.263s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7a3582eb79d0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7a358309b4f0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7a358309b4f0>>, mixin_verb=('build',))
+[0.359s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.359s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.359s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.359s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.359s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.359s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.359s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/rokey/Documents/RokeyProjects/multitb_ws'
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_interfaces) by extension 'ignore'
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_interfaces) by extension 'ignore_ament_install'
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_interfaces) by extensions ['colcon_pkg']
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_interfaces) by extension 'colcon_pkg'
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_interfaces) by extensions ['colcon_meta']
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_interfaces) by extension 'colcon_meta'
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_interfaces) by extensions ['ros']
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_interfaces) by extension 'ros'
+[0.397s] DEBUG:colcon.colcon_core.package_identification:Package 'src/turtlebot3_interfaces' with type 'ros.ament_cmake' and name 'turtlebot3_interfaces'
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_multi_robot) by extensions ['ignore', 'ignore_ament_install']
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_multi_robot) by extension 'ignore'
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_multi_robot) by extension 'ignore_ament_install'
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_multi_robot) by extensions ['colcon_pkg']
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_multi_robot) by extension 'colcon_pkg'
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_multi_robot) by extensions ['colcon_meta']
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_multi_robot) by extension 'colcon_meta'
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_multi_robot) by extensions ['ros']
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_multi_robot) by extension 'ros'
+[0.402s] DEBUG:colcon.colcon_core.package_identification:Package 'src/turtlebot3_multi_robot' with type 'ros.ament_cmake' and name 'turtlebot3_multi_robot'
+[0.402s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_python_nodes) by extensions ['ignore', 'ignore_ament_install']
+[0.402s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_python_nodes) by extension 'ignore'
+[0.403s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_python_nodes) by extension 'ignore_ament_install'
+[0.403s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_python_nodes) by extensions ['colcon_pkg']
+[0.403s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_python_nodes) by extension 'colcon_pkg'
+[0.403s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_python_nodes) by extensions ['colcon_meta']
+[0.403s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_python_nodes) by extension 'colcon_meta'
+[0.403s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_python_nodes) by extensions ['ros']
+[0.403s] Level 1:colcon.colcon_core.package_identification:_identify(src/turtlebot3_python_nodes) by extension 'ros'
+[0.406s] DEBUG:colcon.colcon_core.package_identification:Package 'src/turtlebot3_python_nodes' with type 'ros.ament_python' and name 'turtlebot3_python_nodes'
+[0.406s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.407s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.407s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.407s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.407s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.445s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.446s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.447s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.447s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.447s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.447s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.447s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.448s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 0 installed packages in /home/rokey/Documents/RokeyProjects/multitb_ws/install
+[0.453s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 431 installed packages in /opt/ros/humble
+[0.458s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_interfaces' build argument 'cmake_args' from command line to 'None'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_interfaces' build argument 'cmake_target' from command line to 'None'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_interfaces' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_interfaces' build argument 'cmake_clean_cache' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_interfaces' build argument 'cmake_clean_first' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_interfaces' build argument 'cmake_force_configure' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_interfaces' build argument 'ament_cmake_args' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_interfaces' build argument 'catkin_cmake_args' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_interfaces' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.577s] DEBUG:colcon.colcon_core.verb:Building package 'turtlebot3_interfaces' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces', 'merge_install': False, 'path': '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_interfaces', 'symlink_install': True, 'test_result_base': None}
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_multi_robot' build argument 'cmake_args' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_multi_robot' build argument 'cmake_target' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_multi_robot' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_multi_robot' build argument 'cmake_clean_cache' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_multi_robot' build argument 'cmake_clean_first' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_multi_robot' build argument 'cmake_force_configure' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_multi_robot' build argument 'ament_cmake_args' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_multi_robot' build argument 'catkin_cmake_args' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_multi_robot' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.578s] DEBUG:colcon.colcon_core.verb:Building package 'turtlebot3_multi_robot' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot', 'merge_install': False, 'path': '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_multi_robot', 'symlink_install': True, 'test_result_base': None}
+[0.578s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_python_nodes' build argument 'cmake_args' from command line to 'None'
+[0.578s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_python_nodes' build argument 'cmake_target' from command line to 'None'
+[0.578s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_python_nodes' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.578s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_python_nodes' build argument 'cmake_clean_cache' from command line to 'False'
+[0.578s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_python_nodes' build argument 'cmake_clean_first' from command line to 'False'
+[0.578s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_python_nodes' build argument 'cmake_force_configure' from command line to 'False'
+[0.578s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_python_nodes' build argument 'ament_cmake_args' from command line to 'None'
+[0.578s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_python_nodes' build argument 'catkin_cmake_args' from command line to 'None'
+[0.578s] Level 5:colcon.colcon_core.verb:set package 'turtlebot3_python_nodes' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.578s] DEBUG:colcon.colcon_core.verb:Building package 'turtlebot3_python_nodes' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes', 'merge_install': False, 'path': '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_python_nodes', 'symlink_install': True, 'test_result_base': None}
+[0.579s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.580s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.580s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_interfaces' with build type 'ament_cmake'
+[0.580s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_interfaces'
+[0.584s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.584s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.584s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.589s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_multi_robot' with build type 'ament_cmake'
+[0.590s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_multi_robot'
+[0.590s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.590s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.606s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake /home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_interfaces -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces
+[0.611s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake /home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_multi_robot -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot
+[1.317s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake /home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_multi_robot -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot
+[1.318s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake --build /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot -- -j8 -l8
+[1.335s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake --build /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot -- -j8 -l8
+[1.340s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake --install /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot
+[1.685s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(turtlebot3_multi_robot)
+[1.686s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake --install /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot
+[1.688s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot' for CMake module files
+[1.689s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot' for CMake config files
+[1.689s] Level 1:colcon.colcon_core.shell:create_environment_hook('turtlebot3_multi_robot', 'cmake_prefix_path')
+[1.690s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/hook/cmake_prefix_path.ps1'
+[1.690s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/hook/cmake_prefix_path.dsv'
+[1.691s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/hook/cmake_prefix_path.sh'
+[1.691s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/bin'
+[1.692s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/lib/pkgconfig/turtlebot3_multi_robot.pc'
+[1.692s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/lib/python3.10/site-packages'
+[1.692s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/bin'
+[1.692s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/package.ps1'
+[1.695s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/package.dsv'
+[1.697s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/package.sh'
+[1.698s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/package.bash'
+[1.700s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/package.zsh'
+[1.701s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/colcon-core/packages/turtlebot3_multi_robot)
+[1.702s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(turtlebot3_multi_robot)
+[1.702s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot' for CMake module files
+[1.702s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot' for CMake config files
+[1.703s] Level 1:colcon.colcon_core.shell:create_environment_hook('turtlebot3_multi_robot', 'cmake_prefix_path')
+[1.703s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/hook/cmake_prefix_path.ps1'
+[1.703s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/hook/cmake_prefix_path.dsv'
+[1.704s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/hook/cmake_prefix_path.sh'
+[1.704s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/bin'
+[1.704s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/lib/pkgconfig/turtlebot3_multi_robot.pc'
+[1.705s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/lib/python3.10/site-packages'
+[1.705s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/bin'
+[1.705s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/package.ps1'
+[1.706s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/package.dsv'
+[1.706s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/package.sh'
+[1.707s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/package.bash'
+[1.707s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/turtlebot3_multi_robot/package.zsh'
+[1.708s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot/share/colcon-core/packages/turtlebot3_multi_robot)
+[3.419s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake /home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_interfaces -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces
+[3.420s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake --build /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces -- -j8 -l8
+[6.172s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake --build /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces -- -j8 -l8
+[6.173s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake --install /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces
+[6.525s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(turtlebot3_interfaces)
+[6.525s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes:/opt/ros/humble /usr/local/bin/cmake --install /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces
+[6.526s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces' for CMake module files
+[6.526s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces' for CMake config files
+[6.526s] Level 1:colcon.colcon_core.shell:create_environment_hook('turtlebot3_interfaces', 'cmake_prefix_path')
+[6.527s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/cmake_prefix_path.ps1'
+[6.527s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/cmake_prefix_path.dsv'
+[6.528s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/cmake_prefix_path.sh'
+[6.529s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/lib'
+[6.529s] Level 1:colcon.colcon_core.shell:create_environment_hook('turtlebot3_interfaces', 'ld_library_path_lib')
+[6.530s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/ld_library_path_lib.ps1'
+[6.530s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/ld_library_path_lib.dsv'
+[6.530s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/ld_library_path_lib.sh'
+[6.531s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/bin'
+[6.531s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/lib/pkgconfig/turtlebot3_interfaces.pc'
+[6.531s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/lib/python3.10/site-packages'
+[6.531s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/bin'
+[6.532s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/package.ps1'
+[6.532s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/package.dsv'
+[6.532s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/package.sh'
+[6.533s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/package.bash'
+[6.533s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/package.zsh'
+[6.533s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/colcon-core/packages/turtlebot3_interfaces)
+[6.534s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(turtlebot3_interfaces)
+[6.534s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces' for CMake module files
+[6.535s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces' for CMake config files
+[6.535s] Level 1:colcon.colcon_core.shell:create_environment_hook('turtlebot3_interfaces', 'cmake_prefix_path')
+[6.535s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/cmake_prefix_path.ps1'
+[6.535s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/cmake_prefix_path.dsv'
+[6.536s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/cmake_prefix_path.sh'
+[6.536s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/lib'
+[6.536s] Level 1:colcon.colcon_core.shell:create_environment_hook('turtlebot3_interfaces', 'ld_library_path_lib')
+[6.536s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/ld_library_path_lib.ps1'
+[6.537s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/ld_library_path_lib.dsv'
+[6.537s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/hook/ld_library_path_lib.sh'
+[6.537s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/bin'
+[6.537s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/lib/pkgconfig/turtlebot3_interfaces.pc'
+[6.538s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/lib/python3.10/site-packages'
+[6.538s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/bin'
+[6.538s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/package.ps1'
+[6.539s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/package.dsv'
+[6.539s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/package.sh'
+[6.539s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/package.bash'
+[6.540s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/turtlebot3_interfaces/package.zsh'
+[6.540s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/share/colcon-core/packages/turtlebot3_interfaces)
+[6.541s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_python_nodes' with build type 'ament_python'
+[6.541s] Level 1:colcon.colcon_core.shell:create_environment_hook('turtlebot3_python_nodes', 'ament_prefix_path')
+[6.541s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/hook/ament_prefix_path.ps1'
+[6.542s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/hook/ament_prefix_path.dsv'
+[6.542s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/hook/ament_prefix_path.sh'
+[6.543s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[6.543s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[6.781s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_python_nodes'
+[6.782s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[6.782s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[7.446s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes': CMAKE_PREFIX_PATH=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot LD_LIBRARY_PATH=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/build --no-deps symlink_data
+[8.481s] Level 1:colcon.colcon_core.shell:create_environment_hook('turtlebot3_python_nodes', 'pythonpath_develop')
+[8.482s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/share/turtlebot3_python_nodes/hook/pythonpath_develop.ps1'
+[8.483s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes' returned '0': CMAKE_PREFIX_PATH=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_multi_robot LD_LIBRARY_PATH=/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/build --no-deps symlink_data
+[8.484s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/share/turtlebot3_python_nodes/hook/pythonpath_develop.dsv'
+[8.485s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_python_nodes/share/turtlebot3_python_nodes/hook/pythonpath_develop.sh'
+[8.488s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes' for CMake module files
+[8.489s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes' for CMake config files
+[8.491s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/lib'
+[8.491s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/bin'
+[8.491s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/lib/pkgconfig/turtlebot3_python_nodes.pc'
+[8.492s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/lib/python3.10/site-packages'
+[8.492s] Level 1:colcon.colcon_core.shell:create_environment_hook('turtlebot3_python_nodes', 'pythonpath')
+[8.492s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/hook/pythonpath.ps1'
+[8.494s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/hook/pythonpath.dsv'
+[8.494s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/hook/pythonpath.sh'
+[8.496s] Level 1:colcon.colcon_core.environment:checking '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/bin'
+[8.496s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(turtlebot3_python_nodes)
+[8.496s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/package.ps1'
+[8.497s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/package.dsv'
+[8.498s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/package.sh'
+[8.499s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/package.bash'
+[8.500s] INFO:colcon.colcon_core.shell:Creating package script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/turtlebot3_python_nodes/package.zsh'
+[8.500s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rokey/Documents/RokeyProjects/multitb_ws/install/turtlebot3_python_nodes/share/colcon-core/packages/turtlebot3_python_nodes)
+[8.501s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[8.501s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[8.502s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[8.502s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[8.516s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[8.516s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[8.516s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[8.544s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[8.544s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/local_setup.ps1'
+[8.546s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/rokey/Documents/RokeyProjects/multitb_ws/install/_local_setup_util_ps1.py'
+[8.549s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/setup.ps1'
+[8.554s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/local_setup.sh'
+[8.557s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/rokey/Documents/RokeyProjects/multitb_ws/install/_local_setup_util_sh.py'
+[8.559s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/setup.sh'
+[8.562s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/local_setup.bash'
+[8.563s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/setup.bash'
+[8.565s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/local_setup.zsh'
+[8.567s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/rokey/Documents/RokeyProjects/multitb_ws/install/setup.zsh'

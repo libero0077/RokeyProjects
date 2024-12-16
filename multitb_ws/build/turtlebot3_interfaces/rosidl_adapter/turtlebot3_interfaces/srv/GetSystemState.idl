@@ -1,0 +1,21 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from turtlebot3_interfaces/srv/GetSystemState.srv
+// generated code does not contain a copyright notice
+
+
+module turtlebot3_interfaces {
+  module srv {
+    @verbatim (language="comment", text=
+      "Request")
+    struct GetSystemState_Request {
+      uint8 structure_needs_at_least_one_member;
+    };
+    @verbatim (language="comment", text=
+      "Response")
+    struct GetSystemState_Response {
+      string robot_status_json;
+
+      string slot_status_json;
+    };
+  };
+};

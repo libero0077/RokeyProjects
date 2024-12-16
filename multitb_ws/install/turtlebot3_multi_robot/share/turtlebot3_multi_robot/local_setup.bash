@@ -1,0 +1,1 @@
+/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_multi_robot/ament_cmake_environment_hooks/local_setup.bash

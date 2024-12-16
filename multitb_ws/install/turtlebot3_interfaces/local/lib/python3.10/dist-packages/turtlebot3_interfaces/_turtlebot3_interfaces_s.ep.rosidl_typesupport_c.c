@@ -1,0 +1,1 @@
+/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces/rosidl_generator_py/turtlebot3_interfaces/_turtlebot3_interfaces_s.ep.rosidl_typesupport_c.c

@@ -23,7 +23,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'monitoring_node = turtlebot3_python_nodes.monitoring_node:main',
+            'gui_minimap = turtlebot3_python_nodes.gui_minimap:main',
             'central_control_node = turtlebot3_python_nodes.central_control_node:main',
             'kiosk_gui = turtlebot3_python_nodes.kiosk_gui:main',
         ],
