@@ -216,7 +216,7 @@ class CameraViewer(Node, QObject):
 
         self.log_label = QLabel("로그")
         self.log_label.setStyleSheet("border: 1px solid black;")
-        self.log_label.setAlignment(Qt.AlignCenter)
+        self.log_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)  # 좌측 상단 정렬로 변경
         self.right_layout.addWidget(self.log_label, 10)
 
         self.robot_status_label = QLabel("로봇 상태")

@@ -17,7 +17,7 @@ class CentralControlNode(Node):
         
         # 파라미터 가져오기
         #db_path = self.get_parameter('db_path').get_parameter_value().string_value
-        db_path = "/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_python_nodes/parking_system.db"
+        db_path = "/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_python_nodes/db/parking_system.db"
 
         if not db_path:
             self.get_logger().error("DB path parameter 'db_path' is not set.")
@@ -65,7 +65,7 @@ class CentralControlNode(Node):
         # 예: "robot1 pick_off 1234 (4,9)"
         parts = msg.data.split()
         if len(parts) < 4:
-            self.get_logger().error("nav_callback message format invalid")
+            self.log("nav_callback message format invalid", origin="nav_callback")
             return
 
         robot_name = parts[0]    # robot1 or robot2
@@ -77,7 +77,7 @@ class CentralControlNode(Node):
 
         # pick_off 일 때만 처리 (pick_up은 무시)
         if action_type != "pick_off":
-            self.get_logger().info(f"nav_callback ignored: action_type={action_type}")
+            self.log(f"nav_callback ignored: action_type={action_type}", origin="nav_callback")
             return
 
         if robot_name == "robot1":
@@ -86,13 +86,14 @@ class CentralControlNode(Node):
             self.finish_parking(vehicle_id)
             self.log(f"입차 작업 완료: 차량 {vehicle_id}, 좌표({x},{y})", origin="nav_callback")
 
+
         elif robot_name == "robot2":
             # 출차 완료 시나리오
             # DB에서 해당 차량의 "출차 중" 상태를 "출차 완료"로 변경
             self.finish_checkout(vehicle_id, x, y)
             
         else:
-            self.get_logger().error(f"알 수 없는 로봇: {robot_name}")
+            self.log(f"알 수 없는 로봇: {robot_name}", origin="nav_callback")
 
     def finish_parking(self, vehicle_id):
         # "주차 중" 상태인 Task_Log를 "주차 완료"로 업데이트
@@ -115,18 +116,18 @@ class CentralControlNode(Node):
                 parameters=[task_id]
             )
         else:
-            self.get_logger().error(f"주차 중 상태의 작업을 찾을 수 없음: 차량 {vehicle_id}")
+            self.log(f"주차 중 상태의 작업을 찾을 수 없음: 차량 {vehicle_id}", origin="finish_parking")
 
     def finish_checkout(self, vehicle_id, x, y):
-        # "출차 중" 상태인 Task_Log를 "출차 완료"로 업데이트
+        # slot_id도 가져오기 위해 columns에 slot_id 추가
         task_logs = self.db_manager.fetch_data(
             table="Task_Log",
-            columns="task_id",
+            columns="task_id, slot_id",
             conditions=["vehicle_id = ?", "task_type = ?"],
             parameters=[vehicle_id, "출차"]
         )
         if task_logs:
-            task_id = task_logs[-1][0]
+            task_id, slot_id = task_logs[-1]
             update_data = {
                 "end_time": datetime.now().isoformat(timespec='seconds'),
                 "status": "출차 완료"
@@ -137,13 +138,28 @@ class CentralControlNode(Node):
                 conditions=["task_id = ?"],
                 parameters=[task_id]
             )
-            # 출차 완료 메시지 발행
+
+            # 출차 완료 후 슬롯 비우기 로직 추가
+            if slot_id is not None:
+                update_slot_data = {
+                    "vehicle_id": None
+                }
+                self.db_manager.update_data(
+                    table="Parking_Slot",
+                    data=update_slot_data,
+                    conditions=["slot_id = ?"],
+                    parameters=[slot_id]
+                )
+                # 슬롯 상태를 "빈 슬롯"으로 GUI에 반영
+                self.update_slot_status(slot_id, "빈 슬롯")
+
             out_msg = String()
             out_msg.data = f"{vehicle_id}, 차량 {vehicle_id}번 출차합니다."
             self.vehicle_pub.publish(out_msg)
-            self.log(f"차량 {vehicle_id}번 출차 완료 및 메시지 발행", origin="nav_callback")
+            self.log(f"차량 {vehicle_id}번 출차 완료 및 메시지 발행", origin="finish_checkout")
         else:
-            self.get_logger().error(f"출차 중 상태의 작업을 찾을 수 없음: 차량 {vehicle_id}")
+            self.log(f"출차 중 상태의 작업을 찾을 수 없음: 차량 {vehicle_id}", origin="finish_checkout")
+
 
 
     def log(self, message, origin="central_control_node"):
@@ -152,19 +168,25 @@ class CentralControlNode(Node):
             "origin": origin,
             "message": message
         }
-        self.log_publisher.publish(String(data=json.dumps(log_data)))
+        # 모든 로그를 self.log 함수로만 퍼블리시 -> JSON 형식 유지
+        self.log_publisher.publish(String(data=json.dumps(log_data, ensure_ascii=False)))
         self.get_logger().info(message)
 
     def vehicle_detected_callback(self, msg):
         # 예: "1234, 대기 지역에 차량이 진입하였습니다."
         data_parts = msg.data.split(',', 1)
         if len(data_parts) < 2:
-            self.get_logger().error("vehicle_detected_callback format invalid")
+            self.log("vehicle_detected_callback format invalid", origin="vehicle_detected_callback")
             return
         vehicle_id = data_parts[0].strip()
         message = data_parts[1].strip()
 
-        self.log(f"Vehicle detected: {vehicle_id} - {message}")
+
+        if "대기 지역에 차량이 진입하였습니다" not in message:
+            self.log(f"Not a parking event message, ignoring: {msg.data}", origin="vehicle_detected_callback")
+            return
+        
+        self.log(f"Vehicle detected: {vehicle_id} - {message}", origin="vehicle_detected_callback")
         
         # 차량 감지 시 입차 시나리오: "주차 중" 상태로 DB 삽입
         task_data = {
@@ -184,7 +206,7 @@ class CentralControlNode(Node):
     def payment_confirmation_callback(self, msg):
         # 결제 완료 시 "출차 중"으로 변경
         self.get_logger().info(f"Payment confirmed: {msg.data}")
-        self.log_publisher.publish(String(data=f"Payment confirmed: {msg.data}"))
+        self.log(f"Payment confirmed: {msg.data}", origin="payment_confirmation")
 
         payment_info = self.parse_payment_info(msg.data)
         if payment_info:
@@ -239,16 +261,16 @@ class CentralControlNode(Node):
                 self.vehicle_pub.publish(out_msg)
                 self.log(f"출차 로봇 유도 메시지 발행: 차량 {payment_data['vehicle_id']}", origin="payment_confirmation")
             else:
-                self.get_logger().error(f"No Payment Pending Exit Task_Log found for vehicle_id: {payment_data['vehicle_id']}")
+                self.log(f"No Payment Pending Exit Task_Log found for vehicle_id: {payment_data['vehicle_id']}", origin="payment_confirmation")
         else:
-            self.get_logger().error("Invalid payment received.")
+            self.log("Invalid payment received.", origin="payment_confirmation")
 
     def parse_payment_info(self, data_str):
         try:
             payment_info = json.loads(data_str)
             return payment_info
         except json.JSONDecodeError:
-            self.get_logger().error("Failed to parse payment info")
+            self.log("Failed to parse payment info", origin="parse_payment_info")
             return {}
         
     def handle_exit_request(self, request, response):
@@ -257,7 +279,7 @@ class CentralControlNode(Node):
         self.get_logger().info(f"Exit request received for car number: {car_number}")
         fee = self.db_manager.calculate_fee(car_number)
         entry_time = self.get_entry_time(car_number)
-        self.get_logger().info(f"fee: {fee}, entry_time: {entry_time}")
+        self.log(f"fee: {fee}, entry_time: {entry_time}", origin="handle_exit_request")
 
         if fee > 0 and entry_time:
             slot_id = self.get_slot_id(car_number)
@@ -310,7 +332,7 @@ class CentralControlNode(Node):
         task_logs = self.db_manager.fetch_data(
             table="Task_Log",
             columns="start_time",
-            conditions=[f"vehicle_id = '{vehicle_id}'", "end_time IS NULL"]
+            conditions=[f"vehicle_id = '{vehicle_id}'", "task_type = '주차'"]
         )
         if task_logs:
             # Assuming the latest entry without an end_time is the current parking session
