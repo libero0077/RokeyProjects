@@ -1,1 +1,0 @@
-/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces/rosidl_typesupport_fastrtps_c/turtlebot3_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h

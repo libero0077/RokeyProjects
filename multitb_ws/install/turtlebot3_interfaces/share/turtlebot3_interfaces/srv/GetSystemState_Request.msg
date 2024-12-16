@@ -1,1 +1,0 @@
-/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces/rosidl_cmake/srv/GetSystemState_Request.msg

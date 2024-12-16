@@ -1,4 +1,0 @@
-
-# Response
-string robot_status_json
-string slot_status_json

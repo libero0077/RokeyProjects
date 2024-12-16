@@ -1,7 +1,0 @@
-[console_scripts]
-gui_node = boxproject.GUI_node:main
-robot_arm_node = boxproject.robot_arm_node:main
-robot_status = boxproject.robot_status:main
-test_node = boxproject.debug_node:main
-webcam_node = boxproject.web_camera_node:main
-

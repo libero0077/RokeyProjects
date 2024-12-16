@@ -1,1 +1,0 @@
-/home/rokey/Documents/RokeyProjects/multitb_ws/build/turtlebot3_interfaces/rosidl_generator_py/turtlebot3_interfaces/__init__.py
