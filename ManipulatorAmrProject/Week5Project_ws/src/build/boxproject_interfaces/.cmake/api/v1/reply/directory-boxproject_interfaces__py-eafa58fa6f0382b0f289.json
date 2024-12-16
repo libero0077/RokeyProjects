@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "boxproject_interfaces__py",
+		"source" : "/home/juwon/Week5Project_ws/src/build/boxproject_interfaces/boxproject_interfaces__py"
+	}
+}
