@@ -6,11 +6,11 @@
 
 # 주차별 프로젝트 내용
 ## 1주차 : AI 비전 감시 간이 시스템 구축
-  - ConveyorProject
+  - DetectCarProject
   - Project Summary : 음주 단속 현장에서 도주하거나 우회하는 차량을 실시간으로 감지하고 추적하기 위한 AMR(Autonomous Mobile Robot) 기반 시스템을 개발 (음주 단속 및 차량 감지, 추적은 가상 시나리오임)
   - Link : https://github.com/libero0077/RokeyProjects/tree/main/ConveyorProject
 ## 2주차 : Vision AI 기반 컨베이어 벨트 객체 인식 딥러닝 모델 최적화
-  - DetectCarProject
+  - ConveyorProject
   - Project Summary : 컨베이어 벨트에 놓여진 라즈베리파이의 양품, 불량품을 분류하는 알고리즘 개발
   - Link : https://github.com/libero0077/RokeyProjects/tree/main/DetectCarProject
 ## 3주차: 서비스(음식배달,정찰경찰 등) 로봇 및 관제 시스템 개발
