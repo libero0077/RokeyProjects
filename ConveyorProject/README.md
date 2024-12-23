@@ -252,10 +252,10 @@
 
 ## 기여
 
-[libero0077](https://github.com/libero0077) : 중앙 제어, DB 및 통계 페이지, 테스트 스크립트 작성, 전체 시스템 통합
-[Y6HYUK](https://github.com/Y6HYUK) : 데이터 증강 아이디어 모색, 데이터 수집 및 가설 검증
-[leesw1357](https://github.com/leesw1357) : 데이터 증강 아이디어 모색, 데이터 수집 및 가설 검증
-[juwon407](https://github.com/juwon407) : 분류 알고리즘 개발, 하드웨어 설계, 제작 및 설치
+[libero0077](https://github.com/libero0077) : 중앙 제어, DB 및 통계 페이지, 테스트 스크립트 작성, 전체 시스템 통합  
+[Y6HYUK](https://github.com/Y6HYUK) : 데이터 증강 아이디어 모색, 데이터 수집 및 가설 검증  
+[leesw1357](https://github.com/leesw1357) : 데이터 증강 아이디어 모색, 데이터 수집 및 가설 검증  
+[juwon407](https://github.com/juwon407) : 분류 알고리즘 개발, 하드웨어 설계, 제작 및 설치  
 
 ## 라이선스
 
