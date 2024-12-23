@@ -6,6 +6,7 @@
 
 ### 통계창 예시
 - 하루 매출 및 메뉴별 판매량, 월 별 매출 및 메뉴별 판매량, 서빙 로봇의 배달 로그 등 다양한 통계를 확인할 수 있음
+
 ![Screenshot from 2024-12-23 18-00-48](https://github.com/user-attachments/assets/84ff5a77-18cf-440d-856b-5e9a222b06d0)
 
 
