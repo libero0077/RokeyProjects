@@ -2,12 +2,20 @@
 
 ### 실시간 카메라 피드
 
-![image](https://github.com/user-attachments/assets/902938e0-5b4b-4df2-a484-1891f131e53e)
-![image](https://github.com/user-attachments/assets/8d7a4ca7-0a38-4926-9177-f731e08e1132)
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/902938e0-5b4b-4df2-a484-1891f131e53e" alt="실시간 카메라 피드 1" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/8d7a4ca7-0a38-4926-9177-f731e08e1132" alt="실시간 카메라 피드 2" width="300"/></td>
+  </tr>
+</table>
 
 ### 통계 대시보드
 
-![image](https://github.com/user-attachments/assets/d3a833f4-0602-41e0-bf56-a339202c4a45)
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/d3a833f4-0602-41e0-bf56-a339202c4a45" alt="통계 대시보드" width="600"/></td>
+  </tr>
+</table>
 
 ## 목차
 
