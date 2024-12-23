@@ -1,6 +1,13 @@
 # 라즈베리파이 피코 불량 검출 및 통계 시스템
 
-![프로젝트 로고](path/to/logo.png) <!-- 선택 사항: 프로젝트 로고 추가 -->
+### 실시간 카메라 피드
+
+![image](https://github.com/user-attachments/assets/902938e0-5b4b-4df2-a484-1891f131e53e)
+![image](https://github.com/user-attachments/assets/8d7a4ca7-0a38-4926-9177-f731e08e1132)
+
+### 통계 대시보드
+
+![image](https://github.com/user-attachments/assets/d3a833f4-0602-41e0-bf56-a339202c4a45)
 
 ## 목차
 
@@ -16,7 +23,6 @@
   - [테스트 스크립트](#테스트-스크립트)
 - [설치](#설치)
 - [사용법](#사용법)
-- [스크린샷](#스크린샷)
 - [검증 알고리즘](#검증-알고리즘)
 - [개선 계획](#개선-계획)
 - [기여](#기여)
@@ -212,25 +218,6 @@
     python test_in_localserver.py
     ```
 
-## 스크린샷
-
-### 시스템 개요
-
-![시스템 개요](path/to/system_overview.png)
-
-### 실시간 카메라 피드
-
-![카메라 피드](path/to/camera_feed.png)
-
-### 통계 대시보드
-
-![통계 대시보드](path/to/statistics_dashboard.png)
-
-### 웹 인터페이스
-
-![웹 인터페이스](path/to/web_interface.png)
-
-
 ## 개선 계획
 
 현재 시스템은 기본적인 불량 검출 및 통계 기능을 갖추고 있지만, 다음과 같은 개선을 통해 더욱 강력하고 효율적인 시스템으로 발전시킬 수 있습니다:
@@ -257,10 +244,10 @@
 
 ## 기여
 
-[libero0077](https://github.com/libero0077) : 중앙 제어, YOLO 모델 최적화, DB 설계 및 기능 정의, 통계 페이지 작성, 테스트 스크립트 작성
-[Y6HYUK](https://github.com/Y6HYUK) : 
-[leesw1357](https://github.com/leesw1357) : 
-[juwon407](https://github.com/juwon407) :
+[libero0077](https://github.com/libero0077) : 중앙 제어, DB 및 통계 페이지, 테스트 스크립트 작성, 전체 시스템 통합
+[Y6HYUK](https://github.com/Y6HYUK) : 데이터 증강 아이디어 모색, 데이터 수집 및 가설 검증
+[leesw1357](https://github.com/leesw1357) : 데이터 증강 아이디어 모색, 데이터 수집 및 가설 검증
+[juwon407](https://github.com/juwon407) : 분류 알고리즘 개발, 하드웨어 설계, 제작 및 설치
 
 ## 라이선스
 
