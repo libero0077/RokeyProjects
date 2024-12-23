@@ -1,1 +1,0 @@
-/home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/build/menu_order_interfaces/ament_cmake_python/menu_order_interfaces/menu_order_interfaces.egg-info/dependency_links.txt

@@ -1,1 +1,0 @@
-/home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/build/menu_order_interfaces/rosidl_typesupport_fastrtps_c/menu_order_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h

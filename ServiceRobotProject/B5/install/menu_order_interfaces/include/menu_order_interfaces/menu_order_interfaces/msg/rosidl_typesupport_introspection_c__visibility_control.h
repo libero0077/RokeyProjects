@@ -1,1 +1,0 @@
-/home/rokey/Documents/RokeyProjects/ServiceRobotProject/B5/build/menu_order_interfaces/rosidl_typesupport_introspection_c/menu_order_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
