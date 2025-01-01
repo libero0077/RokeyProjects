@@ -1,0 +1,68 @@
+slam_toolbox:
+  ros__parameters:
+    # Plugin params
+    solver_plugin: solver_plugins::CeresSolver
+    ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
+    ceres_preconditioner: SCHUR_JACOBI
+    ceres_trust_strategy: LEVENBERG_MARQUARDT
+    ceres_dogleg_type: TRADITIONAL_DOGLEG
+    ceres_loss_function: None
+    # ROS Parameters
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_link
+    scan_topic: scan
+    mode: mapping
+    debug_logging: false
+    throttle_scans: 1
+    # --------------------- (1) transform_publish_period, map_update_interval 조정 ---------------------
+    # 기존: transform_publish_period: 0.02 -> 0.05
+    # 설명: transform을 너무 자주 publish하면 미세 잡음까지 맵에 반영되어 '흔들림'을 유발할 수 있음.
+    transform_publish_period: 0.05  # (수정)
+    # 기존: map_update_interval: 0.5 -> 1.0
+    # 설명: 맵 갱신 간격을 늘려 미세한 움직임/노이즈가 자주 맵에 반영되지 않게 함.
+    map_update_interval: 1.0       # (수정)
+    resolution: 0.01
+    max_laser_range: 12.0
+    minimum_time_interval: 0.25
+    transform_timeout: 0.2
+    tf_buffer_duration: 30.0
+    stack_size_to_use: 40000000
+    enable_interactive_mode: true
+    # General Parameters
+    use_scan_matching: true
+    use_scan_barycenter: true
+    # --------------------- (2) minimum_travel_distance, minimum_travel_heading 조정 ---------------------
+    # 기존: minimum_travel_distance: 0.0 -> 0.05
+    # 기존: minimum_travel_heading: 0.0 -> 0.04
+    #
+    # 설명: 로봇이 5cm/약 2.3도 미만으로 움직이면, SLAM은 업데이트하지 않음 -> 미세 흔들림 감소
+    minimum_travel_distance: 0.05   # (수정)
+    minimum_travel_heading: 0.04    # (수정)
+    scan_buffer_size: 20
+    scan_buffer_maximum_scan_distance: 12.0
+    link_match_minimum_response_fine: 0.1
+    link_scan_maximum_distance: 1.5
+    loop_search_maximum_distance: 0.2
+    do_loop_closing: true
+    loop_match_minimum_chain_size: 10
+    loop_match_maximum_variance_coarse: 3.0
+    loop_match_minimum_response_coarse: 0.35
+    loop_match_minimum_response_fine: 0.45
+    # Correlation Parameters
+    correlation_search_space_dimension: 0.5
+    correlation_search_space_resolution: 0.01
+    correlation_search_space_smear_deviation: 0.1
+    # Loop Closure Parameters
+    loop_search_space_dimension: 8.0
+    loop_search_space_resolution: 0.05
+    loop_search_space_smear_deviation: 0.03
+    # Scan Matcher Parameters
+    distance_variance_penalty: 0.5
+    angle_variance_penalty: 1.0
+    fine_search_angle_offset: 0.00349
+    coarse_search_angle_offset: 0.349
+    coarse_angle_resolution: 0.0349
+    minimum_angle_penalty: 0.9
+    minimum_distance_penalty: 0.5
+    use_response_expansion: true
