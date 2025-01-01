@@ -179,7 +179,7 @@
   - `nav2_msgs`
   - `geometry_msgs`
   - `std_msgs`
-  - 'gazebo'
+  - `gazebo`
   - 기타 프로젝트에 필요한 Python 패키지
 
 ### 설치 단계
