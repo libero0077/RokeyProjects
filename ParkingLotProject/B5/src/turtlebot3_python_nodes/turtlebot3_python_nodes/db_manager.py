@@ -290,7 +290,7 @@ class DBManager:
 
 if __name__ == "__main__":
     # Launch 파일과 동일한 경로를 사용하도록 수정
-    db_path = "/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_python_nodes/db/parking_system.db"
+    db_path = "/home/juwon/git/RokeyProjects/ParkingLotProject/B5/src/turtlebot3_python_nodes/db/parking_system.db"
     db_manager = DBManager(db_path)
     data = {
     'vehicle_id': "9160"
@@ -312,10 +312,10 @@ if __name__ == "__main__":
     # 'start_time' : '2024-12-15T10:45:00',
     # 'end_time' : '2024-12-15T10:48:00',
     # 'statu    data = {
-    'vehicle_id': "9160"
-    }
+    # 'vehicle_id': "9160"
+    # }
     condition = ["slot_name = 'A-916'"]
-    db_manager.update_data('Parking_Slot', data, condition)s' : '주차 완료'
+    db_manager.update_data('Parking_Slot', data, condition)
     # }
     # db_manager.insert_data('Task_Log', data)
     db_manager.delete_data('Task_Log', {'vehicle_img = "default_img.jpg"'})

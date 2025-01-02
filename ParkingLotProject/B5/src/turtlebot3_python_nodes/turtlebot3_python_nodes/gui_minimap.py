@@ -177,8 +177,8 @@ class CameraViewer(Node, QObject):
 
         # 맵 로딩
         try:
-            image_path = '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_multi_robot/map/map.pgm'
-            yaml_path = '/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_multi_robot/map/map.yaml'
+            image_path = '/home/juwon/git/RokeyProjects/ParkingLotProject/B5/src/turtlebot3_python_nodes/map/map.pgm'
+            yaml_path = '/home/juwon/git/RokeyProjects/ParkingLotProject/B5/src/turtlebot3_python_nodes/map/map.yaml'
             image = PILImage.open(image_path)
             self.width, self.height = image.size
             self.image_rgb = image.convert('RGB')

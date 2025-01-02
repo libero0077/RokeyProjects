@@ -1,0 +1,28 @@
+{
+  "python.autoComplete.extraPaths": [
+    "/home/juwon/git/RokeyProjects/ParkingLotProject/multitb_ws/install/turtlebot3_python_nodes/lib/python3.10/site-packages",
+    "/home/juwon/git/RokeyProjects/ParkingLotProject/multitb_ws/install/turtlebot3_multi_robot/lib/python3.10/site-packages",
+    "/home/juwon/git/RokeyProjects/ParkingLotProject/multitb_ws/install/turtlebot3_interfaces/local/lib/python3.10/dist-packages",
+    "/home/juwon/git/RokeyProjects/ParkingLotProject/multitb_ws/install/nav_node/lib/python3.10/site-packages",
+    "/home/juwon/ws_moveit/install/moveit_task_constructor_core/local/lib/python3.10/dist-packages",
+    "/home/juwon/ws_moveit/install/moveit_configs_utils/lib/python3.10/site-packages",
+    "/home/juwon/ws_moveit/install/srdfdom/local/lib/python3.10/dist-packages",
+    "/home/juwon/ws_moveit/install/moveit_task_constructor_msgs/local/lib/python3.10/dist-packages",
+    "/home/juwon/ws_moveit/install/launch_param_builder/lib/python3.10/site-packages",
+    "/opt/ros/humble/lib/python3.10/site-packages",
+    "/opt/ros/humble/local/lib/python3.10/dist-packages"
+  ],
+  "python.analysis.extraPaths": [
+    "/home/juwon/git/RokeyProjects/ParkingLotProject/multitb_ws/install/turtlebot3_python_nodes/lib/python3.10/site-packages",
+    "/home/juwon/git/RokeyProjects/ParkingLotProject/multitb_ws/install/turtlebot3_multi_robot/lib/python3.10/site-packages",
+    "/home/juwon/git/RokeyProjects/ParkingLotProject/multitb_ws/install/turtlebot3_interfaces/local/lib/python3.10/dist-packages",
+    "/home/juwon/git/RokeyProjects/ParkingLotProject/multitb_ws/install/nav_node/lib/python3.10/site-packages",
+    "/home/juwon/ws_moveit/install/moveit_task_constructor_core/local/lib/python3.10/dist-packages",
+    "/home/juwon/ws_moveit/install/moveit_configs_utils/lib/python3.10/site-packages",
+    "/home/juwon/ws_moveit/install/srdfdom/local/lib/python3.10/dist-packages",
+    "/home/juwon/ws_moveit/install/moveit_task_constructor_msgs/local/lib/python3.10/dist-packages",
+    "/home/juwon/ws_moveit/install/launch_param_builder/lib/python3.10/site-packages",
+    "/opt/ros/humble/lib/python3.10/site-packages",
+    "/opt/ros/humble/local/lib/python3.10/dist-packages"
+  ]
+}

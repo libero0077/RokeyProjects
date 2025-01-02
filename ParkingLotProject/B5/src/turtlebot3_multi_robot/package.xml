@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>turtlebot3_multi_robot</name>
+  <version>0.0.1</version>
+  <description>Multi robot support TurtleBot3 in Gazebo with ROS2 Python package</description>
+  <maintainer email="y6hyuk@naver.com">yjh</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <!-- 필수 의존성 -->
+  <depend>rclpy</depend>
+  <depend>gazebo_ros</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>nav2_map_server</depend>
+  <depend>nav2_lifecycle_manager</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>ros2_control</depend>
+  <depend>controller_manager</depend>
+  <depend>trajectory_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>behavior_tree_cpp_v3</depend>
+  <depend>nav2_bt_navigator</depend>
+
+  <!-- 실행 시 의존성 -->
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+
+  <!-- 테스트 의존성 -->
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

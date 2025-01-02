@@ -17,7 +17,7 @@ class CentralControlNode(Node):
         
         # 파라미터 가져오기
         #db_path = self.get_parameter('db_path').get_parameter_value().string_value
-        db_path = "/home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_python_nodes/db/parking_system.db"
+        db_path = "/home/juwon/git/RokeyProjects/ParkingLotProject/B5/src/turtlebot3_python_nodes/db/parking_system.db"
 
         if not db_path:
             self.get_logger().error("DB path parameter 'db_path' is not set.")
