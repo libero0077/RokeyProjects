@@ -2,7 +2,7 @@
 ## 프로젝트 기간 : 2024.11.26 ~ 2024.12.02
 
 ### 데모영상
-
+https://www.youtube.com/watch?v=mrxMAlcYZ6Y
 
 
 ### 통계창 예시
