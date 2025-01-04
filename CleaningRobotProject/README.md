@@ -5,7 +5,11 @@
 
 ### 데모영상
 
-*데모 영상을 추가해주세요.*
+- 자율 매핑 Demo : [Youtube Link](https://www.youtube.com/shorts/HFJxlcmbYyI)
+
+- Visual Tracking Demo
+  
+![Week8_CleaningRobot_VisualTracking](https://github.com/user-attachments/assets/0c2ef219-c5b8-4ec3-96da-04aa21cd29a8)
 
 ---
 
@@ -226,7 +230,7 @@ self_cleaning_robot_ws
 
 1. **청소 알고리즘 통합**:
    - **실제 청소 알고리즘 적용 부족**: 현재 청소 경로 알고리즘은 시뮬레이션 환경에서만 검증되었으며, 실제 로봇 하드웨어에서 통합적으로 적용되지 못한 상태입니다. 이를 보완하기 위해 청소 알고리즘을 실제 로봇 제어 시스템과 완전하게 통합하고, 하드웨어 기반 테스트를 통해 성능을 검증할 필요가 있습니다.
-   - 
+     
 2. **청소 효율성 향상**:
    - **청소 경로 최적화**: 청소 경로 최적화 알고리즘을 추가 구현하여 에너지 효율을 높이고 청소 시간을 단축합니다.
 
