@@ -1,241 +1,271 @@
-# Tasks with Doosan Robot
+# 두산 로봇 활용 - sport stacking
 
-![프로젝트 로고](path/to/logo.png) <!-- 선택 사항: 프로젝트 로고 추가 -->
+## 프로젝트 기간 : 2024.12.17 ~ 2024.12.23
+
+------------------------------------------
+
+### 데모영상(추후에 업로드 할 예정입니다.)
+
+- 3*3형태 pallet에 블록배치 : 
+- 젠가 쌓기 :
+- 기어 조립 :
+- socket통신을 이용한 두 로봇팔의 블록 전달 :
+- sport stacking :
+
+------------------------------------------
 
 ## 목차
 
 - [개요](#개요)
 - [주요 기능](#주요-기능)
-- [아키텍처](#아키텍처)
-- [구성 요소](#구성-요소)
-  - [중앙 제어 노드](#중앙-제어-노드)
-  - [카메라 뷰어](#카메라-뷰어)
-  - [맵 노드](#맵-노드)
-  - [데이터베이스 관리자](#데이터베이스-관리자)
+- [task](#task)
+  - [3*3형태 pallet에 블록배치](#3*3형태-pallet에-블록배치)
+  - [젠가 쌓기](#젠가-쌓기)
+  - [기어 조립](#기업-조립)
+  - [socket통신을 이용한 두 로봇팔의 블록 전달 과정 구현](#socket통신을-이용한-두-로봇팔의-블록-전달-과정-구현)
+  - [sport stacking](sport-stacking)
+- [디렉토리 구조](#디렉토리)
 - [설치](#설치)
 - [사용법](#사용법)
-- [토픽 및 서비스](#토픽-및-서비스)
-- [스크린샷](#스크린샷)
+- [개선 계획](#개선-계획)
 - [기여](#기여)
-- [라이선스](#라이선스)
 - [연락처](#연락처)
+- [추가 참고 자료](#추가-참고-자료)
 
 ## 개요
 
-**TurtleBot3 다중 로봇 주차 시스템**은 ROS 2를 기반으로 여러 대의 TurtleBot3 로봇을 활용하여 주차 시설을 관리하는 종합적인 프로젝트입니다. 이 시스템은 실시간 차량 감지, 주차 슬롯 관리, 로봇 네비게이션을 통합하여 주차 및 출차 과정을 효율적으로 처리합니다. PyQt5로 구축된 사용자 친화적인 GUI는 주차 슬롯 상태, 로봇 위치, 시스템 로그에 대한 실시간 업데이트를 제공합니다.
+**DOOSAN 로봇 프로젝트**는 두산 로봇 M0609모델을 사용하며, DSR(Doosan Software for Robotics)패키지와 ROS(Robot Operating System)환경을 활용하여 다양한 task를 진행합니다. 이 프로젝트는 3*3형태의 pallet에 블록의 길이 순서대로 배치하는 task, 젠가를 쌓는 task, 기어를 조립하는 task, socket통신을 이용한 두 로봇팔의 블록 전달 task, sport stacking task로 이루어집니다. 현장에서의 실제 task들을 간소화하여 진행하였으며 이를 활용하여 일관된 task 진행과 정밀제어를 통해 효율성 및 제품의 고품질 유지를 보장합니다.
 
 ## 주요 기능
 
-- **실시간 차량 감지:** YOLO(You Only Look Once)를 활용하여 여러 카메라 피드를 통해 효율적인 차량 감지.
-- **중앙 집중식 제어:** 중앙 제어 노드가 주차 요청, 결제 처리, 로봇 조정을 관리.
-- **그래픽 사용자 인터페이스 (GUI):** PyQt5로 구축된 GUI는 라이브 카메라 피드, 주차 슬롯 상태, 맵 상의 로봇 위치 및 시스템 로그를 표시.
-- **데이터베이스 통합:** SQLite를 사용하여 작업 로그, 결제 기록, 주차 슬롯 상태를 기록.
-- **로봇 네비게이션:** TurtleBot3 로봇과 통합하여 차량 주차 및 출차 작업을 처리.
-- **비상 정지 처리:** 비상 정지 기능을 지원하여 안전성 보장.
-- **시스템 상태 모니터링:** 로봇 상태 및 전체 시스템 상태를 실시간으로 모니터링.
+- **힘 제어 시스템:** 정밀한 힘 감지를 통해 물체의 높이를 측정할 수 있으며 안전성을 강화할 수 있습니다.
+- **그리퍼 제어:** 디지털 입출력을 이용하여 정확한 그리퍼 동작을 제어할 수 있습니다.
+- **위치 제어:** DRL(Doosan Robotics Language)을 이용하여 모델의 조인트 및 툴 작업 속도 및 가속도 등을 정밀하게 조정하여 위치를 제어할 수 있습니다.
+- **작업 순서 최적화:** 센서 데이터와 로봇 동작을 병렬로 처리하며, 홈 포지션과 각 작업의 목표 위치를 미리 정의하여 불필요한 계산을 줄이고 이에 따라 효율적으로 작업 순서를 정해서 진행할 수 있습니다. 
+- **통신 최적화:** socket 통신을 사용하여 양방향 실시간 데이터 교환이 가능하며 다수의 로봇 팔을 각각 제어할 수 있으며 효율적으로 작업을 진행할 수 있습니다.
 
-## 아키텍처
 
-시스템은 여러 상호 연결된 구성 요소로 구성됩니다:
+## task
 
-1. **중앙 제어 노드:** 주차 작업을 관리하고, 결제를 처리하며, 주차 슬롯 상태를 업데이트하고 로봇과 통신.
-2. **카메라 뷰어:** 여러 카메라 피드를 구독하고, YOLO를 사용하여 차량 감지를 수행하며, GUI를 통해 라이브 이미지를 업데이트.
-3. **맵 노드:** AMCL(Adaptive Monte Carlo Localization)을 사용하여 로봇 위치를 추적하고 GUI 맵을 업데이트.
-4. **데이터베이스 관리자:** 작업 로그 및 결제 기록을 포함한 모든 데이터베이스 작업을 처리.
-5. **GUI (PyQt5):** 주차 슬롯 상태, 로봇 위치, 시스템 로그를 실시간으로 모니터링하고 제어할 수 있는 인터페이스 제공.
+### 3*3형태 pallet에 블록배치
 
-![아키텍처 다이어그램](path/to/architecture_diagram.png) <!-- 선택 사항: 아키텍처 다이어그램 추가 -->
-
-## 구성 요소
-
-### 중앙 제어 노드
-
-- **파일:** `central_control_node.py`
-- **설명:** 주차 요청을 처리하고, 작업 로그를 업데이트하며, 결제를 처리하고, 로봇 조정을 관리.
+- **파일:** `pallet_control.py`
+- **설명:** 3*3형태의 pallet에 random하게 배치된 블록을 높이에 따라 정렬합니다.
 - **주요 기능:**
-  - 서비스 서버: `ExitRequest`, `GetSystemState`
-  - 토픽 구독: `/vehicle_detected`, `/payment/confirmation`, `/nav_callback`
-  - 토픽 발행: `/central_control/logs`, `/central_control/robot_status`, `/parking_status`, `/vehicle_detected`
-  - 데이터베이스 작업: 작업 로그 및 결제 기록 삽입 및 업데이트
+  - ROS2와 Doosan 로봇 시스템 통합
+  - 힘 제어 : task_compliance_ctrl와 set_desired_force를 사용하여 블록을 감지하고 안전하게 조작
+  - 위치 제어 : movej와 movel를 사용하여 로봇 팔을 정확한 위치로 이동
+  - 그리퍼 제어 : 디지털 입출력을 통해 그리퍼를 제어하여 블록 픽업 및 배치
+  - 블록 높이에 따른 홈 레벨 설정 : 블록의 높이에 따라 적절한 홈 레벨을 동적으로 결정
 
-### 카메라 뷰어
+### 젠가 쌓기
 
-- **파일:** `camera_viewer.py` (예상 파일명)
-- **설명:** 여러 카메라 피드를 구독하고, YOLO를 사용하여 차량 감지를 수행하며, GUI에 라이브 이미지를 업데이트.
+- **파일:** `jenga_stacker.py`
+- **설명:**  Jenga 블록을 18층까지 쌓아 초기의 jenga 형태를 만듭니다.
 - **주요 기능:**
-  - 이미지 처리: ROS Image 메시지를 OpenCV 이미지로 변환
-  - 차량 감지: 지정된 관심 영역 내에서 YOLO를 사용하여 실시간 감지
-  - GUI 업데이트: 라이브 카메라 피드 표시 및 이미지 확대/축소 기능
+  - 힘 제어 : task_compliance_ctrl와 set_desired_force를 사용하여 블록을 감지하고 안전하게 조작
+  - 위치 제어 : movej와 movel를 사용하여 로봇 팔을 정확한 위치로 이동
+  - 그리퍼 제어 : 디지털 입출력을 통해 그리퍼를 제어
+  - 층별 배치 : 짝수 층에서는 그리퍼를 90도 회전시켜 블록을 교차 배치 
 
-### 맵 노드
+### 기어조립
 
-- **파일:** `map_node.py` (예상 파일명)
-- **설명:** AMCL을 사용하여 여러 로봇의 위치를 추적하고 GUI 맵을 업데이트.
+- **파일:** `gear_assembly.py`
+- **설명:** 지정된 시작 위치에서 기어를 집어 목표 위치로 이동하여 조립하는 작업을 실행합니다.
 - **주요 기능:**
-  - 포즈 구독: `/tb1/amcl_pose`, `/tb2/amcl_pose`
-  - 시그널 발송: GUI 스레드로 로봇 위치 업데이트 전송
+  - 힘 제어 : task_compliance_ctrl와 set_desired_force, check_force_condition를 사용하여 블록을 감지하고 안전하게 조작
+  - 위치 제어 : movej와 movel를 사용하여 로봇 팔을 정확한 위치로 이동
+  - 그리퍼 제어 : 디지털 입출력을 통해 그리퍼를 제어
+  - 4번째 기어(가운데 기어)에 대해서는 추가적인 힘 제어 및 periodic 동작 수행
+  - 힘 제어를 하는 동안에 periodic을 진행시키고, 특정 높이까지 하강하면 release를 하는 구조
 
-### 데이터베이스 관리자
+### socket통신을 이용한 두 로봇팔의 블록 전달 과정 구현
 
-- **파일:** `db_manager.py`
-- **설명:** SQLite 데이터베이스와의 모든 상호작용을 관리하며, 데이터베이스 초기화 및 CRUD 작업 수행.
+- **파일:** `two_robot_socket_server.py`, 'two_robot_socket_client.py'
+- **설명:** socket통신을 이용하여 서로 다른 두 로봇팔끼리 블록을 전달합니다.
 - **주요 기능:**
-  - 데이터베이스 초기화: 필요한 테이블(`Task_Log`, `Payment_Log`, `Parking_Slot` 등) 설정
-  - 데이터 삽입 및 업데이트: 새로운 로그 삽입 및 기존 기록 업데이트
+  - socket_server_thread를 사용하여 소켓 서버를 실행하며 SocketClientThread를 통해 클라이언트 측에서 서버와 연결
+  - 통신 및 로봇 제어: socket 서버와 클라이언트가 연결이 되면 클라이언트와 서버 간의 통신이 시작되고 로봇 제어 명령이 전달
+  - 멀티스레딩: 소켓 서버와 로봇 제어를 별도의 스레드에서 실행
+  - 힘 제어 : task_compliance_ctrl와 set_desired_force, check_force_condition를 사용하여 블록을 감지하고 안전하게 조작
+  - 위치 제어 : movej와 movel를 사용하여 로봇 팔을 정확한 위치로 이동
+  - 그리퍼 제어 : 서버는 명령 수신 및 실행을 하고 클라이언트는 명령 전송 및 응답 처리를 통해 그리퍼 제어
+  
+  
+### sport stacking
+
+- **파일:** `cup_stacker.py`
+- **설명:** 11개의 컵을 한 번에 옮기면서 그리퍼를 사선 방향으로 하고 하나씩 컵을 놔두면서 피라미드 모양(6-3-1-1)의 sport stacking을 진행합니다. 
+- **주요 기능:**
+  - 기울임 동작 : 컵을 쌓을 때 그리퍼를 특정 각도로 기울이는 동작(TILT_ANGLE = 120.0) 포함
+  - stacking : 층(layer), 라인(line), 컵(cup)의 순서를 기반으로 피라미드 형태로 stacking 진행
+  - 좌표 이동 : movel, amovel, movec 등을 통해 효율적인 동선 구축 및 stacking 시간 단축
+  - 힘 제어 : task_compliance_ctrl와 set_desired_force, check_force_condition를 사용하여 블록을 감지하고 안전하게 조작
+  - 그리퍼 제어 : 디지털 입출력을 통해 그리퍼를 제어
+  
+  
+## 디렉토리 구조
+```bash
+├── B5_Sportstaking_발표자료.pdf
+├── B5_Sportstaking_발표자료.pptx
+├── README.md
+├── cup_stacker.py
+├── cup_stacker_with_algorithm.py
+├── gear_assembly.py
+├── jenga_stacker.py
+├── jenga_stacker_faster.py
+├── pallet_control.py
+├── two_robot_socket_client.py
+└── two_robot_socket_server.py
+
+0 directories, 11 files
+
+```
 
 ## 설치
 
 ### 필수 사항
 
-- **ROS 2:** 호환되는 ROS 2 배포판 설치 (예: Foxy, Galactic, Humble)
-- **Python 3:** ROS 2 노드 및 GUI 실행을 위한 Python 3
-- **PyQt5:** GUI 인터페이스 구축을 위해 필요
-- **YOLO (Ultralytics):** 차량 감지를 위해 필요
-- **OpenCV:** 이미지 처리
-- **SQLite3:** 데이터베이스 관리
+- **Python 3.7 이상**
+- **필수 라이브러리:**
+  - `rclpy`
+  - `DR_init`
+  - `math`
+  - `time`
+  - `threading`
+  - `socket`
+  - 'queue'
 
-### 설치 단계
+### 설치 단계 (<ros-distro>는  호환되는 ROS 2 배포판(예: Foxy, Galactic, Humble) 입니다)
 
-1. **저장소 클론:**
-
-    ```bash
-    git clone https://github.com/yourusername/turtlebot3_multi_robot_parking.git
-    cd turtlebot3_multi_robot_parking
-    ```
-
-2. **종속성 설치:**
+1. **ros2 설치:**
 
     ```bash
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install software-properties-common
+    sudo add-apt-repository universe
+    sudo apt install curl
+    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
     sudo apt update
-    sudo apt install python3-pyqt5 python3-opencv sqlite3
+    sudo apt install ros-<ros-distro>-desktop python3-argcomplete
+    
     ```
+    
 
-    `pip`을 사용하여 Python 패키지 설치:
+2. **ROS2 환경 설정:**
 
     ```bash
-    pip install rclpy PyQt5 cv_bridge ultralytics Pillow
+    echo "source /opt/ros/<ros-distro>/setup.bash" >> ~/.bashrc
+    source ~/.bashrc
+
     ```
-
-3. **ROS 2 워크스페이스 빌드:**
-
-    ROS 2 환경 소싱 확인:
+    
+3. **ROS2 디렉토리 생성 및 저장소 클론:**
 
     ```bash
-    source /opt/ros/<ros-distro>/setup.bash
-    ```
-
-    워크스페이스 빌드:
-
-    ```bash
+    mkdir -p ~/ros2_ws/src    
+    cd ~/ros2_ws/src
+    git clone https://github.com/doosan-robotics/doosan-robot2
     colcon build
+    ```
+    
+4. **링크에 있는 py들을 디렉토리에 복사:**
+   https://github.com/libero0077/RokeyProjects/blob/main/DoosanRobotProject
+
+
+5. **의존성 패키지 설치 및 작업 공간 빌드:**
+   ```bash
+    sudo apt install ros-<ros-distro>-rqt* ros-<ros-distro>-moveit* ros-<ros-distro>-gazebo-ros-pkgs ros-<ros-distro>-gazebo-ros2-control ros-<ros-distro>-joint-state-publisher-gui
+    cd ~/ros2_ws
+    colcon build --symlink-install
     source install/setup.bash
+
     ```
 
-4. **데이터베이스 설정:**
-
-    데이터베이스 파일이 존재하고 초기화되었는지 확인. `central_control_node.py` 스크립트는 데이터베이스가 없을 경우 초기화합니다.
-
-    ```bash
-    # 예시 경로 (필요에 따라 수정)
-    /home/rokey/Documents/RokeyProjects/multitb_ws/src/turtlebot3_python_nodes/parking_system.db
-    ```
+6. **ROS2 개발 환경에서 필요한 Python 모듈 로드 및 Doosan 로봇을 조작하는 launch 파일을 실행:**
+   ```bash
+   export PYTHONPATH=$PYTHONPATH:~/ros2_ws/install/common2/lib/common2/imp
+   ros2 launch dsr_bringup2 dsr_bringup2_gazebo.launch.py mode:=real host:=[로봇과 동일한 ip] model:=[사용하려는 실제 로봇 모델]
+   
+   '''
 
 ## 사용법
 
-1. **중앙 제어 노드 실행:**
+1. ** 3*3형태 pallet에 블록배치 실행:**
 
     ```bash
-    ros2 run turtlebot3_python_nodes central_control_node
+    python pallet_control.py
     ```
 
-2. **카메라 뷰어 GUI 실행:**
+2. **젠가 쌓기 실행:**
 
     ```bash
-    ros2 run turtlebot3_python_nodes camera_viewer
+    python jenga_stacker.py
     ```
 
-3. **시스템과 상호작용:**
-
-    - **차량 입차:**
-      - 차량이 감지되면 시스템은 입차를 기록하고 주차 슬롯을 할당.
-      - GUI는 차량이 "주차 중" 상태로 표시됨을 업데이트.
-
-    - **결제 처리:**
-      - 결제가 완료되면 시스템은 작업 로그를 "출차 중"으로 업데이트.
-      - GUI는 해당 슬롯이 출차 중임을 반영.
-
-    - **차량 출차:**
-      - 로봇이 출차 과정을 처리하며, 작업 로그를 "출차 완료"로 업데이트.
-      - GUI는 슬롯 상태를 "빈 슬롯"으로 업데이트.
-
-4. **비상 정지:**
-
-    - 모든 로봇 작업을 중단하기 위해 비상 정지 서비스를 호출.
+3. **기어 조립 실행:**
 
     ```bash
-    ros2 service call /emergency_stop std_srvs/srv/Trigger
+    python gear_assembly.py
     ```
 
-## 토픽 및 서비스
+4. **socket통신을 이용한 두 로봇팔의 블록 전달 실행:**
 
-### 토픽
+        먼저 서버를 실행한 후 클라이언트를 실행합니다.
 
-- **구독:**
-  - `/vehicle_detected` (`std_msgs/String`): 차량 감지 알림.
-  - `/payment/confirmation` (`std_msgs/String`): 결제 상태 확인.
-  - `/nav_callback` (`std_msgs/String`): 로봇의 네비게이션 콜백 수신.
+    ```bash
+    python two_robot_socket_server.py
+    python two_robot_socket_client.py
+    ```
+    
+5. **sport stacking 실행:**
 
-- **발행:**
-  - `/central_control/logs` (`std_msgs/String`): JSON 형식의 시스템 로그 발행.
-  - `/central_control/robot_status` (`std_msgs/String`): 로봇 상태 업데이트 발행.
-  - `/parking_status` (`std_msgs/String`): 주차 슬롯 상태 업데이트 발행.
-  - `/vehicle_detected` (`std_msgs/String`): 차량 출차 요청 발행.
+    ```bash
+    python cup_stacker.py
+    ```
 
-### 서비스
 
-- **`ExitRequest`**
-  - **설명:** 키오스크에서 출차 요청을 처리하고, 데이터베이스를 업데이트하며, 로봇 작업을 조정.
-  - **요청:** `car_number` (문자열)
-  - **응답:** `status` (불리언), `entry_time` (문자열), `fee` (정수), `log` (문자열)
+## 개선 계획
 
-- **`GetSystemState`**
-  - **설명:** 현재 로봇 및 주차 슬롯의 상태를 제공.
-  - **요청:** 빈 요청
-  - **응답:** `robot_status_json` (문자열), `slot_status_json` (문자열)
+1. **3*3형태 pallet에 블록배치:**
+   - **촉각 센서 통합:** 그리퍼에 고감도 촉각 센서를 추가하여 블록 파지 및 조작의 정밀도를 향상시킵니다.
 
-## 스크린샷
+2. **젠가 쌓기:**
+   - **피드백 루프:** 각 블록 적재 후 적재 상태를 확인하는 피드백 루프를 추가하여 안정성을 높입니다.
+   - **3D 비전 센서 활용:** 블록의 정확한 위치와 방향을 감지하여 정밀성을 높입니다.
 
-### GUI 개요
+3. **기어 조립:**
+   - **경로 최적화:** RRT(Rapidly-exploring Random Tree) 알고리즘을 사용하여 장애물을 피하는 최적 경로를 생성.
+   - **컴퓨터 비전 통합:** OpenCV를 사용하여 카메라 피드백을 통해 기어의 정확한 위치와 방향을 감지하고, 이를 바탕으로 로봇의 움직임을 미세 조정할 수 있습니다.
 
-![GUI 개요](path/to/gui_overview.png)
+4. **socket통신을 이용한 두 로봇팔의 블록 전달:**
+   - **재연결 매커니즘:** 서버와의 연결이 끊어졌을 때 자동으로 재연결을 시도하는 로직을 추가해서 기능을 개선합니다.
+   - **인증 메커니즘:** 클라이언트 연결 시 간단한 인증 절차를 추가하여 보안을 강화합니다.
 
-### 라이브 카메라 피드
-
-![카메라 피드](path/to/camera_feed.png)
-
-### 주차 슬롯 상태
-
-![주차 상태](path/to/parking_status.png)
-
-### 맵 상의 로봇 위치
-
-![로봇 위치](path/to/robot_positions.png)
+5. **sport stacking:**
+   - **힘-토크 센서 통합:** 힘-토크 센서를 로봇 팔에 통합하여 "촉각" 기능을 추가하여 컵을 다룰 때 적용되는 힘을 더 정밀하게 제어할 수 있습니다.
+   - **소프트 로보틱스 적용:** 부드러운 소재를 사용한 그리퍼를 도입하여 안정성을 강화합니다.
 
 ## 기여
-[libero0077](https://github.com/libero0077) : 
-[Y6HYUK](https://github.com/Y6HYUK) : 
 
+[libero0077](https://github.com/libero0077) : 사선 방향 접근 스택킹 아이디어 모색, 사선 방향 접근 아이디어 기반 스택킹 구현, pallet에 random하게 배치된 블록을 높이에 따라 정렬하는 알고리즘 구현
+[Y6HYUK](https://github.com/Y6HYUK) : 사선 방향 접근 스택킹 아이디어 모색, 아이디어 결과를 검증할 비교 대상(수직 방향 접근 스택킹)개발
+[leesw1357](https://github.com/leesw1357) : 아이디어 결과를 검증할 비교 대상(수직 방향 접근 스택킹)개발
+[juwon407](https://github.com/juwon407) : 사선 방향 접근 스택킹 아이디어 모색, 사선 방향 접근 아이디어 기반 스택킹 구현, socket 클라이언트 및 서버 구현
 
-## 라이선스
-
-이 프로젝트는 [MIT 라이선스](LICENSE)를 따릅니다.
 
 ## 연락처
 
 문의 사항이나 지원이 필요하시면 아래 연락처로 연락주세요:
 
-- **이름:** jaejun ryu
-- **GitHub:** [libero0077](https://github.com/libero0077)
+- **이름:** Sangwoo Lee
+- **GitHub:** [leesw1357](https://github.com/leesw1357)
 
 ---
 
+## 추가 참고 자료
+
+- [Doosan Robotics 문서](https://manual.doosanrobotics.com/?l=ko)
+- [ROS2 공식 문서](https://docs.ros.org/)
+- [Socket 공식 문서](https://socket.io/docs/v4/)
