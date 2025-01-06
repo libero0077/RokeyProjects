@@ -249,10 +249,10 @@
 
 ## 기여
 
-[libero0077](https://github.com/libero0077) : 사선 방향 접근 스택킹 아이디어 모색, 사선 방향 접근 아이디어 기반 스택킹 구현, pallet에 random하게 배치된 블록을 높이에 따라 정렬하는 알고리즘 구현
-[Y6HYUK](https://github.com/Y6HYUK) : 사선 방향 접근 스택킹 아이디어 모색, 아이디어 결과를 검증할 비교 대상(수직 방향 접근 스택킹)개발
-[leesw1357](https://github.com/leesw1357) : 아이디어 결과를 검증할 비교 대상(수직 방향 접근 스택킹)개발
-[juwon407](https://github.com/juwon407) : 사선 방향 접근 스택킹 아이디어 모색, 사선 방향 접근 아이디어 기반 스택킹 구현, socket 클라이언트 및 서버 구현
+- [libero0077](https://github.com/libero0077) : 사선 방향 접근 스택킹 아이디어 모색, 사선 방향 접근 아이디어 기반 스택킹 구현, pallet에 random하게 배치된 블록을 높이에 따라 정렬하는 알고리즘 구현
+- [Y6HYUK](https://github.com/Y6HYUK) : 사선 방향 접근 스택킹 아이디어 모색, 아이디어 결과를 검증할 비교 대상(수직 방향 접근 스택킹)개발
+- [leesw1357](https://github.com/leesw1357) : 아이디어 결과를 검증할 비교 대상(수직 방향 접근 스택킹)개발
+- [juwon407](https://github.com/juwon407) : 사선 방향 접근 스택킹 아이디어 모색, 사선 방향 접근 아이디어 기반 스택킹 구현, socket 클라이언트 및 서버 구현
 
 
 ## 연락처
