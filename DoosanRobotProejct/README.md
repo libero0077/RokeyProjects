@@ -1,4 +1,4 @@
-# 두산 로봇 활용 - sport stacking
+# 두산 로봇 활용 프로젝트
 
 ## 프로젝트 기간 : 2024.12.17 ~ 2024.12.23
 
@@ -171,7 +171,7 @@
     ```
     
 4. **링크에 있는 py들을 디렉토리에 복사:**
-   https://github.com/libero0077/RokeyProjects/blob/main/DoosanRobotProject
+   https://github.com/libero0077/RokeyProjects/tree/main/DoosanRobotProejct
 
 
 5. **의존성 패키지 설치 및 작업 공간 빌드:**
