@@ -6,10 +6,10 @@
 
 ### 데모영상
 
-- AMR노드 실행 영상 : 추후 업로드할 예정 입니다.
-- AMR 복귀 영상 : ![Detect_car_amr_home](https://github.com/user-attachments/assets/d77e5811-1ce5-48b2-9151-6662d913404d)
-- GUI 실행 영상 : ![Detect_car_gui](https://github.com/user-attachments/assets/73d3d9e5-e3d9-48c4-b108-c7960b74944a)
-
+- AMR노드 실행 영상 : 추후 업로드할 예정입니다.
+- AMR 복귀 영상
+![Detect_car_amr_home](https://github.com/user-attachments/assets/d77e5811-1ce5-48b2-9151-6662d913404d)
+- GUI 실행 영상 : 추후 업로드할 예정입니다.
 
 ------------------------------------------
 
