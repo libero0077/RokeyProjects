@@ -7,9 +7,10 @@
 ### 데모영상
 
 - AMR노드 실행 영상 : 추후 업로드할 예정입니다.
+- GUI 실행 영상 : 추후 업로드할 예정입니다.
 - AMR 복귀 영상
 ![Detect_car_amr_home](https://github.com/user-attachments/assets/d77e5811-1ce5-48b2-9151-6662d913404d)
-- GUI 실행 영상 : 추후 업로드할 예정입니다.
+
 
 ------------------------------------------
 
@@ -205,7 +206,7 @@
 
 
 
-#### 추적차량 판단 알고리즘
+## 추적차량 판단 알고리즘
 
 **추적차량 판단 알고리즘**은 일반 차량과 추적 차량 구분함과 동시에 판단할 수 있는 핵심적인 역할을 합니다. `ui_camera_subscriber.py`에서 구현된 이 알고리즘은 다음과 같은 단계로 구성됩니다:
 
@@ -340,7 +341,7 @@
 
 [libero0077](https://github.com/libero0077) : DB 및 Logging 기능 통합, Object Detection 기능 정확도 향상, 문서 작성, 중앙 감지 모듈 개발  
 [Y6HYUK](https://github.com/Y6HYUK) : 터틀봇 실행 및 네비게이션 기능 구현, Object Detection 기능 구현 및 중앙 감지 모듈 개발, 문서작성  
-[leesw1357](https://github.com/leesw1357) : 시간 관련 기능 구현, 문서 작성, Object Detection 기능 정확도 향상 
+[leesw1357](https://github.com/leesw1357) : 시간 관련 기능 구현, 문서 작성, Object Detection 기능 정확도 향상  
 [juwon407](https://github.com/juwon407) : 모니터링 모듈 개발, 모듈 간 통합 총괄, 알림 기능 구현 및 통합
 
 
