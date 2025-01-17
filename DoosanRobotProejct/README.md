@@ -1,16 +1,15 @@
-# 두산 로봇 활용 프로젝트
-
+# 두산 로봇 활용
 ## 프로젝트 기간 : 2024.12.17 ~ 2024.12.23
 
 ------------------------------------------
 
-### 데모영상(추후에 업로드 할 예정입니다.)
+### 데모영상
 
-- 3*3형태 pallet에 블록배치 : 
-- 젠가 쌓기 :
-- 기어 조립 :
-- socket통신을 이용한 두 로봇팔의 블록 전달 :
-- sport stacking :
+- 3*3형태 pallet에 블록배치 : https://youtu.be/q8Xm6hnT-i8
+- 젠가 쌓기 : https://youtu.be/GRrfOn8wpvs
+- 기어 조립 : https://youtu.be/4eTDPMtYRCM
+- socket통신을 이용한 두 로봇팔의 블록 전달 : https://youtu.be/f1HJRCGwliU
+- sport stacking : https://youtu.be/4_s6fq9cKoA
 
 ------------------------------------------
 
@@ -173,7 +172,6 @@
 4. **링크에 있는 py들을 디렉토리에 복사:**
    https://github.com/libero0077/RokeyProjects/tree/main/DoosanRobotProejct
 
-
 5. **의존성 패키지 설치 및 작업 공간 빌드:**
    ```bash
     sudo apt install ros-<ros-distro>-rqt* ros-<ros-distro>-moveit* ros-<ros-distro>-gazebo-ros-pkgs ros-<ros-distro>-gazebo-ros2-control ros-<ros-distro>-joint-state-publisher-gui
@@ -236,7 +234,6 @@
    - **3D 비전 센서 활용:** 블록의 정확한 위치와 방향을 감지하여 정밀성을 높입니다.
 
 3. **기어 조립:**
-   - **경로 최적화:** RRT(Rapidly-exploring Random Tree) 알고리즘을 사용하여 장애물을 피하는 최적 경로를 생성.
    - **컴퓨터 비전 통합:** OpenCV를 사용하여 카메라 피드백을 통해 기어의 정확한 위치와 방향을 감지하고, 이를 바탕으로 로봇의 움직임을 미세 조정할 수 있습니다.
 
 4. **socket통신을 이용한 두 로봇팔의 블록 전달:**
