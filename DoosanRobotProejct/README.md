@@ -7,8 +7,8 @@
 
 - 3*3형태 pallet에 블록배치 : https://youtu.be/q8Xm6hnT-i8
 - 젠가 쌓기 : https://youtu.be/GRrfOn8wpvs
-- 기어 조립 : https://youtu.be/4eTDPMtYRCM
-- socket통신을 이용한 두 로봇팔의 블록 전달 : https://youtu.be/f1HJRCGwliU
+- 기어 조립 : https://youtu.be/D3FE-cX7UTA
+- socket통신을 이용한 두 로봇팔의 블록 전달 : https://youtu.be/tYrmEwL1NeY
 - sport stacking : https://youtu.be/4_s6fq9cKoA
 
 ------------------------------------------
