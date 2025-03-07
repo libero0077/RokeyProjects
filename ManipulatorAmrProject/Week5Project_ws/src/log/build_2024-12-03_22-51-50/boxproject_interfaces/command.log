@@ -1,4 +1,0 @@
-Invoking command in '/home/juwon/Week5Project_ws/src/build/boxproject_interfaces': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/juwon/Week5Project_ws/src/build/boxproject_interfaces -- -j6 -l6
-Invoked command in '/home/juwon/Week5Project_ws/src/build/boxproject_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/juwon/Week5Project_ws/src/build/boxproject_interfaces -- -j6 -l6
-Invoking command in '/home/juwon/Week5Project_ws/src/build/boxproject_interfaces': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/juwon/Week5Project_ws/src/build/boxproject_interfaces
-Invoked command in '/home/juwon/Week5Project_ws/src/build/boxproject_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/juwon/Week5Project_ws/src/build/boxproject_interfaces
